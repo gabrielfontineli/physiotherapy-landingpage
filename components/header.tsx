@@ -8,10 +8,11 @@ import { ThemeToggle } from "@/components/theme-toggle"
 const WHATSAPP_URL = "https://wa.me/5584999999999?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
 
 const navLinks = [
-  { label: "Sintomas", href: "#sintomas" },
-  { label: "Tratamentos", href: "#tratamentos" },
+  { label: "Serviços", href: "#servicos" },
+  { label: "Método", href: "#metodo" },
   { label: "Sobre", href: "#sobre" },
-  { label: "Localização", href: "#localizacao" },
+  { label: "Depoimentos", href: "#depoimentos" },
+  { label: "Triagem", href: "#triagem" },
 ]
 
 export function Header() {

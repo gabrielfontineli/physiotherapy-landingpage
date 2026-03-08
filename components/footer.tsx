@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-[oklch(0.14_0.015_220)] py-10 sm:py-12">
+    <footer className="border-t border-border bg-[oklch(0.12_0.03_240)] py-10 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-start">
           <div>

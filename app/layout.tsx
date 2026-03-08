@@ -12,25 +12,15 @@ export const metadata: Metadata = {
   description: 'Fisioterapeuta especialista em coluna, quiropraxia, osteopatia e acupuntura em Natal RN. Tratamento individualizado para dor lombar, hérnia de disco, ciático e mais.',
   icons: {
     icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon-dark-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
     apple: '/apple-icon.png',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#2a8a8a',
+  themeColor: '#1a2e5a',
   width: 'device-width',
   initialScale: 1,
 }
