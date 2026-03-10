@@ -34,7 +34,7 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="btn-pulse-green bg-[#25D366] hover:bg-[#20BD5A] text-white text-base font-semibold px-6 sm:px-8 h-12 sm:h-14"
+              className="btn-shimmer-green bg-[#25D366] hover:bg-[#20BD5A] text-white text-base font-semibold px-6 sm:px-8 h-12 sm:h-14"
             >
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
@@ -46,7 +46,7 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="btn-pulse-orange bg-amber-500 hover:bg-amber-600 text-white text-base font-semibold h-12 sm:h-14 shadow-sm"
+              className="btn-shimmer-orange bg-amber-500 hover:bg-amber-600 text-white text-base font-semibold h-12 sm:h-14 shadow-sm"
             >
               <a href="#triagem" className="flex items-center">
                 <Monitor className="mr-2 h-5 w-5 shrink-0" />
@@ -58,7 +58,7 @@ export function HeroSection() {
           <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/70">
             <span className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-accent" />
-              5+ anos de experiência
+              Especializações no tratamento da dor
             </span>
             <span className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-accent" />
