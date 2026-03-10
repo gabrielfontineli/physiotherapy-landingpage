@@ -124,52 +124,66 @@
   }
 }
 
-@keyframes btn-shimmer {
-  0%   { transform: translateX(-160%) skewX(-18deg); }
-  100% { transform: translateX(280%)  skewX(-18deg); }
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-200%) skewX(-20deg); }
+  100% { transform: translateX(400%)  skewX(-20deg); }
 }
 
-@keyframes btn-glow-green {
-  0%, 100% { box-shadow: 0 0 8px 2px rgba(37, 211, 102, 0.45), 0 0 24px 4px rgba(37, 211, 102, 0.18); }
-  50%       { box-shadow: 0 0 18px 6px rgba(37, 211, 102, 0.65), 0 0 40px 10px rgba(37, 211, 102, 0.28); }
+@keyframes glow-green {
+  0%, 100% {
+    box-shadow:
+      0 0 10px 3px rgba(37, 211, 102, 0.55),
+      0 4px 20px 0px rgba(37, 211, 102, 0.30);
+  }
+  50% {
+    box-shadow:
+      0 0 22px 8px rgba(37, 211, 102, 0.80),
+      0 4px 36px 4px rgba(37, 211, 102, 0.45);
+  }
 }
 
-@keyframes btn-glow-orange {
-  0%, 100% { box-shadow: 0 0 8px 2px rgba(245, 158, 11, 0.45), 0 0 24px 4px rgba(245, 158, 11, 0.18); }
-  50%       { box-shadow: 0 0 18px 6px rgba(245, 158, 11, 0.65), 0 0 40px 10px rgba(245, 158, 11, 0.28); }
+@keyframes glow-orange {
+  0%, 100% {
+    box-shadow:
+      0 0 10px 3px rgba(245, 158, 11, 0.55),
+      0 4px 20px 0px rgba(245, 158, 11, 0.30);
+  }
+  50% {
+    box-shadow:
+      0 0 22px 8px rgba(245, 158, 11, 0.80),
+      0 4px 36px 4px rgba(245, 158, 11, 0.45);
+  }
 }
 
-.btn-shimmer-green {
+.btn-glow-green {
   position: relative;
   overflow: hidden;
-  animation: btn-glow-green 2.4s ease-in-out infinite;
+  animation: glow-green 2s ease-in-out infinite;
 }
 
-.btn-shimmer-green::after {
-  content: '';
+.btn-glow-orange {
+  position: relative;
+  overflow: hidden;
+  animation: glow-orange 2s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.btn-shine {
   position: absolute;
-  inset: 0;
-  width: 35%;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.28), transparent);
-  animation: btn-shimmer 2.4s ease-in-out infinite;
-  animation-delay: 0.4s;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 100%
+  );
+  animation: shimmer-sweep 3s ease-in-out infinite;
   pointer-events: none;
 }
 
-.btn-shimmer-orange {
-  position: relative;
-  overflow: hidden;
-  animation: btn-glow-orange 2.4s ease-in-out infinite;
-  animation-delay: 1.2s;
-}
-
-.btn-shimmer-orange::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  width: 35%;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.28), transparent);
-  animation: btn-shimmer 2.4s ease-in-out infinite;
-  animation-delay: 1.6s;
-  pointer-events: none;
+.btn-shine-delayed {
+  animation-delay: 1.5s;
 }
