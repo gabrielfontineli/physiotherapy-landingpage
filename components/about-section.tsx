@@ -2,7 +2,7 @@ import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const WHATSAPP_URL = "https://wa.me/5584999999999?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
+const WHATSAPP_URL = "https://wa.me/5584981910924?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
 
 const specializations = [
   { name: "Osteopatia", icon: "🦴" },
@@ -25,7 +25,7 @@ export function AboutSection() {
           <div className="relative pb-6 order-2 lg:order-1">
             <div className="relative overflow-hidden rounded-2xl aspect-[4/5] sm:aspect-[3/4] max-w-xs sm:max-w-sm mx-auto lg:mx-0">
               <Image
-                src="/images/dr-guilherme-about.jpg"
+                src="/images/dr-guilherme-about-new.png"
                 alt="Dr. Guilherme Carvalho, Fisioterapeuta"
                 fill
                 sizes="(max-width: 640px) 320px, (max-width: 1024px) 384px, 448px"

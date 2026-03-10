@@ -17,7 +17,7 @@ const steps = [
     number: "03",
     icon: Zap,
     title: "Tratamento Ativo",
-    description: "Quiropraxia, osteopatia, dry needling, acupuntura — aplicamos as técnicas certas para o seu caso, sempre com você participando ativamente.",
+    description: "Exercícios terapêuticos, quiropraxia, osteopatia, dry needling, acupuntura — aplicamos as técnicas certas para o seu caso. Diversas especializações no tratamento da dor, sempre com você participando ativamente.",
   },
   {
     number: "04",

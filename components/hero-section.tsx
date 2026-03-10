@@ -2,7 +2,7 @@ import { ArrowRight, Monitor, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
-const WHATSAPP_URL = "https://wa.me/5584999999999?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
+const WHATSAPP_URL = "https://wa.me/5584981910924?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
 
 export function HeroSection() {
   return (
@@ -23,18 +23,18 @@ export function HeroSection() {
         <div className="max-w-2xl">
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-white text-balance">
             Chega de dor nas costas.{" "}
-            <span className="text-accent">Recupere seu movimento.</span>
+            <span className="text-accent">Ajuda especializada para hérnia de disco e dor no ciático.</span>
           </h1>
 
           <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl leading-relaxed text-white/85 text-pretty max-w-xl">
-            Fisioterapeuta com pós-graduação em Osteopatia, Quiropraxia e Acupuntura. Atendimento presencial em Natal e online para todo o Brasil.
+            Recupere a confiança na sua coluna. Fisioterapeuta especialista em coluna. Avaliação personalizada e tratamento individualizado. Atendimento em Natal e teleconsulta para pacientes no Brasil e no exterior.
           </p>
 
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Button
               asChild
               size="lg"
-              className="bg-[#25D366] hover:bg-[#20BD5A] text-white text-base font-semibold px-6 sm:px-8 h-12 sm:h-14"
+              className="btn-pulse-green bg-[#25D366] hover:bg-[#20BD5A] text-white text-base font-semibold px-6 sm:px-8 h-12 sm:h-14"
             >
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
@@ -46,11 +46,11 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="bg-white/18 backdrop-blur-sm border border-white/60 text-white hover:bg-white/28 text-base font-semibold h-12 sm:h-14 shadow-sm"
+              className="btn-pulse-orange bg-amber-500 hover:bg-amber-600 text-white text-base font-semibold h-12 sm:h-14 shadow-sm"
             >
-              <a href="#servicos" className="flex items-center">
+              <a href="#triagem" className="flex items-center">
                 <Monitor className="mr-2 h-5 w-5 shrink-0" />
-                Atendo online também
+                Agendar consulta On-line
               </a>
             </Button>
           </div>

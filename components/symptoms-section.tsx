@@ -22,7 +22,7 @@ const symptomGroups = [
   {
     area: "Dia a dia",
     symptoms: [
-      "Dor ao ficar em pé por muito tempo",
+      "Dor ao ficar em pé por muito tempo ou sentado",
       "Já tomou remédio e não resolveu",
       "Dificuldade de levantar da cama",
     ],

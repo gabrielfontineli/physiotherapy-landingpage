@@ -2,15 +2,32 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Checkbox } from "@/components/ui/checkbox"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
-import { AlertTriangle, Clock, CheckCircle2, Send, Phone, ArrowRight, XCircle } from "lucide-react"
+import { AlertTriangle, CheckCircle2, ArrowRight } from "lucide-react"
 
-const WHATSAPP_NUMBER = "5584999999999"
+const WHATSAPP_NUMBER = "5584981910924"
 const WA_BASE = `https://wa.me/${WHATSAPP_NUMBER}?text=`
+
+const QUESTION_LABELS: Record<number, string> = {
+  1: "Dor principal",
+  2: "Irradiação",
+  3: "Tempo de dor",
+  4: "O que piora",
+  5: "Exame de imagem",
+  6: "Sinais de alerta",
+  7: "Cirurgia na coluna",
+}
+
+function buildWaUrl(answers: Record<number, string>): string {
+  const lines = [
+    "Olá, Dr. Guilherme! Fiz a triagem online e gostaria de agendar minha teleconsulta.",
+    "",
+    "*Minhas respostas:*",
+    ...Object.entries(QUESTION_LABELS).map(
+      ([q, label]) => `${q}. ${label}: ${answers[Number(q)] ?? "—"}`
+    ),
+  ]
+  return WA_BASE + encodeURIComponent(lines.join("\n"))
+}
 
 const WA_ICON = (
   <svg className="mr-2 h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -18,650 +35,346 @@ const WA_ICON = (
   </svg>
 )
 
-// Mask: (XX) XXXXX-XXXX
-function maskPhone(value: string) {
-  const d = value.replace(/\D/g, "").slice(0, 11)
-  if (d.length <= 2) return d.length ? `(${d}` : ""
-  if (d.length <= 7) return `(${d.slice(0, 2)}) ${d.slice(2)}`
-  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
-}
-
-const FLAGS_CAUDA_EQUINA = [
-  "Perda de controle urinário ou fecal",
-  "Dormência na região íntima (sela)",
-]
-const FLAGS_SURGICAL = [
-  "Perda de força significativa em perna ou braço",
+const DANGER_FLAGS = [
+  "Perda total de força na perna ou braço",
+  "Dificuldade para controlar urina ou fezes",
+  "Dormência intensa na região íntima",
+  "Febre associada à dor na coluna",
+  "Dor incapacitante que não melhora em nenhuma posição",
 ]
 
-type FormAlert = "cauda-equina" | "surgery-indicated" | null
+const SIMPLE_QUESTIONS = [
+  {
+    q: 1,
+    label: "Onde está sua dor principal?",
+    options: [
+      "Lombar (parte baixa das costas)",
+      "Cervical (pescoço)",
+      "Torácica (meio das costas)",
+      "Mais de uma região",
+    ],
+  },
+  {
+    q: 2,
+    label: "Sua dor irradia (vai) para algum membro do corpo?",
+    options: [
+      "Não, fica apenas na coluna",
+      "Vai para glúteo ou coxa",
+      "Desce pela perna até o pé ou dedos",
+      "Vai para braço ou mão",
+    ],
+  },
+  {
+    q: 3,
+    label: "Há quanto tempo você sente essa dor?",
+    options: [
+      "Menos de 1 semana",
+      "Entre 1 semana e 3 meses",
+      "Mais de 3 meses",
+      "Vai e volta há meses ou anos",
+    ],
+  },
+  {
+    q: 4,
+    label: "O que costuma piorar sua dor?",
+    options: [
+      "Ficar muito tempo sentado",
+      "Levantar da cama",
+      "Caminhar ou se movimentar",
+      "Ficar muito tempo parado",
+      "Não sei identificar",
+    ],
+  },
+  {
+    q: 5,
+    label: "Você já fez exame de imagem (ressonância ou tomografia)?",
+    options: [
+      "Sim, mostrou hérnia de disco",
+      "Sim, mas não lembro o resultado",
+      "Não fiz exame",
+      "Tenho suspeita de hérnia",
+    ],
+  },
+]
 
-// Reusable card option for radio groups
-function RadioCard({
-  value,
-  selected,
-  children,
-}: {
-  value: string
-  selected: boolean
-  children: React.ReactNode
-}) {
+type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7 | "alert" | "done"
+
+function ProgressBar({ current, total }: { current: number; total: number }) {
+  const pct = Math.round((current / total) * 100)
   return (
-    <div
-      className={`flex items-center gap-3 rounded-lg border px-4 py-3 transition-colors cursor-pointer ${
-        selected
-          ? "border-primary bg-primary/8 text-foreground"
-          : "border-border bg-background hover:border-primary/40 text-foreground"
-      }`}
-    >
-      <RadioGroupItem value={value} id={`rc-${value}`} className="shrink-0" />
-      <Label htmlFor={`rc-${value}`} className="cursor-pointer text-sm font-normal leading-snug w-full">
-        {children}
-      </Label>
+    <div className="mb-6">
+      <div className="flex justify-between mb-2">
+        <span className="text-sm font-medium text-foreground">
+          Pergunta {current} de {total}
+        </span>
+        <span className="text-sm text-muted-foreground">{pct}%</span>
+      </div>
+      <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+        <div
+          className="h-full bg-primary transition-all duration-500 ease-out"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
     </div>
   )
 }
 
 export function TriageFormSection() {
-  const [currentStep, setCurrentStep] = useState(1)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [formAlert, setFormAlert] = useState<FormAlert>(null)
+  const [step, setStep] = useState<Step>(1)
+  const [answers, setAnswers] = useState<Record<number, string>>({})
+  const [alertFlags, setAlertFlags] = useState<string[]>([])
 
-  const [formData, setFormData] = useState({
-    nome: "",
-    idade: "",
-    cidade: "",
-    profissao: "",
-    whatsapp: "",
-    localDor: "",
-    irradiacao: "",
-    tempoDor: "",
-    nivelDor: "",
-    sinaisAlerta: [] as string[],
-    exameImagem: "",
-    diagnostico: "",
-    cirurgiaIndicada: "",
-    tratamentos: [] as string[],
-    melhorou: "",
-    pioraCom: [] as string[],
-    atividadeFisica: "",
-    atividadeFisicaOutra: "",
-    expectativa: "",
-    dispostoInvestir: "",
-  })
+  const TOTAL = 7
 
-  const totalSteps = 7
+  const goTo = (s: Step) => setTimeout(() => setStep(s), 140)
 
-  const set = (field: string, value: string | string[]) =>
-    setFormData(prev => ({ ...prev, [field]: value }))
-
-  const toggle = (field: string, value: string) => {
-    const arr = formData[field as keyof typeof formData] as string[]
-    set(field, arr.includes(value) ? arr.filter(v => v !== value) : [...arr, value])
+  const handleSimple = (q: number, opt: string) => {
+    setAnswers(prev => ({ ...prev, [q]: opt }))
+    goTo((q + 1) as Step)
   }
 
-  // Real-time red-flag detection on sinaisAlerta
-  const handleSinal = (option: string) => {
-    const arr = formData.sinaisAlerta
-    const checking = !arr.includes(option)
-    const next = checking ? [...arr, option] : arr.filter(v => v !== option)
-    set("sinaisAlerta", next)
-    if (checking) {
-      if (FLAGS_CAUDA_EQUINA.includes(option)) { setFormAlert("cauda-equina"); return }
-      if (FLAGS_SURGICAL.includes(option)) { setFormAlert("surgery-indicated"); return }
+  const handleAlertToggle = (flag: string) => {
+    if (flag === "Nenhum desses") {
+      setAlertFlags(["Nenhum desses"])
+    } else {
+      setAlertFlags(prev => {
+        const without = prev.filter(f => f !== "Nenhum desses")
+        return without.includes(flag)
+          ? without.filter(f => f !== flag)
+          : [...without, flag]
+      })
     }
   }
 
-  // Real-time surgery detection
-  const handleCirurgia = (value: string) => {
-    set("cirurgiaIndicada", value)
-    if (value === "Sim") setFormAlert("surgery-indicated")
+  const confirmAlert = () => {
+    const hasDanger = alertFlags.some(f => DANGER_FLAGS.includes(f))
+    if (hasDanger) {
+      setAnswers(prev => ({ ...prev, 6: alertFlags.join(", ") }))
+      setStep("alert")
+    } else {
+      setAnswers(prev => ({ ...prev, 6: "Nenhum desses" }))
+      setStep(7)
+    }
   }
 
-  const nextStep = () => { if (currentStep < totalSteps) setCurrentStep(p => p + 1) }
-  const prevStep = () => { if (currentStep > 1) setCurrentStep(p => p - 1) }
-
-  const handleSubmit = async () => {
-    setIsSubmitting(true)
-    await new Promise(r => setTimeout(r, 1200))
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+  const handleFinal = (opt: string) => {
+    setAnswers(prev => ({ ...prev, 7: opt }))
+    goTo("done")
   }
 
-  // ── CAUDA EQUINA ──────────────────────────────────────────────────────────
-  if (formAlert === "cauda-equina") {
-    return (
-      <section id="triagem" className="py-16 md:py-28 bg-background">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6">
-          <div className="rounded-2xl border-2 border-destructive/70 bg-destructive/5 p-8 sm:p-12">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-destructive/15">
-              <XCircle className="h-8 w-8 text-destructive" />
-            </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-foreground text-center text-balance">
-              Procure um pronto-socorro agora
-            </h2>
-            <p className="mt-4 text-foreground/80 leading-relaxed text-center text-pretty">
-              Os sintomas que você indicou podem ser sinal de{" "}
-              <strong>Síndrome da Cauda Equina</strong> — uma emergência neurológica.
+  const currentQ = SIMPLE_QUESTIONS.find(q => q.q === step)
+
+  return (
+    <section id="triagem" className="py-16 md:py-28 bg-background">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6">
+
+        {/* Header */}
+        <div className="text-center mb-10">
+          <span className="text-sm font-semibold uppercase tracking-widest text-primary">
+            Teleconsulta
+          </span>
+          <h2 className="mt-4 font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-balance">
+            Triagem rápida para dor na coluna
+          </h2>
+          <p className="mt-4 text-muted-foreground leading-relaxed max-w-xl mx-auto">
+            Responda algumas perguntas rápidas para entender se o atendimento on-line pode ajudar você.{" "}
+            <strong className="text-foreground">Leva menos de 1 minuto.</strong>
+          </p>
+        </div>
+
+        {/* ── PERGUNTAS 1–5 ── */}
+        {currentQ && (
+          <div className="rounded-2xl border border-border bg-card shadow-sm p-6 sm:p-8">
+            <ProgressBar current={currentQ.q} total={TOTAL} />
+            <p className="text-base sm:text-lg font-semibold text-foreground mb-5">
+              {currentQ.q}. {currentQ.label}
             </p>
-            <div className="mt-6 rounded-xl bg-destructive/10 border border-destructive/30 p-5 space-y-1.5">
-              <p className="text-sm font-semibold text-foreground mb-2">Por que não é caso de teleconsulta:</p>
-              <ul className="text-sm text-foreground/80 list-disc list-inside space-y-1 leading-relaxed">
-                <li>Risco de sequelas neurológicas permanentes</li>
-                <li>Requer avaliação médica e exame físico imediato</li>
-                <li>Pode necessitar de cirurgia de emergência — o tempo é crítico</li>
-              </ul>
+            <div className="space-y-2">
+              {currentQ.options.map(opt => (
+                <button
+                  key={opt}
+                  type="button"
+                  onClick={() => handleSimple(currentQ.q, opt)}
+                  className={`w-full text-left rounded-xl border px-5 py-3.5 text-sm transition-all hover:border-primary/60 hover:bg-primary/5 ${
+                    answers[currentQ.q] === opt
+                      ? "border-primary bg-primary/8 text-foreground font-medium"
+                      : "border-border bg-background text-foreground/80"
+                  }`}
+                >
+                  {opt}
+                </button>
+              ))}
             </div>
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-              <Button asChild size="lg" className="bg-destructive hover:bg-destructive/90 text-destructive-foreground font-semibold">
-                <a href="tel:192"><Phone className="mr-2 h-5 w-5" />Ligar para o SAMU — 192</a>
+            {currentQ.q > 1 && (
+              <div className="mt-5">
+                <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={() => setStep((currentQ.q - 1) as Step)}>
+                  ← Voltar
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ── PERGUNTA 6 — SINAIS DE ALERTA ── */}
+        {step === 6 && (
+          <div className="rounded-2xl border border-border bg-card shadow-sm p-6 sm:p-8">
+            <ProgressBar current={6} total={TOTAL} />
+
+            <div className="rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-700 p-4 mb-5">
+              <div className="flex items-start gap-2">
+                <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
+                  Leia com atenção.{" "}
+                  <strong>Alguns sintomas indicam necessidade de atendimento presencial urgente.</strong>
+                </p>
+              </div>
+            </div>
+
+            <p className="text-base sm:text-lg font-semibold text-foreground mb-5">
+              6. Você apresenta algum desses sintomas?
+            </p>
+
+            <div className="space-y-2">
+              {[...DANGER_FLAGS, "Nenhum desses"].map(opt => {
+                const isDanger = DANGER_FLAGS.includes(opt)
+                const checked = alertFlags.includes(opt)
+                return (
+                  <button
+                    key={opt}
+                    type="button"
+                    onClick={() => handleAlertToggle(opt)}
+                    className={`w-full text-left rounded-xl border px-5 py-3.5 text-sm transition-all flex items-start gap-3 ${
+                      checked && isDanger
+                        ? "border-destructive/60 bg-destructive/5 text-foreground"
+                        : checked
+                        ? "border-primary bg-primary/8 text-foreground"
+                        : "border-border bg-background text-foreground/80 hover:border-primary/40 hover:bg-primary/5"
+                    }`}
+                  >
+                    <span
+                      className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors ${
+                        checked
+                          ? isDanger
+                            ? "border-destructive bg-destructive"
+                            : "border-primary bg-primary"
+                          : "border-muted-foreground/40"
+                      }`}
+                    >
+                      {checked && (
+                        <svg className="h-2.5 w-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </span>
+                    <span className="flex-1">{opt}</span>
+                    {isDanger && (
+                      <span className="rounded-full bg-destructive/15 px-2 py-0.5 text-[10px] font-semibold text-destructive shrink-0 mt-0.5">
+                        alerta
+                      </span>
+                    )}
+                  </button>
+                )
+              })}
+            </div>
+
+            <div className="mt-6 flex items-center justify-between">
+              <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={() => setStep(5)}>
+                ← Voltar
               </Button>
-              <Button variant="outline" size="lg" onClick={() => {
-                setFormAlert(null)
-                set("sinaisAlerta", formData.sinaisAlerta.filter(s => !FLAGS_CAUDA_EQUINA.includes(s)))
-                setCurrentStep(3)
-              }}>
+              <Button onClick={confirmAlert} disabled={alertFlags.length === 0} className="px-6">
+                Confirmar <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* ── PERGUNTA 7 ── */}
+        {step === 7 && (
+          <div className="rounded-2xl border border-border bg-card shadow-sm p-6 sm:p-8">
+            <ProgressBar current={7} total={TOTAL} />
+            <p className="text-base sm:text-lg font-semibold text-foreground mb-5">
+              7. Você já fez cirurgia na coluna?
+            </p>
+            <div className="space-y-2">
+              {[
+                "Não",
+                "Sim, mas continuo com dor",
+                "Sim, fiz recentemente",
+                "Já tive indicação de cirurgia",
+              ].map(opt => (
+                <button
+                  key={opt}
+                  type="button"
+                  onClick={() => handleFinal(opt)}
+                  className={`w-full text-left rounded-xl border px-5 py-3.5 text-sm transition-all hover:border-primary/60 hover:bg-primary/5 ${
+                    answers[7] === opt
+                      ? "border-primary bg-primary/8 text-foreground font-medium"
+                      : "border-border bg-background text-foreground/80"
+                  }`}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+            <div className="mt-5">
+              <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={() => setStep(6)}>
+                ← Voltar
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* ── ALERTA — sinais de emergência ── */}
+        {step === "alert" && (
+          <div className="rounded-2xl border-2 border-amber-400/70 bg-amber-50 dark:bg-amber-950/20 p-8 sm:p-12">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/40">
+              <AlertTriangle className="h-8 w-8 text-amber-600 dark:text-amber-400" />
+            </div>
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-foreground text-center text-balance">
+              Esses sintomas podem exigir avaliação médica presencial urgente.
+            </h3>
+            <p className="mt-4 text-foreground/80 leading-relaxed text-center text-pretty">
+              Procure atendimento médico o quanto antes.
+            </p>
+            <div className="mt-8 text-center">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setAlertFlags([])
+                  setStep(6)
+                }}
+              >
                 Errei a resposta — voltar
               </Button>
             </div>
           </div>
-        </div>
-      </section>
-    )
-  }
+        )}
 
-  // ── INDICAÇÃO CIRÚRGICA ───────────────────────────────────────────────────
-  if (formAlert === "surgery-indicated") {
-    const msg = encodeURIComponent(
-      `Olá, Dr. Guilherme! Fiz a triagem online e o formulário identificou que meu caso pode ter indicação cirúrgica. Gostaria de entender melhor minhas opções.`
-    )
-    return (
-      <section id="triagem" className="py-16 md:py-28 bg-background">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6">
-          <div className="rounded-2xl border-2 border-primary/40 bg-primary/5 p-8 sm:p-12">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/15">
-              <AlertTriangle className="h-8 w-8 text-primary" />
-            </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-foreground text-center text-balance">
-              O atendimento online não é o indicado para você
-            </h2>
-            <p className="mt-4 text-foreground/80 leading-relaxed text-center text-pretty">
-              Suas respostas indicam <strong>sintomas que sugerem indicação cirúrgica</strong> ou comprometimento
-              neurológico significativo. Esse perfil requer avaliação presencial.
-            </p>
-            <div className="mt-6 space-y-3">
-              <div className="flex items-start gap-3 rounded-xl bg-card border border-border p-4">
-                <XCircle className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
-                <p className="text-sm text-foreground/80 leading-relaxed">
-                  <strong className="text-foreground">Por que não é indicado online:</strong>{" "}
-                  Casos com indicação cirúrgica exigem exame físico, análise de imagem ao vivo e
-                  comunicação direta com o cirurgião. Isso não pode ser feito com segurança à distância.
-                </p>
-              </div>
-              <div className="flex items-start gap-3 rounded-xl bg-card border border-border p-4">
-                <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <p className="text-sm text-foreground/80 leading-relaxed">
-                  <strong className="text-foreground">O que pode ser feito:</strong>{" "}
-                  Fisioterapia presencial pode ser uma alternativa conservadora antes da cirurgia,
-                  ou reabilitação pós-operatória. Entre em contato para discutir seu caso.
-                </p>
-              </div>
-            </div>
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-              <Button asChild size="lg" className="bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold">
-                <a href={`${WA_BASE}${msg}`} target="_blank" rel="noopener noreferrer">
-                  {WA_ICON}Falar com o Dr. Guilherme
-                </a>
-              </Button>
-              <Button variant="outline" size="lg" onClick={() => {
-                setFormAlert(null)
-                if (formData.cirurgiaIndicada === "Sim") {
-                  set("cirurgiaIndicada", "")
-                  setCurrentStep(4)
-                } else {
-                  set("sinaisAlerta", formData.sinaisAlerta.filter(s => !FLAGS_SURGICAL.includes(s)))
-                  setCurrentStep(3)
-                }
-              }}>
-                Errei a resposta — voltar
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  // ── SUCESSO ───────────────────────────────────────────────────────────────
-  if (isSubmitted) {
-    return (
-      <section id="triagem" className="py-16 md:py-28 bg-background">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6">
+        {/* ── TELA FINAL ── */}
+        {step === "done" && (
           <div className="rounded-2xl border border-border bg-card p-8 sm:p-12 text-center">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
               <CheckCircle2 className="h-8 w-8 text-primary" />
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-foreground">Triagem enviada!</h2>
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-foreground text-balance">
+              Seu caso pode ser avaliado no atendimento on-line.
+            </h3>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              Analisarei suas respostas e entrarei em contato pelo WhatsApp em até 24 horas.
+              Clique abaixo para agendar sua consulta.
             </p>
-            <Button asChild size="lg" className="mt-8 bg-[#25D366] hover:bg-[#20BD5A] text-white">
-              <a href={`${WA_BASE}${encodeURIComponent("Olá! Acabei de enviar o formulário de triagem.")}`} target="_blank" rel="noopener noreferrer">
-                {WA_ICON}Falar no WhatsApp
+            <Button
+              asChild
+              size="lg"
+              className="mt-8 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold h-14 px-8"
+            >
+              <a href={buildWaUrl(answers)} target="_blank" rel="noopener noreferrer">
+                {WA_ICON}
+                Agendar teleconsulta
               </a>
             </Button>
           </div>
-        </div>
-      </section>
-    )
-  }
+        )}
 
-  // ── FORMULÁRIO ────────────────────────────────────────────────────────────
-  return (
-    <section id="triagem" className="py-16 md:py-28 bg-background">
-      <div className="mx-auto max-w-2xl px-4 sm:px-6">
-        <div className="text-center mb-10">
-          <span className="text-sm font-semibold uppercase tracking-widest text-primary">Teleconsulta</span>
-          <h2 className="mt-4 font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-balance">
-            Triagem — Hérnia de Disco
-          </h2>
-          <p className="mt-4 text-muted-foreground leading-relaxed max-w-xl mx-auto">
-            Pré-triagem para teleconsulta sobre hérnia de disco, dor lombar, cervical ou ciática. Menos de 5 minutos.
-          </p>
-        </div>
-
-        {/* Progress */}
-        <div className="mb-8">
-          <div className="flex justify-between mb-2">
-            <span className="text-sm font-medium text-foreground">Etapa {currentStep} de {totalSteps}</span>
-            <span className="text-sm text-muted-foreground flex items-center gap-1">
-              <Clock className="h-4 w-4" />~5 min
-            </span>
-          </div>
-          <div className="h-2 rounded-full bg-muted overflow-hidden">
-            <div
-              className="h-full bg-primary transition-all duration-500 ease-out"
-              style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-            />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-border bg-card shadow-sm p-6 sm:p-8">
-
-          {/* ── STEP 1 ── */}
-          {currentStep === 1 && (
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-5">
-                1 / {totalSteps} — Identificação
-              </p>
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="nome" className="font-medium text-foreground">Nome completo *</Label>
-                  <Input id="nome" value={formData.nome} onChange={e => set("nome", e.target.value)}
-                    placeholder="Digite seu nome completo" className="mt-1.5 h-10" />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="idade" className="font-medium text-foreground">Idade *</Label>
-                    <Input id="idade" type="number" value={formData.idade} onChange={e => set("idade", e.target.value)}
-                      placeholder="Ex: 35" className="mt-1.5 h-10" />
-                  </div>
-                  <div>
-                    <Label htmlFor="cidade" className="font-medium text-foreground">Cidade/UF *</Label>
-                    <Input id="cidade" value={formData.cidade} onChange={e => set("cidade", e.target.value)}
-                      placeholder="Ex: Natal/RN" className="mt-1.5 h-10" />
-                  </div>
-                </div>
-                <div>
-                  <Label htmlFor="profissao" className="font-medium text-foreground">Profissão *</Label>
-                  <Input id="profissao" value={formData.profissao} onChange={e => set("profissao", e.target.value)}
-                    placeholder="Digite sua profissão" className="mt-1.5 h-10" />
-                </div>
-                <div>
-                  <Label htmlFor="whatsapp" className="font-medium text-foreground">WhatsApp *</Label>
-                  <Input
-                    id="whatsapp"
-                    type="tel"
-                    value={formData.whatsapp}
-                    onChange={e => set("whatsapp", maskPhone(e.target.value))}
-                    placeholder="(84) 99999-9999"
-                    className="mt-1.5 h-10"
-                    maxLength={15}
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* ── STEP 2 ── */}
-          {currentStep === 2 && (
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-5">
-                2 / {totalSteps} — Sobre sua dor
-              </p>
-              <div className="space-y-6">
-                <div>
-                  <Label className="font-medium text-foreground block mb-2.5">Onde é a principal dor? *</Label>
-                  <RadioGroup value={formData.localDor} onValueChange={v => set("localDor", v)} className="space-y-2">
-                    {["Lombar (parte mais baixa da coluna)", "Cervical (pescoço)", "Torácica (meio das costas)", "Irradia para a perna", "Irradia para o braço"].map(opt => (
-                      <RadioCard key={opt} value={opt} selected={formData.localDor === opt}>{opt}</RadioCard>
-                    ))}
-                  </RadioGroup>
-                </div>
-
-                <div>
-                  <Label className="font-medium text-foreground block mb-2.5">A dor irradia para perna ou braço? *</Label>
-                  <RadioGroup value={formData.irradiacao} onValueChange={v => set("irradiacao", v)} className="space-y-2">
-                    {["Não", "Sim, até a coxa", "Sim, até o joelho", "Sim, até o pé", "Sim, até a mão"].map(opt => (
-                      <RadioCard key={opt} value={opt} selected={formData.irradiacao === opt}>{opt}</RadioCard>
-                    ))}
-                  </RadioGroup>
-                </div>
-
-                <div>
-                  <Label className="font-medium text-foreground block mb-2.5">Há quanto tempo sente dor? *</Label>
-                  <RadioGroup value={formData.tempoDor} onValueChange={v => set("tempoDor", v)} className="grid grid-cols-2 gap-2">
-                    {["Menos de 7 dias", "1 a 4 semanas", "1 a 3 meses", "Mais de 3 meses"].map(opt => (
-                      <RadioCard key={opt} value={opt} selected={formData.tempoDor === opt}>{opt}</RadioCard>
-                    ))}
-                  </RadioGroup>
-                </div>
-
-                <div>
-                  <Label className="font-medium text-foreground block mb-2.5">Nível de dor (0 = sem dor, 10 = máxima) *</Label>
-                  <div className="flex flex-wrap gap-2">
-                    {[0,1,2,3,4,5,6,7,8,9,10].map(num => (
-                      <button
-                        key={num}
-                        type="button"
-                        onClick={() => set("nivelDor", String(num))}
-                        className={`h-11 w-11 rounded-lg border-2 text-sm font-semibold transition-all ${
-                          formData.nivelDor === String(num)
-                            ? "border-primary bg-primary text-primary-foreground scale-110"
-                            : num >= 8 ? "border-destructive/40 bg-destructive/5 text-foreground hover:border-destructive"
-                            : num >= 5 ? "border-accent/40 bg-accent/5 text-foreground hover:border-accent"
-                            : "border-border bg-background text-foreground hover:border-primary/50"
-                        }`}
-                      >{num}</button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* ── STEP 3 ── */}
-          {currentStep === 3 && (
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">
-                3 / {totalSteps} — Sinais de alerta
-              </p>
-              <div className="rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-700 p-4 mb-5">
-                <div className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-                  <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
-                    Responda com atenção.{" "}
-                    <strong>Alguns sintomas encerrarão o formulário imediatamente</strong> e
-                    redirecionarão para o atendimento correto.
-                  </p>
-                </div>
-              </div>
-              <Label className="font-medium text-foreground block mb-3">
-                Você apresenta algum desses sintomas? *
-              </Label>
-              <div className="space-y-2">
-                {[
-                  { label: "Perda de força significativa em perna ou braço", danger: true },
-                  { label: "Perda de controle urinário ou fecal", danger: true },
-                  { label: "Dormência na região íntima (sela)", danger: true },
-                  { label: "Febre associada à dor nas costas", danger: false },
-                  { label: "Nenhum desses", danger: false },
-                ].map(({ label, danger }) => {
-                  const checked = formData.sinaisAlerta.includes(label)
-                  return (
-                    <label
-                      key={label}
-                      className={`flex items-start gap-3 rounded-lg border px-4 py-3.5 cursor-pointer transition-colors ${
-                        checked && danger ? "border-destructive/60 bg-destructive/5"
-                          : checked ? "border-primary bg-primary/8"
-                          : "border-border bg-background hover:border-primary/40"
-                      }`}
-                    >
-                      <Checkbox
-                        checked={checked}
-                        onCheckedChange={() => handleSinal(label)}
-                        className="mt-0.5 shrink-0"
-                      />
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-sm text-foreground leading-relaxed">{label}</span>
-                        {danger && (
-                          <span className="rounded-full bg-destructive/15 px-2 py-0.5 text-[10px] font-semibold text-destructive">
-                            sinal de alerta
-                          </span>
-                        )}
-                      </div>
-                    </label>
-                  )
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* ── STEP 4 ── */}
-          {currentStep === 4 && (
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-5">
-                4 / {totalSteps} — Diagnóstico
-              </p>
-              <div className="space-y-5">
-                <div>
-                  <Label className="font-medium text-foreground block mb-2.5">Você já realizou exame de imagem? *</Label>
-                  <RadioGroup value={formData.exameImagem} onValueChange={v => set("exameImagem", v)} className="grid grid-cols-2 gap-2">
-                    {["Não", "Ressonância", "Tomografia", "Raio-X"].map(opt => (
-                      <RadioCard key={opt} value={opt} selected={formData.exameImagem === opt}>{opt}</RadioCard>
-                    ))}
-                  </RadioGroup>
-                </div>
-
-                {formData.exameImagem && formData.exameImagem !== "Não" && (
-                  <div>
-                    <Label htmlFor="diagnostico" className="font-medium text-foreground">
-                      Qual o diagnóstico descrito no laudo?
-                    </Label>
-                    <Textarea
-                      id="diagnostico"
-                      value={formData.diagnostico}
-                      onChange={e => set("diagnostico", e.target.value)}
-                      placeholder="Ex: hérnia de disco L4-L5 com compressão radicular..."
-                      className="mt-1.5 min-h-[80px]"
-                    />
-                  </div>
-                )}
-
-                <div className="rounded-xl bg-muted/50 border border-border p-5">
-                  <Label className="font-semibold text-foreground block mb-3">
-                    Algum médico já indicou cirurgia para o seu caso? *
-                  </Label>
-                  <RadioGroup value={formData.cirurgiaIndicada} onValueChange={handleCirurgia} className="space-y-2">
-                    {[
-                      { v: "Não", desc: "Nenhum médico recomendou cirurgia" },
-                      { v: "Sim", desc: "Tenho indicação cirúrgica" },
-                      { v: "Em avaliação", desc: "Ainda estou sendo avaliado" },
-                    ].map(({ v, desc }) => (
-                      <div
-                        key={v}
-                        className={`flex items-start gap-3 rounded-lg border px-4 py-3.5 transition-colors ${
-                          formData.cirurgiaIndicada === v
-                            ? v === "Sim"
-                              ? "border-amber-400 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-600"
-                              : "border-primary bg-primary/8"
-                            : "border-border bg-background hover:border-primary/40"
-                        }`}
-                      >
-                        <RadioGroupItem value={v} id={`cir-${v}`} className="mt-0.5 shrink-0" />
-                        <Label htmlFor={`cir-${v}`} className="cursor-pointer">
-                          <span className="text-sm font-medium text-foreground">{v}</span>
-                          <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* ── STEP 5 ── */}
-          {currentStep === 5 && (
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-5">
-                5 / {totalSteps} — Tratamentos realizados
-              </p>
-              <div className="space-y-5">
-                <div>
-                  <Label className="font-medium text-foreground block mb-3">Quais tratamentos você já fez? *</Label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {["Medicamentos", "Infiltração", "Fisioterapia", "Pilates", "Cirurgia", "Nenhum"].map(opt => {
-                      const checked = formData.tratamentos.includes(opt)
-                      return (
-                        <label key={opt} className={`flex items-center gap-3 rounded-lg border px-4 py-3 cursor-pointer transition-colors ${
-                          checked ? "border-primary bg-primary/8 text-foreground" : "border-border bg-background hover:border-primary/40 text-foreground"
-                        }`}>
-                          <Checkbox checked={checked} onCheckedChange={() => toggle("tratamentos", opt)} />
-                          <span className="text-sm">{opt}</span>
-                        </label>
-                      )
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <Label className="font-medium text-foreground block mb-3">Com esses tratamentos melhorou? *</Label>
-                  <RadioGroup value={formData.melhorou} onValueChange={v => set("melhorou", v)} className="grid grid-cols-3 gap-2">
-                    {[{ v: "Sim", e: "✅" }, { v: "Parcialmente", e: "🔶" }, { v: "Não", e: "❌" }].map(({ v, e }) => (
-                      <div key={v} className={`flex flex-col items-center justify-center gap-1 rounded-lg border px-2 py-4 transition-colors ${
-                        formData.melhorou === v ? "border-primary bg-primary/8" : "border-border bg-background hover:border-primary/40"
-                      }`}>
-                        <RadioGroupItem value={v} id={`mel-${v}`} className="sr-only" />
-                        <Label htmlFor={`mel-${v}`} className="cursor-pointer text-center">
-                          <span className="text-xl block">{e}</span>
-                          <span className="text-xs font-medium text-foreground mt-1 block">{v}</span>
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* ── STEP 6 ── */}
-          {currentStep === 6 && (
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-5">
-                6 / {totalSteps} — Fatores mecânicos
-              </p>
-              <div className="space-y-5">
-                <div>
-                  <Label className="font-medium text-foreground block mb-3">A dor piora quando: *</Label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {["Fica muito tempo sentado", "Fica em pé", "Se abaixa", "Carrega peso", "Dirige", "Ao acordar", "Não sei identificar"].map(opt => {
-                      const checked = formData.pioraCom.includes(opt)
-                      return (
-                        <label key={opt} className={`flex items-center gap-3 rounded-lg border px-4 py-3 cursor-pointer transition-colors ${
-                          checked ? "border-primary bg-primary/8 text-foreground" : "border-border bg-background hover:border-primary/40 text-foreground"
-                        }`}>
-                          <Checkbox checked={checked} onCheckedChange={() => toggle("pioraCom", opt)} />
-                          <span className="text-sm">{opt}</span>
-                        </label>
-                      )
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <Label className="font-medium text-foreground block mb-3">Pratica atividade física? *</Label>
-                  <RadioGroup value={formData.atividadeFisica} onValueChange={v => set("atividadeFisica", v)} className="grid grid-cols-2 gap-2">
-                    {["Não", "Musculação", "Caminhada", "Outra"].map(opt => (
-                      <RadioCard key={opt} value={opt} selected={formData.atividadeFisica === opt}>{opt}</RadioCard>
-                    ))}
-                  </RadioGroup>
-                  {formData.atividadeFisica === "Outra" && (
-                    <Input value={formData.atividadeFisicaOutra} onChange={e => set("atividadeFisicaOutra", e.target.value)}
-                      placeholder="Qual atividade?" className="mt-2.5 h-10" />
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* ── STEP 7 ── */}
-          {currentStep === 7 && (
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-5">
-                7 / {totalSteps} — Expectativa
-              </p>
-              <div className="space-y-5">
-                <div>
-                  <Label htmlFor="expectativa" className="font-medium text-foreground">
-                    O que você espera da teleconsulta? *
-                  </Label>
-                  <Textarea
-                    id="expectativa"
-                    value={formData.expectativa}
-                    onChange={e => set("expectativa", e.target.value)}
-                    placeholder="Descreva seus objetivos com o tratamento..."
-                    className="mt-1.5 min-h-[100px]"
-                  />
-                </div>
-                <div className="rounded-xl bg-muted/50 border border-border p-5">
-                  <p className="text-xs text-muted-foreground mb-3">O acompanhamento é particular.</p>
-                  <Label className="font-semibold text-foreground block mb-3">
-                    Está disposto(a) a investir na sua recuperação agora? *
-                  </Label>
-                  <RadioGroup value={formData.dispostoInvestir} onValueChange={v => set("dispostoInvestir", v)} className="space-y-2">
-                    {[
-                      { v: "Sim", desc: "Estou pronto para começar" },
-                      { v: "Preciso saber os valores", desc: "Quero conhecer os preços primeiro" },
-                      { v: "Não no momento", desc: "Ainda não estou decidido" },
-                    ].map(({ v, desc }) => (
-                      <div key={v} className={`flex items-start gap-3 rounded-lg border px-4 py-3.5 transition-colors ${
-                        formData.dispostoInvestir === v ? "border-primary bg-primary/8" : "border-border bg-background hover:border-primary/40"
-                      }`}>
-                        <RadioGroupItem value={v} id={`inv-${v}`} className="mt-0.5 shrink-0" />
-                        <Label htmlFor={`inv-${v}`} className="cursor-pointer">
-                          <span className="text-sm font-medium text-foreground">{v}</span>
-                          <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </div>
-                <div className="flex items-start gap-3 rounded-xl border border-border bg-muted/40 p-4">
-                  <AlertTriangle className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    Essa triagem não substitui avaliação médica presencial em casos de urgência.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Navigation */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
-            <Button variant="outline" onClick={prevStep} disabled={currentStep === 1} className="px-6">
-              Voltar
-            </Button>
-            {currentStep < totalSteps ? (
-              <Button onClick={nextStep} className="px-6">
-                Continuar <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            ) : (
-              <Button onClick={handleSubmit} disabled={isSubmitting} className="px-6">
-                {isSubmitting ? "Enviando..." : <><Send className="mr-2 h-4 w-4" />Enviar Triagem</>}
-              </Button>
-            )}
-          </div>
-        </div>
       </div>
     </section>
   )

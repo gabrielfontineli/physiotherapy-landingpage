@@ -3,7 +3,7 @@
 import { MapPin, Monitor, BookOpen, ArrowRight, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const WHATSAPP_URL = "https://wa.me/5584999999999?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
+const WHATSAPP_URL = "https://wa.me/5584981910924?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
 
 const services = [
   {
@@ -25,7 +25,7 @@ const services = [
     id: "online",
     icon: Monitor,
     title: "Teleatendimento",
-    subtitle: "Para qualquer cidade do Brasil",
+    subtitle: "Para qualquer lugar do mundo",
     color: "accent",
     featured: true,
     bullets: [
@@ -40,15 +40,15 @@ const services = [
   {
     id: "ebook",
     icon: BookOpen,
-    title: "E-book Hérnia de Disco",
-    subtitle: "Para quem quer se informar",
+    title: "Guia Prático — Destrave sua Hérnia de Disco e Ciático",
+    subtitle: "Para quem sofre com dor lombar e quer alívio sem depender só de remédio.",
     color: "green",
     bullets: [
-      "Entenda sua condição",
+      "Entenda sua dor",
       "Exercícios seguros em casa",
-      "Evite cirurgias desnecessárias",
+      "Estratégias para aliviar o nervo ciático",
     ],
-    cta: "Comprar E-book",
+    cta: "Acessar o Guia",
     href: "#ebook",
     external: false,
   },
@@ -130,14 +130,16 @@ export function ServicesSection() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
+
+                {service.id === "online" && (
+                  <p className="mt-4 text-center text-xs text-muted-foreground">
+                    <strong>Teleatendimento:</strong> Responda 5 perguntas em 2 minutos e descubra se consigo te ajudar online.
+                  </p>
+                )}
               </div>
             )
           })}
         </div>
-
-        <p className="mt-8 text-center text-sm text-muted-foreground">
-          <strong>Teleatendimento:</strong> Responda 5 perguntas em 2 minutos e descubra se consigo te ajudar online.
-        </p>
       </div>
     </section>
   )
