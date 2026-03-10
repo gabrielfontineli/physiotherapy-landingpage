@@ -47,7 +47,7 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="btn-glow-orange bg-amber-500 hover:bg-amber-600 text-white text-base font-semibold h-12 sm:h-14"
+              className="btn-glow-orange bg-amber-500 hover:bg-amber-600 text-white text-base font-semibold h-12 sm:h-14 shadow-sm"
             >
               <a href="#triagem" className="flex items-center">
                 <span className="btn-shine btn-shine-delayed" aria-hidden="true" />
@@ -58,6 +58,10 @@ export function HeroSection() {
           </div>
 
           <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/70">
+            <span className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4 text-accent" />
+              +5 anos de experiência
+            </span>
             <span className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-accent" />
               Especializações no tratamento da dor
