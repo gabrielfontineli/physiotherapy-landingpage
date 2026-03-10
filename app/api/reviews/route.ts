@@ -59,7 +59,10 @@ export async function GET() {
 
   try {
     const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&language=pt-BR&key=${apiKey}`
-    const res = await fetch(url, { next: { revalidate: 3600 } }) // cache 1h
+    const res = await fetch(url, {
+      next: { revalidate: 3600 }, // cache 1h in production
+      cache: process.env.NODE_ENV === "development" ? "no-store" : "default",
+    })
 
     if (!res.ok) throw new Error(`Places API error: ${res.status}`)
 
