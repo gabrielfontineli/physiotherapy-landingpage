@@ -15,7 +15,7 @@ export async function HeroSection() {
           alt={t("imageAlt")}
           fill
           sizes="100vw"
-          className="object-cover object-[75%_center] md:object-[60%_center] lg:object-center"
+          className="object-cover object-[85%_center] md:object-[60%_center] lg:object-center"
           priority
         />
         {/* Mobile: dark at bottom so content is readable, photo visible at top */}
