@@ -5,26 +5,27 @@ import { Button } from "@/components/ui/button"
 
 const symptomGroups = [
   {
-    area: "Coluna",
+    area: "Dor na Coluna",
     symptoms: [
-      "Dormência ou formigamento",
-      "Travamento nas costas",
+      "Dor lombar (parte baixa das costas)",
+      "Dor no pescoço ou cervical",
+      "Travamento ou rigidez nas costas",
     ],
   },
   {
-    area: "Membros",
+    area: "Nervo e Irradiação",
     symptoms: [
+      "Dor que desce para a perna ou pé (ciático)",
+      "Dormência ou formigamento nos membros",
       "Fraqueza nos braços ou pernas",
-      "Dor no ombro ou pescoço",
-      "Dor que desce para a perna ou braço",
     ],
   },
   {
-    area: "Dia a dia",
+    area: "Impacto no Dia a Dia",
     symptoms: [
-      "Dor ao ficar em pé por muito tempo ou sentado",
-      "Já tomou remédio e não resolveu",
-      "Dificuldade de levantar da cama",
+      "Dificuldade de levantar da cama ou sentar",
+      "Dor ao ficar sentado ou em pé por muito tempo",
+      "Já tratou antes e não resolveu",
     ],
   },
 ]

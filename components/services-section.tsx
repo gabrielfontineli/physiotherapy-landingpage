@@ -49,8 +49,8 @@ const services = [
       "Estratégias para aliviar o nervo ciático",
     ],
     cta: "Acessar o Guia",
-    href: "#ebook",
-    external: false,
+    href: "https://pay.hotmart.com/D104423178L",
+    external: true,
   },
 ]
 
