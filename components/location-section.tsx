@@ -1,8 +1,7 @@
 import { MapPin, Clock, AlertCircle, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getTranslations } from "next-intl/server"
-
-const WHATSAPP_URL = "https://wa.me/5584981910924?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
+import { WHATSAPP_URL } from "@/lib/config"
 
 export async function LocationSection() {
   const t = await getTranslations("location")

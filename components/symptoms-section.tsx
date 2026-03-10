@@ -1,11 +1,9 @@
-"use client"
-
 import { ArrowDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
-export function SymptomsSection() {
-  const t = useTranslations("symptoms")
+export async function SymptomsSection() {
+  const t = await getTranslations("symptoms")
 
   const symptomGroups = [0, 1, 2].map((i) => ({
     area: t(`group${i}Area` as "group0Area"),

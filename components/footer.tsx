@@ -36,6 +36,9 @@ export async function Footer() {
               <a href="#localizacao" className="text-sm text-white/60 hover:text-white transition-colors">
                 {t("navLocation")}
               </a>
+              <a href="/guia" className="text-sm text-[oklch(0.80_0.17_52)] hover:text-[oklch(0.90_0.17_52)] transition-colors font-medium">
+                Guia Digital
+              </a>
             </nav>
           </div>
 

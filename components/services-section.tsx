@@ -1,13 +1,22 @@
-"use client"
-
 import { MapPin, Monitor, BookOpen, ArrowRight, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
+import { WHATSAPP_URL, HOTMART_URL } from "@/lib/config"
 
-const WHATSAPP_URL = "https://wa.me/5584981910924?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
+const colorClasses = {
+  primary: "bg-primary/10 text-primary border-primary/20",
+  accent: "bg-accent/10 text-accent border-accent/40",
+  green: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
+}
 
-export function ServicesSection() {
-  const t = useTranslations("services")
+const buttonClasses = {
+  primary: "bg-primary text-primary-foreground hover:bg-primary/90",
+  accent: "bg-accent text-accent-foreground hover:bg-accent/90",
+  green: "bg-emerald-600 text-white hover:bg-emerald-700",
+}
+
+export async function ServicesSection() {
+  const t = await getTranslations("services")
 
   const services = [
     {
@@ -41,21 +50,10 @@ export function ServicesSection() {
       color: "green" as const,
       bullets: [t("ebookB1"), t("ebookB2"), t("ebookB3")],
       cta: t("ebookCta"),
-      href: "https://pay.hotmart.com/D104423178L",
+      href: HOTMART_URL,
       external: true,
     },
   ]
-
-  const colorClasses = {
-    primary: "bg-primary/10 text-primary border-primary/20",
-    accent: "bg-accent/10 text-accent border-accent/40",
-    green: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
-  }
-  const buttonClasses = {
-    primary: "bg-primary text-primary-foreground hover:bg-primary/90",
-    accent: "bg-accent text-accent-foreground hover:bg-accent/90",
-    green: "bg-emerald-600 text-white hover:bg-emerald-700",
-  }
 
   return (
     <section id="servicos" className="py-16 md:py-28 bg-background">
@@ -92,7 +90,7 @@ export function ServicesSection() {
                   </div>
                 )}
 
-                <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${colorClasses[service.color]}`}>
+                <div className={`flex h-12 w-12 items-center justify-center rounded-xl border ${colorClasses[service.color]}`}>
                   <Icon className="h-6 w-6" />
                 </div>
 

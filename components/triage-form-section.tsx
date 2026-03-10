@@ -4,9 +4,9 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { AlertTriangle, CheckCircle2, ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { WHATSAPP_BASE } from "@/lib/config"
 
-const WHATSAPP_NUMBER = "5584981910924"
-const WA_BASE = `https://wa.me/${WHATSAPP_NUMBER}?text=`
+const WA_BASE = WHATSAPP_BASE
 
 const WA_ICON = (
   <svg className="mr-2 h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">

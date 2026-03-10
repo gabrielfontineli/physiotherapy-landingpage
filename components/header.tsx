@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { useTranslations } from "next-intl"
-
-const WHATSAPP_URL = "https://wa.me/5584981910924?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
+import { WHATSAPP_URL } from "@/lib/config"
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
