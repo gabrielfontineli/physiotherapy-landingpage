@@ -6,14 +6,18 @@ import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { GoogleReview } from "@/app/api/reviews/route"
 
-const CONDITIONS = [
-  "Hérnia de Disco",
-  "Dor Lombar Crônica",
-  "Ciático",
-  "Teleatendimento",
-  "Escoliose",
-  "Cervicalgia",
-]
+function detectCondition(text: string): string | null {
+  const t = text.toLowerCase()
+  if (t.includes("hérnia") || t.includes("hernia") || t.includes("disco")) return "Hérnia de Disco"
+  if (t.includes("ciátic") || t.includes("ciatico") || t.includes("nervo ciático")) return "Nervo Ciático"
+  if (t.includes("escoliose")) return "Escoliose"
+  if (t.includes("cervical") || t.includes("pescoço")) return "Cervicalgia"
+  if (t.includes("lombar") || t.includes("lombo") || t.includes("l4") || t.includes("l5")) return "Dor Lombar"
+  if (t.includes("online") || t.includes("teleconsulta") || t.includes("teleatendimento") || t.includes("videochamada")) return "Teleatendimento"
+  if (t.includes("coluna") || t.includes("costas")) return "Dor na Coluna"
+  if (t.includes("postura")) return "Postura"
+  return null
+}
 
 function getInitials(name: string) {
   return name.split(" ").slice(0, 2).map((n) => n[0]).join("").toUpperCase()
@@ -159,11 +163,13 @@ export function TestimonialsSection() {
                       &ldquo;{review.text}&rdquo;
                     </p>
 
-                    <div className="mt-4 pt-4 border-t border-border">
-                      <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                        {CONDITIONS[index % CONDITIONS.length]}
-                      </span>
-                    </div>
+                    {detectCondition(review.text) && (
+                      <div className="mt-4 pt-4 border-t border-border">
+                        <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                          {detectCondition(review.text)}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
