@@ -10,9 +10,9 @@ const colorClasses = {
 }
 
 const buttonClasses = {
-  primary: "bg-primary text-primary-foreground hover:bg-primary/90",
-  accent: "bg-accent text-accent-foreground hover:bg-accent/90",
-  green: "bg-emerald-600 text-white hover:bg-emerald-700",
+  primary: "btn-lift bg-primary text-primary-foreground hover:bg-primary/90",
+  accent: "btn-glow-accent bg-accent text-accent-foreground hover:bg-accent/90",
+  green: "btn-lift bg-emerald-600 text-white hover:bg-emerald-700",
 }
 
 export async function ServicesSection() {
@@ -115,8 +115,9 @@ export async function ServicesSection() {
                     target={service.external ? "_blank" : undefined}
                     rel={service.external ? "noopener noreferrer" : undefined}
                   >
-                    {service.cta}
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    {service.featured && <span className="btn-shine" aria-hidden="true" />}
+                    <span className="relative">{service.cta}</span>
+                    <ArrowRight className="relative ml-2 h-4 w-4" />
                   </a>
                 </Button>
 

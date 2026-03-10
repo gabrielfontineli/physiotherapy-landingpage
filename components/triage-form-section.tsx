@@ -346,9 +346,10 @@ export function TriageFormSection() {
             <Button
               asChild
               size="lg"
-              className="mt-8 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold h-14 px-8"
+              className="btn-glow-green mt-8 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold h-14 px-8"
             >
               <a href={buildWaUrl(answers)} target="_blank" rel="noopener noreferrer">
+                <span className="btn-shine" aria-hidden="true" />
                 {WA_ICON}
                 {t("doneCta")}
               </a>

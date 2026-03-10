@@ -194,3 +194,64 @@
 .btn-shine-delayed {
   animation-delay: 1.1s;
 }
+
+/* ── Primary (blue) glow — for bg-primary CTA buttons ── */
+@keyframes glow-primary {
+  0%, 100% {
+    box-shadow:
+      0 0 8px  2px rgba(91, 143, 212, 0.50),
+      0 0 20px 6px rgba(91, 143, 212, 0.22);
+  }
+  50% {
+    box-shadow:
+      0 0 18px 5px  rgba(91, 143, 212, 0.85),
+      0 0 45px 12px rgba(91, 143, 212, 0.40),
+      0 0 70px 20px rgba(91, 143, 212, 0.15);
+  }
+}
+
+.btn-glow-primary {
+  position: relative;
+  overflow: hidden;
+  animation: glow-primary 1.8s ease-in-out infinite;
+  animation-delay: 0.4s;
+  will-change: box-shadow;
+}
+
+/* ── Accent (gold) glow — for bg-accent / featured CTA buttons ── */
+@keyframes glow-accent {
+  0%, 100% {
+    box-shadow:
+      0 0 8px  2px rgba(212, 168, 50, 0.55),
+      0 0 20px 6px rgba(212, 168, 50, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 18px 5px  rgba(212, 168, 50, 0.90),
+      0 0 45px 12px rgba(212, 168, 50, 0.45),
+      0 0 70px 20px rgba(212, 168, 50, 0.18);
+  }
+}
+
+.btn-glow-accent {
+  position: relative;
+  overflow: hidden;
+  animation: glow-accent 1.6s ease-in-out infinite;
+  animation-delay: 0.6s;
+  will-change: box-shadow;
+}
+
+/* ── Lift — subtle hover raise for secondary / outline buttons ── */
+.btn-lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-lift:hover {
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.btn-lift:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: none;
+}

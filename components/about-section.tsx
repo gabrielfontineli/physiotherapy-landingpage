@@ -84,11 +84,12 @@ export async function AboutSection() {
 
             <Button
               asChild
-              className="mt-8 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
+              className="btn-glow-primary mt-8 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
             >
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                {t("cta")}
-                <ArrowRight className="ml-2 h-4 w-4 shrink-0" />
+                <span className="btn-shine btn-shine-delayed" aria-hidden="true" />
+                <span className="relative">{t("cta")}</span>
+                <ArrowRight className="relative ml-2 h-4 w-4 shrink-0" />
               </a>
             </Button>
           </div>

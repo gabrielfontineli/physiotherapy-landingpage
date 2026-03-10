@@ -39,10 +39,11 @@ export function Header() {
           ))}
           <LocaleSwitcher />
           <ThemeToggle />
-          <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+          <Button asChild size="sm" className="btn-glow-primary bg-primary text-primary-foreground hover:bg-primary/90">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-              <Phone className="mr-2 h-4 w-4" />
-              {t("schedule")}
+              <span className="btn-shine btn-shine-delayed" aria-hidden="true" />
+              <Phone className="relative mr-2 h-4 w-4" />
+              <span className="relative">{t("schedule")}</span>
             </a>
           </Button>
         </nav>
