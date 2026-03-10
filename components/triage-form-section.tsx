@@ -3,31 +3,10 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { AlertTriangle, CheckCircle2, ArrowRight } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 const WHATSAPP_NUMBER = "5584981910924"
 const WA_BASE = `https://wa.me/${WHATSAPP_NUMBER}?text=`
-
-const QUESTION_LABELS: Record<number, string> = {
-  1: "Dor principal",
-  2: "Irradiação",
-  3: "Tempo de dor",
-  4: "O que piora",
-  5: "Exame de imagem",
-  6: "Sinais de alerta",
-  7: "Cirurgia na coluna",
-}
-
-function buildWaUrl(answers: Record<number, string>): string {
-  const lines = [
-    "Olá, Dr. Guilherme! Fiz a triagem online e gostaria de agendar minha teleconsulta.",
-    "",
-    "*Minhas respostas:*",
-    ...Object.entries(QUESTION_LABELS).map(
-      ([q, label]) => `${q}. ${label}: ${answers[Number(q)] ?? "—"}`
-    ),
-  ]
-  return WA_BASE + encodeURIComponent(lines.join("\n"))
-}
 
 const WA_ICON = (
   <svg className="mr-2 h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -35,78 +14,14 @@ const WA_ICON = (
   </svg>
 )
 
-const DANGER_FLAGS = [
-  "Perda total de força na perna ou braço",
-  "Dificuldade para controlar urina ou fezes",
-  "Dormência intensa na região íntima",
-  "Febre associada à dor na coluna",
-  "Dor incapacitante que não melhora em nenhuma posição",
-]
-
-const SIMPLE_QUESTIONS = [
-  {
-    q: 1,
-    label: "Onde está sua dor principal?",
-    options: [
-      "Lombar (parte baixa das costas)",
-      "Cervical (pescoço)",
-      "Torácica (meio das costas)",
-      "Mais de uma região",
-    ],
-  },
-  {
-    q: 2,
-    label: "Sua dor irradia (vai) para algum membro do corpo?",
-    options: [
-      "Não, fica apenas na coluna",
-      "Vai para glúteo ou coxa",
-      "Desce pela perna até o pé ou dedos",
-      "Vai para braço ou mão",
-    ],
-  },
-  {
-    q: 3,
-    label: "Há quanto tempo você sente essa dor?",
-    options: [
-      "Menos de 1 semana",
-      "Entre 1 semana e 3 meses",
-      "Mais de 3 meses",
-      "Vai e volta há meses ou anos",
-    ],
-  },
-  {
-    q: 4,
-    label: "O que costuma piorar sua dor?",
-    options: [
-      "Ficar muito tempo sentado",
-      "Levantar da cama",
-      "Caminhar ou se movimentar",
-      "Ficar muito tempo parado",
-      "Não sei identificar",
-    ],
-  },
-  {
-    q: 5,
-    label: "Você já fez exame de imagem (ressonância ou tomografia)?",
-    options: [
-      "Sim, mostrou hérnia de disco",
-      "Sim, mas não lembro o resultado",
-      "Não fiz exame",
-      "Tenho suspeita de hérnia",
-    ],
-  },
-]
-
 type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7 | "alert" | "done"
 
-function ProgressBar({ current, total }: { current: number; total: number }) {
+function ProgressBar({ current, total, label }: { current: number; total: number; label: string }) {
   const pct = Math.round((current / total) * 100)
   return (
     <div className="mb-6">
       <div className="flex justify-between mb-2">
-        <span className="text-sm font-medium text-foreground">
-          Pergunta {current} de {total}
-        </span>
+        <span className="text-sm font-medium text-foreground">{label}</span>
         <span className="text-sm text-muted-foreground">{pct}%</span>
       </div>
       <div className="h-1.5 rounded-full bg-muted overflow-hidden">
@@ -120,49 +35,103 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
 }
 
 export function TriageFormSection() {
+  const t = useTranslations("triage")
   const [step, setStep] = useState<Step>(1)
   const [answers, setAnswers] = useState<Record<number, string>>({})
   const [alertFlags, setAlertFlags] = useState<string[]>([])
 
   const TOTAL = 7
 
+  const DANGER_FLAGS = [t("d1"), t("d2"), t("d3"), t("d4"), t("d5")]
+
+  const SIMPLE_QUESTIONS = [
+    {
+      q: 1,
+      label: t("q1label"),
+      options: [t("q1o1"), t("q1o2"), t("q1o3"), t("q1o4")],
+    },
+    {
+      q: 2,
+      label: t("q2label"),
+      options: [t("q2o1"), t("q2o2"), t("q2o3"), t("q2o4")],
+    },
+    {
+      q: 3,
+      label: t("q3label"),
+      options: [t("q3o1"), t("q3o2"), t("q3o3"), t("q3o4")],
+    },
+    {
+      q: 4,
+      label: t("q4label"),
+      options: [t("q4o1"), t("q4o2"), t("q4o3"), t("q4o4"), t("q4o5")],
+    },
+    {
+      q: 5,
+      label: t("q5label"),
+      options: [t("q5o1"), t("q5o2"), t("q5o3"), t("q5o4")],
+    },
+  ]
+
+  const QUESTION_LABELS: Record<number, string> = {
+    1: t("label1"),
+    2: t("label2"),
+    3: t("label3"),
+    4: t("label4"),
+    5: t("label5"),
+    6: t("label6"),
+    7: t("label7"),
+  }
+
+  function buildWaUrl(answers: Record<number, string>): string {
+    const lines = [
+      t("waGreeting"),
+      "",
+      t("waAnswers"),
+      ...Object.entries(QUESTION_LABELS).map(
+        ([q, label]) => `${q}. ${label}: ${answers[Number(q)] ?? "—"}`
+      ),
+    ]
+    return WA_BASE + encodeURIComponent(lines.join("\n"))
+  }
+
   const goTo = (s: Step) => setTimeout(() => setStep(s), 140)
 
   const handleSimple = (q: number, opt: string) => {
-    setAnswers(prev => ({ ...prev, [q]: opt }))
+    setAnswers((prev) => ({ ...prev, [q]: opt }))
     goTo((q + 1) as Step)
   }
 
   const handleAlertToggle = (flag: string) => {
-    if (flag === "Nenhum desses") {
-      setAlertFlags(["Nenhum desses"])
+    const noneText = t("dNone")
+    if (flag === noneText) {
+      setAlertFlags([noneText])
     } else {
-      setAlertFlags(prev => {
-        const without = prev.filter(f => f !== "Nenhum desses")
+      setAlertFlags((prev) => {
+        const without = prev.filter((f) => f !== noneText)
         return without.includes(flag)
-          ? without.filter(f => f !== flag)
+          ? without.filter((f) => f !== flag)
           : [...without, flag]
       })
     }
   }
 
   const confirmAlert = () => {
-    const hasDanger = alertFlags.some(f => DANGER_FLAGS.includes(f))
+    const hasDanger = alertFlags.some((f) => DANGER_FLAGS.includes(f))
     if (hasDanger) {
-      setAnswers(prev => ({ ...prev, 6: alertFlags.join(", ") }))
+      setAnswers((prev) => ({ ...prev, 6: alertFlags.join(", ") }))
       setStep("alert")
     } else {
-      setAnswers(prev => ({ ...prev, 6: "Nenhum desses" }))
+      setAnswers((prev) => ({ ...prev, 6: t("dNone") }))
       setStep(7)
     }
   }
 
   const handleFinal = (opt: string) => {
-    setAnswers(prev => ({ ...prev, 7: opt }))
+    setAnswers((prev) => ({ ...prev, 7: opt }))
     goTo("done")
   }
 
-  const currentQ = SIMPLE_QUESTIONS.find(q => q.q === step)
+  const currentQ = SIMPLE_QUESTIONS.find((q) => q.q === step)
 
   return (
     <section id="triagem" className="py-16 md:py-28 bg-background">
@@ -171,26 +140,30 @@ export function TriageFormSection() {
         {/* Header */}
         <div className="text-center mb-10">
           <span className="text-sm font-semibold uppercase tracking-widest text-primary">
-            Teleconsulta
+            {t("tagline")}
           </span>
           <h2 className="mt-4 font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-balance">
-            Triagem rápida para dor na coluna
+            {t("title")}
           </h2>
           <p className="mt-4 text-muted-foreground leading-relaxed max-w-xl mx-auto">
-            Responda algumas perguntas rápidas para entender se o atendimento on-line pode ajudar você.{" "}
-            <strong className="text-foreground">Leva menos de 1 minuto.</strong>
+            {t("subtitle")}{" "}
+            <strong className="text-foreground">{t("subtitleBold")}</strong>
           </p>
         </div>
 
-        {/* ── PERGUNTAS 1–5 ── */}
+        {/* Questions 1–5 */}
         {currentQ && (
           <div className="rounded-2xl border border-border bg-card shadow-sm p-6 sm:p-8">
-            <ProgressBar current={currentQ.q} total={TOTAL} />
+            <ProgressBar
+              current={currentQ.q}
+              total={TOTAL}
+              label={t("progress", { current: currentQ.q, total: TOTAL })}
+            />
             <p className="text-base sm:text-lg font-semibold text-foreground mb-5">
               {currentQ.q}. {currentQ.label}
             </p>
             <div className="space-y-2">
-              {currentQ.options.map(opt => (
+              {currentQ.options.map((opt) => (
                 <button
                   key={opt}
                   type="button"
@@ -207,35 +180,44 @@ export function TriageFormSection() {
             </div>
             {currentQ.q > 1 && (
               <div className="mt-5">
-                <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={() => setStep((currentQ.q - 1) as Step)}>
-                  ← Voltar
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-muted-foreground"
+                  onClick={() => setStep((currentQ.q - 1) as Step)}
+                >
+                  {t("back")}
                 </Button>
               </div>
             )}
           </div>
         )}
 
-        {/* ── PERGUNTA 6 — SINAIS DE ALERTA ── */}
+        {/* Question 6 — Alert flags */}
         {step === 6 && (
           <div className="rounded-2xl border border-border bg-card shadow-sm p-6 sm:p-8">
-            <ProgressBar current={6} total={TOTAL} />
+            <ProgressBar
+              current={6}
+              total={TOTAL}
+              label={t("progress", { current: 6, total: TOTAL })}
+            />
 
             <div className="rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-700 p-4 mb-5">
               <div className="flex items-start gap-2">
                 <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                 <p className="text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
-                  Leia com atenção.{" "}
-                  <strong>Alguns sintomas indicam necessidade de atendimento presencial urgente.</strong>
+                  {t("alertNotice")}{" "}
+                  <strong>{t("alertNoticeBold")}</strong>
                 </p>
               </div>
             </div>
 
             <p className="text-base sm:text-lg font-semibold text-foreground mb-5">
-              6. Você apresenta algum desses sintomas?
+              {t("q6label")}
             </p>
 
             <div className="space-y-2">
-              {[...DANGER_FLAGS, "Nenhum desses"].map(opt => {
+              {[...DANGER_FLAGS, t("dNone")].map((opt) => {
                 const isDanger = DANGER_FLAGS.includes(opt)
                 const checked = alertFlags.includes(opt)
                 return (
@@ -269,7 +251,7 @@ export function TriageFormSection() {
                     <span className="flex-1">{opt}</span>
                     {isDanger && (
                       <span className="rounded-full bg-destructive/15 px-2 py-0.5 text-[10px] font-semibold text-destructive shrink-0 mt-0.5">
-                        alerta
+                        {t("alertTag")}
                       </span>
                     )}
                   </button>
@@ -279,29 +261,28 @@ export function TriageFormSection() {
 
             <div className="mt-6 flex items-center justify-between">
               <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={() => setStep(5)}>
-                ← Voltar
+                {t("back")}
               </Button>
               <Button onClick={confirmAlert} disabled={alertFlags.length === 0} className="px-6">
-                Confirmar <ArrowRight className="ml-2 h-4 w-4" />
+                {t("confirm")} <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
           </div>
         )}
 
-        {/* ── PERGUNTA 7 ── */}
+        {/* Question 7 */}
         {step === 7 && (
           <div className="rounded-2xl border border-border bg-card shadow-sm p-6 sm:p-8">
-            <ProgressBar current={7} total={TOTAL} />
+            <ProgressBar
+              current={7}
+              total={TOTAL}
+              label={t("progress", { current: 7, total: TOTAL })}
+            />
             <p className="text-base sm:text-lg font-semibold text-foreground mb-5">
-              7. Você já fez cirurgia na coluna?
+              {t("q7label")}
             </p>
             <div className="space-y-2">
-              {[
-                "Não",
-                "Sim, mas continuo com dor",
-                "Sim, fiz recentemente",
-                "Já tive indicação de cirurgia",
-              ].map(opt => (
+              {[t("q7o1"), t("q7o2"), t("q7o3"), t("q7o4")].map((opt) => (
                 <button
                   key={opt}
                   type="button"
@@ -318,23 +299,23 @@ export function TriageFormSection() {
             </div>
             <div className="mt-5">
               <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={() => setStep(6)}>
-                ← Voltar
+                {t("back")}
               </Button>
             </div>
           </div>
         )}
 
-        {/* ── ALERTA — sinais de emergência ── */}
+        {/* Alert screen */}
         {step === "alert" && (
           <div className="rounded-2xl border-2 border-amber-400/70 bg-amber-50 dark:bg-amber-950/20 p-8 sm:p-12">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/40">
               <AlertTriangle className="h-8 w-8 text-amber-600 dark:text-amber-400" />
             </div>
             <h3 className="font-serif text-xl sm:text-2xl font-bold text-foreground text-center text-balance">
-              Esses sintomas podem exigir avaliação médica presencial urgente.
+              {t("alertTitle")}
             </h3>
             <p className="mt-4 text-foreground/80 leading-relaxed text-center text-pretty">
-              Procure atendimento médico o quanto antes.
+              {t("alertSubtitle")}
             </p>
             <div className="mt-8 text-center">
               <Button
@@ -344,23 +325,23 @@ export function TriageFormSection() {
                   setStep(6)
                 }}
               >
-                Errei a resposta — voltar
+                {t("alertBack")}
               </Button>
             </div>
           </div>
         )}
 
-        {/* ── TELA FINAL ── */}
+        {/* Done screen */}
         {step === "done" && (
           <div className="rounded-2xl border border-border bg-card p-8 sm:p-12 text-center">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
               <CheckCircle2 className="h-8 w-8 text-primary" />
             </div>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-foreground text-balance">
-              Seu caso pode ser avaliado no atendimento on-line.
+              {t("doneTitle")}
             </h3>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              Clique abaixo para agendar sua consulta.
+              {t("doneSubtitle")}
             </p>
             <Button
               asChild
@@ -369,7 +350,7 @@ export function TriageFormSection() {
             >
               <a href={buildWaUrl(answers)} target="_blank" rel="noopener noreferrer">
                 {WA_ICON}
-                Agendar teleconsulta
+                {t("doneCta")}
               </a>
             </Button>
           </div>

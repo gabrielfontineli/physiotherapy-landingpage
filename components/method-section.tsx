@@ -1,57 +1,42 @@
 import { MapPin, Target, Zap, Award } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
-const steps = [
-  {
-    number: "01",
-    icon: MapPin,
-    title: "Mapa da Dor",
-    description: "Criamos juntos um mapa completo da sua dor: onde dói, quando piora, o que alivia. Entendemos o padrão para atacar a causa, não só o sintoma.",
-  },
-  {
-    number: "02",
-    icon: Target,
-    title: "Plano Personalizado",
-    description: "Com base no seu Mapa da Dor, montamos um protocolo sob medida: técnicas específicas, frequência ideal e metas claras de recuperação.",
-  },
-  {
-    number: "03",
-    icon: Zap,
-    title: "Tratamento Ativo",
-    description: "Exercícios terapêuticos, quiropraxia, osteopatia, dry needling, acupuntura — aplicamos as técnicas certas para o seu caso. Diversas especializações no tratamento da dor, sempre com você participando ativamente.",
-  },
-  {
-    number: "04",
-    icon: Award,
-    title: "Alta com Autonomia",
-    description: "Você sai sabendo como cuidar do seu corpo para evitar recaídas. O objetivo é você não depender de mim para sempre.",
-  },
-]
+const stepIcons = [MapPin, Target, Zap, Award]
 
-export function MethodSection() {
+export async function MethodSection() {
+  const t = await getTranslations("method")
+
+  const steps = [
+    { number: "01", title: t("step1Title"), description: t("step1Desc") },
+    { number: "02", title: t("step2Title"), description: t("step2Desc") },
+    { number: "03", title: t("step3Title"), description: t("step3Desc") },
+    { number: "04", title: t("step4Title"), description: t("step4Desc") },
+  ]
+
   return (
     <section id="metodo" className="py-16 md:py-28 bg-card">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto">
           <span className="text-sm font-semibold uppercase tracking-widest text-primary">
-            Meu Método
+            {t("tagline")}
           </span>
           <h2 className="mt-4 font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-balance">
-            Do Mapa da Dor à sua recuperação
+            {t("title")}
           </h2>
           <p className="mt-4 text-muted-foreground text-pretty">
-            Um processo único que começa mapeando sua dor para tratá-la de verdade
+            {t("subtitle")}
           </p>
         </div>
 
         <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {steps.map((step, index) => {
-            const Icon = step.icon
+            const Icon = stepIcons[index]
             return (
               <div key={step.number} className="relative">
                 {index < steps.length - 1 && (
                   <div className="hidden lg:block absolute top-8 left-[calc(100%+0.5rem)] w-[calc(100%-1rem)] h-px bg-border" />
                 )}
-                
+
                 <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                   <div className="relative">
                     <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20">
@@ -61,7 +46,7 @@ export function MethodSection() {
                       {step.number}
                     </span>
                   </div>
-                  
+
                   <h3 className="mt-4 text-lg font-bold text-foreground">{step.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{step.description}</p>
                 </div>

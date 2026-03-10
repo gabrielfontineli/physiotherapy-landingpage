@@ -1,18 +1,21 @@
 import { MapPin, Clock, AlertCircle, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { getTranslations } from "next-intl/server"
 
-const WHATSAPP_URL = "https://wa.me/5584999999999?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
+const WHATSAPP_URL = "https://wa.me/5584981910924?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
 
-export function LocationSection() {
+export async function LocationSection() {
+  const t = await getTranslations("location")
+
   return (
     <section id="localizacao" className="py-16 md:py-28 bg-card">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto">
           <span className="text-sm font-semibold uppercase tracking-widest text-primary">
-            Localização
+            {t("tagline")}
           </span>
           <h2 className="mt-4 font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-balance">
-            Onde fica localizado?
+            {t("title")}
           </h2>
         </div>
 
@@ -26,7 +29,7 @@ export function LocationSection() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Localização do consultório"
+              title={t("mapTitle")}
             />
           </div>
 
@@ -36,16 +39,16 @@ export function LocationSection() {
                 <MapPin className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground">Endereço</h3>
+                <h3 className="font-semibold text-foreground">{t("addressLabel")}</h3>
                 <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                  Bairro Cidade Alta, Rua João Pessoa, 198.
+                  {t("addressLine1")}
                   <br />
-                  Edifício Canaçu, Sala 406.
+                  {t("addressLine2")}
                   <br />
-                  Centro de Natal, Rio Grande do Norte
+                  {t("addressLine3")}
                 </p>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  (vizinho à Caixa Econômica Federal)
+                  {t("addressNote")}
                 </p>
               </div>
             </div>
@@ -55,11 +58,11 @@ export function LocationSection() {
                 <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground">Atendimento</h3>
+                <h3 className="font-semibold text-foreground">{t("hoursLabel")}</h3>
                 <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                  Atendimento com hora marcada.
+                  {t("hoursText")}
                   <br />
-                  Agende sua avaliação pelo WhatsApp.
+                  {t("hoursText2")}
                 </p>
               </div>
             </div>
@@ -69,9 +72,9 @@ export function LocationSection() {
                 <AlertCircle className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground">Importante</h3>
+                <h3 className="font-semibold text-foreground">{t("importantLabel")}</h3>
                 <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                  Não recebemos plano de saúde. Atendimento particular com foco total no seu tratamento.
+                  {t("importantText")}
                 </p>
               </div>
             </div>
@@ -82,7 +85,7 @@ export function LocationSection() {
               className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold w-full"
             >
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                Agendar Avaliação
+                {t("cta")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </Button>

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useTranslations } from "next-intl"
 import type { GoogleReview } from "@/app/api/reviews/route"
 
 function detectCondition(text: string): string | null {
@@ -15,7 +16,7 @@ function detectCondition(text: string): string | null {
   if (t.includes("lombar") || t.includes("lombo") || t.includes("l4") || t.includes("l5")) return "Dor Lombar"
   if (t.includes("online") || t.includes("teleconsulta") || t.includes("teleatendimento") || t.includes("videochamada")) return "Teleatendimento"
   if (t.includes("coluna") || t.includes("costas")) return "Dor na Coluna"
-  if (t.includes("postura")) return "Postura"
+  if (t.includes("disc") || t.includes("sciatica") || t.includes("herniation")) return "Disc Herniation"
   return null
 }
 
@@ -24,6 +25,7 @@ function getInitials(name: string) {
 }
 
 export function TestimonialsSection() {
+  const t = useTranslations("testimonials")
   const [reviews, setReviews] = useState<GoogleReview[]>([])
   const [totalRating, setTotalRating] = useState<number | null>(null)
   const [totalCount, setTotalCount] = useState<number | null>(null)
@@ -89,25 +91,25 @@ export function TestimonialsSection() {
                 ))}
               </div>
               <span className="text-sm font-semibold text-foreground">
-                {totalRating ? `${totalRating.toFixed(1)} no Google` : "5.0 no Google"}
+                {totalRating ? t("googleRating", { rating: totalRating.toFixed(1) }) : t("googleFallback")}
               </span>
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-balance">
-              O que nossos pacientes dizem
+              {t("title")}
             </h2>
             <p className="mt-2 text-muted-foreground">
-              {totalCount ? `${totalCount}+ avaliações com nota máxima` : "Mais de 50 avaliações com nota máxima"}
+              {totalCount ? t("subtitle", { count: totalCount }) : t("subtitleFallback")}
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <Button variant="outline" size="icon" className="h-10 w-10 rounded-full" onClick={scrollPrev}>
               <ChevronLeft className="h-5 w-5" />
-              <span className="sr-only">Anterior</span>
+              <span className="sr-only">{t("prev")}</span>
             </Button>
             <Button variant="outline" size="icon" className="h-10 w-10 rounded-full" onClick={scrollNext}>
               <ChevronRight className="h-5 w-5" />
-              <span className="sr-only">Próximo</span>
+              <span className="sr-only">{t("next")}</span>
             </Button>
           </div>
         </div>
@@ -186,7 +188,7 @@ export function TestimonialsSection() {
               className={`h-2 rounded-full transition-all duration-300 ${
                 index === selectedIndex ? "w-8 bg-primary" : "w-2 bg-primary/30 hover:bg-primary/50"
               }`}
-              aria-label={`Ir para depoimento ${index + 1}`}
+              aria-label={t("dotLabel", { index: index + 1 })}
             />
           ))}
         </div>
@@ -198,7 +200,7 @@ export function TestimonialsSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
           >
-            Ver todas as avaliações no Google
+            {t("viewAll")}
             <ChevronRight className="h-4 w-4" />
           </a>
         </div>

@@ -1,23 +1,26 @@
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { getTranslations } from "next-intl/server"
 
 const WHATSAPP_URL = "https://wa.me/5584981910924?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
 
-const specializations = [
-  { name: "Osteopatia", icon: "🦴" },
-  { name: "Quiropraxia", icon: "🔧" },
-  { name: "Acupuntura", icon: "📍" },
-  { name: "Dry Needling", icon: "💉" },
-]
+export async function AboutSection() {
+  const t = await getTranslations("about")
 
-const stats = [
-  { value: "5+", label: "Anos de experiência" },
-  { value: "3", label: "Pós-graduações" },
-  { value: "500+", label: "Pacientes tratados" },
-]
+  const specializations = [
+    { name: t("specOsteopathy"), icon: "🦴" },
+    { name: t("specChiro"), icon: "🔧" },
+    { name: t("specAcupuncture"), icon: "📍" },
+    { name: t("specDryNeedling"), icon: "💉" },
+  ]
 
-export function AboutSection() {
+  const stats = [
+    { value: "5+", label: t("statYears") },
+    { value: "3", label: t("statPostGrad") },
+    { value: "500+", label: t("statPatients") },
+  ]
+
   return (
     <section id="sobre" className="py-16 md:py-28 bg-card">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -26,7 +29,7 @@ export function AboutSection() {
             <div className="relative overflow-hidden rounded-2xl aspect-[4/5] sm:aspect-[3/4] max-w-xs sm:max-w-sm mx-auto lg:mx-0">
               <Image
                 src="/images/dr-guilherme-about-new.png"
-                alt="Dr. Guilherme Carvalho, Fisioterapeuta"
+                alt={t("imageAlt")}
                 fill
                 sizes="(max-width: 640px) 320px, (max-width: 1024px) 384px, 448px"
                 className="object-cover object-top"
@@ -40,22 +43,22 @@ export function AboutSection() {
 
           <div className="order-1 lg:order-2">
             <span className="text-sm font-semibold uppercase tracking-widest text-primary">
-              Sobre Mim
+              {t("tagline")}
             </span>
             <h2 className="mt-4 font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-foreground text-balance">
-              Dr. Guilherme Carvalho
+              {t("title")}
             </h2>
             <p className="mt-2 text-base text-muted-foreground">
-              Fisioterapeuta Clínico · Natal, RN
+              {t("subtitle")}
             </p>
 
             <p className="mt-6 text-base leading-relaxed text-foreground/80 text-pretty">
-              Com mais de cinco anos de experiência e dezenas de aprimoramentos em dor crônica, além de pós-graduações em Osteopatia, Quiropraxia e Acupuntura. Atendo presencialmente em Natal e online para todo o Brasil.
+              {t("bio")}
             </p>
 
             <blockquote className="mt-6 border-l-4 border-accent pl-5 py-2">
               <p className="text-base leading-relaxed text-foreground/80 italic text-pretty">
-                &ldquo;Meu objetivo é transformar a vida dos meus pacientes, tornando-os mais saudáveis e confiantes. Quero que você compreenda como agir diante de dores nas costas, oferecendo tratamentos eficazes que evitam o uso de medicações e cirurgias desnecessárias.&rdquo;
+                &ldquo;{t("quote")}&rdquo;
               </p>
             </blockquote>
 
@@ -85,7 +88,7 @@ export function AboutSection() {
               className="mt-8 w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
             >
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                Quer me conhecer melhor?
+                {t("cta")}
                 <ArrowRight className="ml-2 h-4 w-4 shrink-0" />
               </a>
             </Button>

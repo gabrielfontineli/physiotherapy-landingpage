@@ -4,19 +4,22 @@ import { useState } from "react"
 import { Menu, X, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { LocaleSwitcher } from "@/components/locale-switcher"
+import { useTranslations } from "next-intl"
 
 const WHATSAPP_URL = "https://wa.me/5584981910924?text=Ol%C3%A1%2C%20Dr.%20Guilherme!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o."
 
-const navLinks = [
-  { label: "Serviços", href: "#servicos" },
-  { label: "Método", href: "#metodo" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Triagem", href: "#triagem" },
-]
-
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const t = useTranslations("header")
+
+  const navLinks = [
+    { label: t("navServices"), href: "#servicos" },
+    { label: t("navMethod"), href: "#metodo" },
+    { label: t("navAbout"), href: "#sobre" },
+    { label: t("navTestimonials"), href: "#depoimentos" },
+    { label: t("navTriage"), href: "#triagem" },
+  ]
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-md border-b border-border">
@@ -35,22 +38,26 @@ export function Header() {
               {link.label}
             </a>
           ))}
+          <LocaleSwitcher />
           <ThemeToggle />
           <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
               <Phone className="mr-2 h-4 w-4" />
-              Agendar
+              {t("schedule")}
             </a>
           </Button>
         </nav>
 
-        <button
-          className="md:hidden text-foreground"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
-        >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <LocaleSwitcher />
+          <button
+            className="text-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? t("closeMenu") : t("openMenu")}
+          >
+            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {mobileOpen && (
@@ -67,13 +74,13 @@ export function Header() {
               </a>
             ))}
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Tema</span>
+              <span className="text-sm text-muted-foreground">{t("theme")}</span>
               <ThemeToggle />
             </div>
             <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 w-full">
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <Phone className="mr-2 h-4 w-4" />
-                Agendar Avaliação
+                {t("scheduleEvaluation")}
               </a>
             </Button>
           </nav>
