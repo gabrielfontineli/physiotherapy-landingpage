@@ -110,7 +110,9 @@
     "prev": "Previous",
     "next": "Next",
     "dotLabel": "Go to testimonial {index}",
-    "viewAll": "View all reviews on Google"
+    "viewAll": "View all reviews on Google",
+    "sectionLabel": "Patient testimonials",
+    "loadError": "Could not load testimonials. View the reviews directly on Google."
   },
   "triage": {
     "tagline": "Teleconsultation",
@@ -199,6 +201,22 @@
     "ctaWhatsapp": "Chat on WhatsApp",
     "ctaOnline": "I have questions first",
     "note": "I'll respond as soon as possible · In-person and online care"
+  },
+  "expect": {
+    "tagline": "What Sets Us Apart",
+    "title": "What can you expect from a session?",
+    "subtitle": "The goal here is not just to relieve your pain, but to treat the root cause so you can return to life without limitations.",
+    "benefit1": "Full assessment + explanation of your condition",
+    "benefit2": "Individualized care",
+    "benefit3": "Modern and safe techniques",
+    "benefit4": "Focus on results and functionality",
+    "tech1": "Chiropractic",
+    "tech2": "Osteopathy",
+    "tech3": "Dry Needling",
+    "tech4": "Myofascial Release",
+    "tech5": "Electrotherapy",
+    "tech6": "Acupuncture",
+    "cta": "Book Evaluation"
   },
   "footer": {
     "title": "Clinical Physiotherapist",

@@ -41,6 +41,32 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": ["MedicalBusiness", "LocalBusiness"],
+  name: "Dr. Guilherme Carvalho — Fisioterapeuta",
+  description:
+    "Fisioterapeuta especialista em coluna, quiropraxia, osteopatia e acupuntura em Natal, RN. Tratamento individualizado para hérnia de disco, ciático e dor lombar.",
+  telephone: "+5584981910924",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Rua João Pessoa, 198 — Sala 406",
+    addressLocality: "Natal",
+    addressRegion: "Rio Grande do Norte",
+    addressCountry: "BR",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "50",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  medicalSpecialty: ["Physiotherapy", "Osteopathy", "Chiropractic", "Acupuncture"],
+  hasCredential: "CREFITO 1 318268-F",
+}
+
 export default async function LocaleLayout({
   children,
   params,
@@ -53,6 +79,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>

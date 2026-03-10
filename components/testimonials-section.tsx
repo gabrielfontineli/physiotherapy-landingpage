@@ -30,6 +30,7 @@ export function TestimonialsSection() {
   const [totalRating, setTotalRating] = useState<number | null>(null)
   const [totalCount, setTotalCount] = useState<number | null>(null)
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [loadError, setLoadError] = useState(false)
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" })
 
@@ -41,7 +42,7 @@ export function TestimonialsSection() {
         if (data.rating) setTotalRating(data.rating)
         if (data.total) setTotalCount(data.total)
       })
-      .catch(() => {})
+      .catch(() => { setLoadError(true) })
   }, [])
 
   const onSelect = useCallback(() => {
@@ -73,7 +74,11 @@ export function TestimonialsSection() {
   const scrollTo = useCallback((i: number) => emblaApi?.scrollTo(i), [emblaApi])
 
   return (
-    <section id="depoimentos" className="py-16 md:py-28 bg-secondary/30">
+    <section
+      id="depoimentos"
+      className="py-16 md:py-28 bg-secondary/30"
+      aria-label={t("sectionLabel")}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 sm:mb-14">
@@ -115,7 +120,11 @@ export function TestimonialsSection() {
         </div>
 
         {/* Embla carousel */}
-        {reviews.length === 0 ? (
+        {loadError ? (
+          <p className="text-center text-muted-foreground text-sm py-8">
+            {t("loadError")}
+          </p>
+        ) : reviews.length === 0 ? (
           <div className="flex gap-4">
             {[0, 1, 2].map((i) => (
               <div key={i} className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0">
@@ -124,7 +133,7 @@ export function TestimonialsSection() {
             ))}
           </div>
         ) : (
-          <div className="overflow-hidden" ref={emblaRef}>
+          <div className="overflow-hidden" ref={emblaRef} aria-live="polite" aria-atomic="false">
             <div className="flex -ml-4 sm:-ml-5">
               {reviews.map((review, index) => (
                 <div

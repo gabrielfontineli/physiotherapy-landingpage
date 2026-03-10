@@ -79,7 +79,7 @@ export async function ServicesSection() {
                 className={`relative flex flex-col rounded-2xl border bg-card p-5 sm:p-6 transition-all hover:shadow-lg ${
                   service.featured
                     ? "border-accent/40 ring-2 ring-accent/20"
-                    : "border-border"
+                    : "border-border hover:border-primary/30"
                 }`}
               >
                 {service.featured && (

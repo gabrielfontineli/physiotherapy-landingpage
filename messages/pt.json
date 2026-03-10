@@ -110,7 +110,9 @@
     "prev": "Anterior",
     "next": "Próximo",
     "dotLabel": "Ir para depoimento {index}",
-    "viewAll": "Ver todas as avaliações no Google"
+    "viewAll": "Ver todas as avaliações no Google",
+    "sectionLabel": "Depoimentos de pacientes",
+    "loadError": "Não foi possível carregar os depoimentos. Veja as avaliações diretamente no Google."
   },
   "triage": {
     "tagline": "Teleconsulta",
@@ -199,6 +201,22 @@
     "ctaWhatsapp": "Falar pelo WhatsApp",
     "ctaOnline": "Quero tirar dúvidas primeiro",
     "note": "Respondo assim que possível · Atendimento presencial e online"
+  },
+  "expect": {
+    "tagline": "Diferencial",
+    "title": "O que você pode esperar do atendimento?",
+    "subtitle": "O objetivo aqui não é apenas aliviar sua dor, mas tratar a causa para que você volte a viver sem limitações.",
+    "benefit1": "Avaliação completa + explicação do quadro",
+    "benefit2": "Atendimento individualizado",
+    "benefit3": "Técnicas modernas e seguras",
+    "benefit4": "Foco em resultado e funcionalidade",
+    "tech1": "Quiropraxia",
+    "tech2": "Osteopatia",
+    "tech3": "Dry Needling",
+    "tech4": "Liberação Miofascial",
+    "tech5": "Eletrotermofototerapia",
+    "tech6": "Acupuntura",
+    "cta": "Agendar Avaliação"
   },
   "footer": {
     "title": "Fisioterapeuta Clínico",

@@ -24,16 +24,16 @@ export async function Footer() {
               {t("navLabel")}
             </p>
             <nav className="mt-3 flex flex-col gap-2">
-              <a href="#sintomas" className="text-sm text-white/60 hover:text-white transition-colors">
+              <a href="#sintomas" className="text-sm text-white/60 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 focus-visible:rounded-sm transition-colors">
                 {t("navSymptoms")}
               </a>
-              <a href="#tratamentos" className="text-sm text-white/60 hover:text-white transition-colors">
+              <a href="#tratamentos" className="text-sm text-white/60 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 focus-visible:rounded-sm transition-colors">
                 {t("navTreatments")}
               </a>
-              <a href="#sobre" className="text-sm text-white/60 hover:text-white transition-colors">
+              <a href="#sobre" className="text-sm text-white/60 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 focus-visible:rounded-sm transition-colors">
                 {t("navAbout")}
               </a>
-              <a href="#localizacao" className="text-sm text-white/60 hover:text-white transition-colors">
+              <a href="#localizacao" className="text-sm text-white/60 hover:text-white focus-visible:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 focus-visible:rounded-sm transition-colors">
                 {t("navLocation")}
               </a>
               <a href="/guia" className="text-sm text-[oklch(0.80_0.17_52)] hover:text-[oklch(0.90_0.17_52)] transition-colors font-medium">
