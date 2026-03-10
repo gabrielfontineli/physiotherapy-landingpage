@@ -45,7 +45,7 @@ export function FinalCtaSection() {
         </div>
 
         <p className="mt-6 text-sm text-white/50">
-          Respondo em até 24h · Atendimento presencial e online
+          Respondo assim que possível · Atendimento presencial e online
         </p>
       </div>
     </section>
