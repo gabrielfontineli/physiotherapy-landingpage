@@ -93,24 +93,28 @@ const trustStats = [
 
 const faqs = [
   {
-    q: "Preciso ter laudo médico para usar o guia?",
-    a: "Não. O guia foi criado para quem já sabe que tem hérnia ou suspeita. Se você ainda não tem diagnóstico, recomendo consultar um profissional antes.",
+    q: "Os exercícios podem piorar minha hérnia?",
+    a: "Não. O guia foi estruturado para respeitar a fase da dor. Primeiro você aprende posições de alívio e descompressão da coluna, que ajudam a reduzir a irritação do nervo. Depois, conforme a dor melhora, entram exercícios progressivos e mobilizações seguras. O objetivo é evitar movimentos que possam piorar a crise e ensinar o que realmente ajuda.",
   },
   {
-    q: "Os exercícios são seguros para qualquer fase da hérnia?",
-    a: "O guia inclui orientações sobre quando iniciar cada exercício. Em casos de dor muito aguda, recomendo iniciar pelas posições de alívio e avançar gradualmente.",
+    q: "Funciona para hérnia L4-L5 ou L5-S1?",
+    a: "Sim. O guia foi pensado principalmente para quem tem hérnia lombar nas regiões L4-L5 e L5-S1, que são as mais comuns e frequentemente causam dor no nervo ciático. As estratégias explicadas ajudam a reduzir a pressão na coluna e diminuir a irritação do nervo.",
   },
   {
-    q: "Quanto tempo leva para sentir resultado?",
-    a: "A maioria dos pacientes relata alívio nas primeiras semanas de prática consistente. O guia não é solução milagrosa — é um método comprovado que exige disciplina.",
+    q: "Em quanto tempo posso sentir melhora?",
+    a: "Algumas pessoas relatam alívio já nas primeiras aplicações das posições de descompressão. Mas cada caso é diferente. O principal objetivo do guia é ensinar o que fazer para sair do ciclo de crises, entender melhor a dor e aplicar estratégias seguras no dia a dia.",
   },
   {
-    q: "É formato PDF ou vídeo?",
-    a: "O guia é em formato digital (PDF + vídeos demonstrativos dos exercícios), acessível pelo celular ou computador.",
+    q: "Vou conseguir entender os exercícios?",
+    a: "Sim. O guia foi feito para ser simples e direto. Você terá explicações claras + vídeos demonstrativos, mostrando exatamente como fazer cada posição e exercício. Mesmo quem nunca fez fisioterapia consegue acompanhar.",
   },
   {
-    q: "E se eu não gostar? Tem garantia?",
-    a: "Sim. Você tem 7 dias para avaliar o conteúdo. Se não ficar satisfeito por qualquer motivo, basta solicitar o reembolso integral pela plataforma Hotmart — sem burocracia.",
+    q: "Preciso ter diagnóstico médico?",
+    a: "Não necessariamente. O guia foi criado para pessoas que já sabem ou suspeitam que têm hérnia de disco ou dor no ciático. Mas se você ainda não tem diagnóstico e tem dúvidas sobre sua condição, o ideal é procurar um profissional de saúde para avaliação.",
+  },
+  {
+    q: "Tem garantia?",
+    a: "Sim. Você tem 7 dias de garantia. Se achar que o guia não é para você, basta solicitar o reembolso dentro desse prazo. Sem burocracia.",
   },
 ]
 
@@ -559,6 +563,54 @@ export default function GuiaPage() {
             </div>
           </div>
         </div>
+
+
+      {/* ── FINAL CTA ── */}
+      <div className="py-16 sm:py-24 text-center">
+        <div
+          className="relative mx-auto max-w-xl px-4 sm:px-6 overflow-hidden"
+        >
+          {/* Subtle gold glow behind CTA */}
+          <div
+            className="pointer-events-none absolute inset-x-0 -bottom-10 h-40"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 80% at 50% 100%, rgba(245,200,66,0.12) 0%, transparent 70%)",
+            }}
+          />
+          <div className="relative">
+            <Award className="mx-auto h-10 w-10 mb-6" style={{ color: "#f5c842" }} />
+            <h2
+              className="font-serif text-3xl sm:text-4xl font-bold text-balance"
+              style={{ fontFamily: "var(--font-playfair, serif)" }}
+            >
+              Chega de esperar a dor passar sozinha
+            </h2>
+            <p
+              className="mt-4 text-sm leading-relaxed max-w-sm mx-auto"
+              style={{ color: "rgba(255,255,255,0.40)" }}
+            >
+              Você já sofreu o suficiente. O guia está pronto para você agir agora.
+              Com garantia de 7 dias, não há risco.
+            </p>
+            <div className="mt-8">
+              <BuyButton label="Quero o Guia Agora" />
+            </div>
+            <p className="mt-6 text-sm" style={{ color: "rgba(255,255,255,0.28)" }}>
+              Prefere tirar dúvidas antes?{" "}
+              <a
+                href={WHATSAPP_GUIDE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#f5c842" }}
+                className="hover:underline"
+              >
+                Fale com o Dr. Guilherme pelo WhatsApp
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>        
       </section>
 
       {/* ── GUARANTEE + PRICE ── */}
@@ -718,52 +770,34 @@ export default function GuiaPage() {
         </div>
       </section>
 
-      {/* ── FINAL CTA ── */}
-      <section className="py-16 sm:py-24 text-center bg-[#0c0c0f]">
-        <div
-          className="relative mx-auto max-w-xl px-4 sm:px-6 overflow-hidden"
-        >
-          {/* Subtle gold glow behind CTA */}
-          <div
-            className="pointer-events-none absolute inset-x-0 -bottom-10 h-40"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 80% at 50% 100%, rgba(245,200,66,0.12) 0%, transparent 70%)",
-            }}
-          />
-          <div className="relative">
-            <Award className="mx-auto h-10 w-10 mb-6" style={{ color: "#f5c842" }} />
-            <h2
-              className="font-serif text-3xl sm:text-4xl font-bold text-balance"
-              style={{ fontFamily: "var(--font-playfair, serif)" }}
-            >
-              Chega de esperar a dor passar sozinha
-            </h2>
-            <p
-              className="mt-4 text-sm leading-relaxed max-w-sm mx-auto"
-              style={{ color: "rgba(255,255,255,0.40)" }}
-            >
-              Você já sofreu o suficiente. O guia está pronto para você agir agora.
-              Com garantia de 7 dias, não há risco.
+      {/* ── POST-FAQ CTA ── */}
+      <section className="py-16 bg-[#0c0c0f] border-t border-white/5">
+        <div className="mx-auto max-w-xl px-4 sm:px-6 text-center">
+          <h2
+            className="font-serif text-3xl sm:text-4xl font-bold mb-4"
+            style={{ fontFamily: "var(--font-playfair, serif)" }}
+          >
+            Ainda com dor?
+          </h2>
+          <p className="text-base sm:text-lg mb-6" style={{ color: "rgba(255,255,255,0.7)" }}>
+            Comece hoje a entender como aliviar a sua hérnia de disco e o ciático.
+          </p>
+          
+          <div 
+            className="mb-8 p-6 rounded-2xl"
+            style={{ background: "rgba(245,200,66,0.05)", border: "1px solid rgba(245,200,66,0.2)" }}
+          >
+            <p className="text-xl font-bold text-[#f5c842] mb-2">
+              Acesso imediato ao guia completo por R$19,90.
             </p>
-            <div className="mt-8">
-              <BuyButton label="Quero o Guia Agora" />
-            </div>
-            <p className="mt-6 text-sm" style={{ color: "rgba(255,255,255,0.28)" }}>
-              Prefere tirar dúvidas antes?{" "}
-              <a
-                href={WHATSAPP_GUIDE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#f5c842" }}
-                className="hover:underline"
-              >
-                Fale com o Dr. Guilherme pelo WhatsApp
-              </a>
+            <p className="text-sm mt-3" style={{ color: "rgba(255,255,255,0.5)" }}>
+              Você ainda conta com garantia de 7 dias. Se não achar que o guia é para você, pode solicitar o reembolso sem burocracia.
             </p>
           </div>
+
+          <BuyButton label="QUERO ACESSAR O GUIA" />
         </div>
-      </section>
+      </section>  
 
       {/* ── FOOTER ── */}
       <footer
