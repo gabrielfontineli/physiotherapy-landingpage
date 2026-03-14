@@ -22,15 +22,42 @@ export async function generateMetadata({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "metadata" })
 
+  const title = t("title")
+  const description = t("description")
+  const url = "https://doutorguilhermecarvalho.com"
+
   return {
-    title: t("title"),
-    description: t("description"),
+    metadataBase: new URL(url),
+    title,
+    description,
     icons: {
       icon: [
         { url: "/favicon.svg", type: "image/svg+xml" },
         { url: "/icon-dark-32x32.png", sizes: "32x32", type: "image/png" },
       ],
       apple: "/apple-icon.png",
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Dr. Guilherme Carvalho — Fisioterapeuta",
+      locale: locale === "pt" ? "pt_BR" : "en_US",
+      type: "website",
+      images: [
+        {
+          url: "/images/dr-guilherme-about-new.png",
+          width: 1200,
+          height: 630,
+          alt: "Dr. Guilherme Carvalho — Fisioterapeuta especialista em coluna em Natal/RN",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/images/dr-guilherme-about-new.png"],
     },
   }
 }
