@@ -42,7 +42,7 @@ export async function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="btn-glow-green bg-[#25D366] hover:bg-[#20BD5A] text-white text-base font-semibold px-6 sm:px-8 h-12 sm:h-14"
+              className="btn-glow-green bg-[#25D366] hover:bg-[#20BD5A] text-white text-sm sm:text-base font-semibold px-5 sm:px-8 h-auto py-3 sm:h-14 sm:py-0 whitespace-normal leading-tight"
             >
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <span className="btn-shine" aria-hidden="true" />
@@ -55,7 +55,7 @@ export async function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="btn-glow-orange bg-amber-500 hover:bg-amber-600 text-white text-base font-semibold h-12 sm:h-14 shadow-sm"
+              className="btn-glow-orange bg-amber-500 hover:bg-amber-600 text-white text-sm sm:text-base font-semibold h-auto py-3 sm:h-14 sm:py-0 px-5 sm:px-6 shadow-sm whitespace-normal leading-tight"
             >
               <a href="#triagem" className="flex items-center">
                 <span className="btn-shine btn-shine-delayed" aria-hidden="true" />

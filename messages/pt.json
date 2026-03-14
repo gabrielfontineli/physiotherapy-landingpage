@@ -20,8 +20,8 @@
     "titleAccent": "Hérnia de disco e ciático com especialista.",
     "descriptionFull": "Recupere a confiança na sua coluna. Fisioterapeuta especialista em coluna. Avaliação personalizada e tratamento individualizado. Atendimento em Natal e teleconsulta para pacientes no Brasil e no exterior.",
     "descriptionShort": "Fisioterapeuta especialista em coluna. Atendimento em Natal e online.",
-    "ctaWhatsapp": "Agendar Avaliação",
-    "ctaOnline": "Consulta Online",
+    "ctaWhatsapp": "Agendar consulta presencial (Natal/RN)",
+    "ctaOnline": "Agendar consulta online (Qualquer lugar do mundo)",
     "badge1": "+5 anos de experiência",
     "badge2": "Especializações no tratamento da dor",
     "badge3": "CREFITO 1 318268-F",
@@ -198,8 +198,8 @@
   "finalCta": {
     "title": "Ainda com dor? Me manda mensagem agora.",
     "subtitle": "Sem compromisso. Só uma conversa para entender seu caso e ver se posso te ajudar.",
-    "ctaWhatsapp": "Falar pelo WhatsApp",
-    "ctaOnline": "Quero tirar dúvidas primeiro",
+    "ctaWhatsapp": "Agendar consulta presencial (Natal/RN)",
+    "ctaOnline": "Agendar consulta online (Qualquer lugar do mundo)",
     "note": "Respondo assim que possível · Atendimento presencial e online"
   },
   "expect": {
