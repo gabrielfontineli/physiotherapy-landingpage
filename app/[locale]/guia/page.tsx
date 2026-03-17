@@ -15,6 +15,7 @@ import {
 } from "lucide-react"
 import { BuyButton } from "@/components/guia/buy-button"
 import { StickyCta } from "@/components/guia/sticky-cta"
+import { PixelViewContent } from "@/components/guia/pixel-events"
 import {
   Accordion,
   AccordionContent,
@@ -77,7 +78,7 @@ const modules = [
 ]
 
 const forWho = [
-  "Tem diagnóstico de hérnia de disco (L4-L5, L5-S1 ou cervical)",
+  "Tem diagnóstico de hérnia de disco (L4-L5, L5-S1 ou ciática)",
   "Sofre com dor no nervo ciático (dor que desce pela perna)",
   "Quer fazer exercícios mas tem medo de piorar",
   "Não pode ou não quer depender de sessões presenciais",
@@ -89,6 +90,44 @@ const trustStats = [
   { value: "5+", label: "Anos de experiência", sub: "em dor crônica" },
   { value: "3", label: "Pós-graduações", sub: "especializações" },
   { value: "500+", label: "Pacientes atendidos", sub: "presencial e online" },
+]
+
+const testimonials = [
+  {
+    name: "Carlos M.",
+    time: "21:43",
+    text: "Já comecei a aplicar ontem e hoje acordei bem melhor. A dor que descia pra perna diminuiu muito.",
+  },
+  {
+    name: "Fernanda R.",
+    time: "09:17",
+    text: "Eu estava travando direto. Comecei a fazer as posições e já senti alívio. Muito bom mesmo.",
+  },
+  {
+    name: "Marcos T.",
+    time: "16:52",
+    text: "Finalmente alguém explicou de um jeito que dá pra entender. Já estou conseguindo controlar melhor a dor.",
+  },
+  {
+    name: "Patrícia L.",
+    time: "11:08",
+    text: "Tenho L4-L5 e L5-S1 e já estou melhorando. Está fazendo muito sentido pra mim.",
+  },
+  {
+    name: "Roberto S.",
+    time: "20:30",
+    text: "Eu tinha medo de piorar fazendo exercício, mas do jeito que está no guia ficou muito mais seguro.",
+  },
+  {
+    name: "Ana C.",
+    time: "08:45",
+    text: "A dor não sumiu totalmente ainda, mas melhorou muito. Já consigo levantar sem travar.",
+  },
+  {
+    name: "Diego F.",
+    time: "14:22",
+    text: "Funciona mesmo. Já senti diferença.",
+  },
 ]
 
 const faqs = [
@@ -124,6 +163,8 @@ export default function GuiaPage() {
       className="min-h-screen bg-[#0c0c0f] text-white font-sans"
       style={{ fontFamily: "var(--font-inter, sans-serif)" }}
     >
+      <PixelViewContent />
+
       {/* ── TOP BAR ── */}
       <div className="w-full py-2.5 text-center text-sm font-semibold bg-[#f5c842] text-[#0c0c0f]">
         🔥 Oferta de lançamento · R$&nbsp;19,90 · Acesso imediato após pagamento
@@ -377,6 +418,108 @@ export default function GuiaPage() {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS (WhatsApp style) ── */}
+      <section className="py-16 sm:py-20 bg-[#f0f4f8]">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#075e54]">
+              Depoimentos
+            </span>
+            <h2
+              className="mt-3 font-serif text-3xl sm:text-4xl font-bold text-[#1a1a1a] text-balance"
+              style={{ fontFamily: "var(--font-playfair, serif)" }}
+            >
+              Pessoas que já começaram a aplicar
+            </h2>
+            <p className="mt-2 text-sm text-[#555]">
+              Resultados reais de quem começou a seguir o guia
+            </p>
+          </div>
+
+          {/* Horizontal scroll carousel */}
+          <div
+            className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6"
+            style={{ scrollSnapType: "x mandatory", scrollBehavior: "smooth" }}
+          >
+            {testimonials.map((t) => (
+              <div
+                key={t.name}
+                className="flex-shrink-0 w-[78vw] max-w-[300px] sm:w-[280px]"
+                style={{ scrollSnapAlign: "start" }}
+              >
+                {/* WhatsApp-style card */}
+                <div
+                  className="rounded-2xl p-4 shadow-md"
+                  style={{
+                    background: "#ffffff",
+                    border: "1px solid #e2e8f0",
+                  }}
+                >
+                  {/* Header: avatar + name + time */}
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+                      style={{ background: "#075e54" }}
+                    >
+                      {t.name.charAt(0)}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-semibold text-[#075e54] truncate">{t.name}</p>
+                    </div>
+                    <span className="text-[10px] text-[#aaa] shrink-0">{t.time}</span>
+                  </div>
+
+                  {/* Message bubble */}
+                  <div
+                    className="rounded-xl rounded-tl-sm px-3.5 py-3"
+                    style={{ background: "#dcf8c6" }}
+                  >
+                    <p className="text-sm leading-relaxed text-[#1a1a1a]">
+                      &ldquo;{t.text}&rdquo;
+                    </p>
+                    {/* WhatsApp double-check tick */}
+                    <div className="flex justify-end mt-1.5">
+                      <svg width="16" height="11" viewBox="0 0 16 11" fill="none">
+                        <path d="M1 5.5L4.5 9L11 1" stroke="#4fc3f7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M5 5.5L8.5 9L15 1" stroke="#4fc3f7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Scroll hint for mobile */}
+          <p className="text-center text-xs text-[#aaa] mt-3 sm:hidden">
+            ← deslize para ver mais →
+          </p>
+        </div>
+
+        {/* ── CONVERSION BLOCK (inside light section) ── */}
+        <div className="mx-auto max-w-xl px-4 sm:px-6 mt-12 text-center">
+          <p
+            className="font-serif text-2xl sm:text-3xl font-bold text-[#1a1a1a]"
+            style={{ fontFamily: "var(--font-playfair, serif)" }}
+          >
+            Você não precisa continuar vivendo com dor.
+          </p>
+          <p className="mt-2 text-sm text-[#555]">
+            Comece hoje a aplicar o passo a passo.
+          </p>
+
+          <div className="mt-7">
+            <BuyButton label="QUERO ACESSAR O GUIA" />
+          </div>
+          <p className="mt-3 text-sm text-[#777]">
+            Acesso imediato por apenas{" "}
+            <strong className="text-[#1a1a1a]">R$&nbsp;19,90</strong>
+            {" "}· Garantia de 7 dias
+          </p>
         </div>
       </section>
 
