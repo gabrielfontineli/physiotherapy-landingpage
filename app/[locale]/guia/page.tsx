@@ -27,6 +27,7 @@ import { StickyCta } from "@/components/guia/sticky-cta"
 import { PixelViewContent } from "@/components/guia/pixel-events"
 import { CountdownTimer } from "@/components/guia/countdown-timer"
 import { SymptomChecklist } from "@/components/guia/symptom-checklist"
+import { GuiaEngagementTracker } from "@/components/guia/engagement-tracker"
 import {
   Accordion,
   AccordionContent,
@@ -145,6 +146,7 @@ export default async function GuiaPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0d] text-white overflow-x-hidden">
       <PixelViewContent />
+      <GuiaEngagementTracker />
 
       {/* ── GLOBAL ANIMATIONS ── */}
       <style>{`
@@ -208,22 +210,14 @@ export default async function GuiaPage() {
       </div>
 
       {/* ── 2. HERO ── */}
-      <section className="relative min-h-[90vh] flex items-center pt-10 pb-16 sm:pt-16 sm:pb-24 overflow-hidden">
-        {/* Dramatic background */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 30% 0%, rgba(245,200,66,0.15) 0%, transparent 60%)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 50% 50% at 80% 80%, rgba(245,200,66,0.06) 0%, transparent 60%)" }} />
-          {/* Grid lines */}
-          <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(245,200,66,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245,200,66,0.04) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-        </div>
+      <section className="relative overflow-hidden" style={{ background: "radial-gradient(ellipse 80% 60% at 70% 40%, rgba(245,200,66,0.07) 0%, transparent 60%)" }}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8 items-center">
 
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-
-            {/* LEFT — Copy */}
-            <div className="order-2 lg:order-1 text-center lg:text-left slide-up">
-              {/* Live badge */}
-              <div className="inline-flex items-center gap-2.5 rounded-full px-4 py-2 mb-6" style={{ background: "rgba(245,200,66,0.10)", border: "1px solid rgba(245,200,66,0.30)" }}>
+            {/* COPY — mobile: abaixo, desktop: esquerda */}
+            <div className="order-2 lg:order-1 py-10 sm:py-16 lg:py-20 text-center lg:text-left slide-up">
+              {/* Social proof badge */}
+              <div className="inline-flex items-center gap-2.5 rounded-full px-4 py-2 mb-6" style={{ background: "rgba(245,200,66,0.12)", border: "1px solid rgba(245,200,66,0.35)" }}>
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="absolute inline-flex h-full w-full rounded-full bg-[#f5c842] opacity-75 ping-slow" />
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#f5c842]" />
@@ -236,79 +230,68 @@ export default async function GuiaPage() {
                 </span>
               </div>
 
-              {/* Main headline */}
               <h1
-                className="font-black leading-[1.05] text-balance text-white"
-                style={{ fontSize: "clamp(2.4rem, 6vw, 4.2rem)", letterSpacing: "-0.02em" }}
+                className="font-black leading-[1.03] text-white"
+                style={{ fontSize: "clamp(2.2rem, 4.5vw, 4rem)", letterSpacing: "-0.03em" }}
               >
                 {cfg.heroPreHeadline ?? "Chega de sofrer com"}{" "}
                 <span style={{ color: "#f5c842" }}>
                   {cfg.heroHeadline ?? "Hérnia de Disco"}
                 </span>
                 {cfg.heroSubtitle ? (
-                  <> <span className="opacity-60">e</span> {cfg.heroSubtitle}</>
+                  <> <span style={{ opacity: 0.55 }}>e</span> {cfg.heroSubtitle}</>
                 ) : (
-                  <> <span className="opacity-60">e</span> nervo ciático</>
+                  <> <span style={{ opacity: 0.55 }}>e</span> nervo ciático</>
                 )}
               </h1>
 
-              <p className="mt-6 text-lg sm:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0" style={{ color: "rgba(255,255,255,0.65)" }}>
+              <p className="mt-5 text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0" style={{ color: "rgba(255,255,255,0.62)" }}>
                 {cfg.heroDescription ??
                   "O protocolo de fisioterapeuta especialista para aliviar a dor, retomar sua vida e parar de depender só de remédio — tudo em casa."}
               </p>
 
-              {/* CTA block */}
               <div className="mt-8 flex flex-col gap-3 items-center lg:items-start">
                 <a
                   href={HOTMART_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-shine glow-btn relative inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-5 text-lg sm:text-xl font-black text-[#0a0a0d] bg-[#f5c842] hover:bg-[#f0bb22] transition-all hover:scale-[1.03] active:scale-[0.97]"
-                  style={{ width: "100%", maxWidth: "440px" }}
+                  style={{ width: "100%", maxWidth: "420px" }}
                 >
                   QUERO ALIVIAR MINHA DOR AGORA
                   <ArrowRight className="h-5 w-5 shrink-0" />
                 </a>
 
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs" style={{ color: "rgba(255,255,255,0.38)" }}>
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs" style={{ color: "rgba(255,255,255,0.40)" }}>
                   <span className="flex items-center gap-1.5"><Shield className="h-3.5 w-3.5 text-green-400" /> Compra segura</span>
                   <span className="flex items-center gap-1.5"><CheckCircle className="h-3.5 w-3.5 text-green-400" /> Acesso imediato</span>
                   <span className="flex items-center gap-1.5"><Shield className="h-3.5 w-3.5 text-green-400" /> Garantia 7 dias</span>
                 </div>
 
-                <p className="text-2xl font-black" style={{ color: "#f5c842" }}>
-                  R$&nbsp;19,90
-                  <span className="text-sm font-normal ml-2" style={{ color: "rgba(255,255,255,0.35)" }}>
-                    <s>R$ 67,00</s> pagamento único
-                  </span>
-                </p>
-              </div>
-            </div>
-
-            {/* RIGHT — Product image */}
-            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-              <div className="relative float-anim">
-                {/* Glow behind image */}
-                <div style={{ position: "absolute", inset: "-20%", background: "radial-gradient(circle, rgba(245,200,66,0.20) 0%, transparent 70%)", filter: "blur(30px)", borderRadius: "50%", zIndex: 0 }} />
-                <Image
-                  src="/images/hero-guide.png"
-                  alt="Guia Prático — Destrave sua Hérnia de Disco e Ciático"
-                  width={460}
-                  height={460}
-                  className="relative w-56 sm:w-72 lg:w-[380px] h-auto rounded-3xl"
-                  priority
-                  style={{ zIndex: 1, filter: "drop-shadow(0 40px 80px rgba(245,200,66,0.30))" }}
-                />
-                {/* Floating badge */}
-                <div
-                  className="absolute -bottom-4 -left-4 rounded-2xl px-4 py-3 text-center"
-                  style={{ background: "rgba(10,10,13,0.95)", border: "1px solid rgba(245,200,66,0.35)", backdropFilter: "blur(12px)", zIndex: 2 }}
-                >
-                  <p className="text-2xl font-black" style={{ color: "#f5c842" }}>R$&nbsp;19,90</p>
-                  <p className="text-[10px] font-medium" style={{ color: "rgba(255,255,255,0.40)" }}>acesso imediato</p>
+                <div className="flex items-baseline gap-3">
+                  <p className="text-3xl font-black" style={{ color: "#f5c842" }}>R$&nbsp;19,90</p>
+                  <p className="text-sm" style={{ color: "rgba(255,255,255,0.32)" }}>
+                    <s>R$ 67,00</s> · pagamento único
+                  </p>
                 </div>
               </div>
             </div>
+
+            {/* FOTO — mobile: topo (max-h para não ocupar tudo), desktop: direita (altura livre) */}
+            <div className="order-1 lg:order-2 flex justify-center lg:justify-end relative">
+              {/* Glow dourado atrás */}
+              <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 60% at 60% 50%, rgba(245,200,66,0.10) 0%, transparent 70%)" }} />
+              <Image
+                src="/images/hero-guide.png"
+                alt="Dr. Guilherme Carvalho — Fisioterapeuta"
+                width={600}
+                height={750}
+                priority
+                className="relative w-full lg:w-auto lg:h-[88vh] object-contain object-top"
+                style={{ maxHeight: "55vw", minHeight: 280 }}
+              />
+            </div>
+
           </div>
         </div>
       </section>
@@ -331,7 +314,7 @@ export default async function GuiaPage() {
       </div>
 
       {/* ── DEPOIMENTOS WHATSAPP ── */}
-      <section className="py-16 sm:py-20" style={{ background: "#0f0f13" }}>
+      <section id="section-testimonials" className="py-16 sm:py-20" style={{ background: "#0f0f13" }}>
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-4" style={{ background: "rgba(37,211,102,0.10)", border: "1px solid rgba(37,211,102,0.25)" }}>
@@ -389,7 +372,7 @@ export default async function GuiaPage() {
       </section>
 
       {/* ── SINTOMAS — ISSO É VOCÊ? ── */}
-      <section className="py-16 sm:py-20" style={{ background: "linear-gradient(180deg, #0a0a0d 0%, #110909 100%)" }}>
+      <section id="section-checklist" className="py-16 sm:py-20" style={{ background: "linear-gradient(180deg, #0a0a0d 0%, #110909 100%)" }}>
         <div className="mx-auto max-w-2xl px-4 sm:px-6">
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-4" style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.30)" }}>
@@ -408,7 +391,7 @@ export default async function GuiaPage() {
       </section>
 
       {/* ── O QUE ACONTECE SE VOCÊ NÃO AGIR — fundo vermelho escuro ── */}
-      <section className="py-16 sm:py-20 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #1a0505 0%, #250a0a 50%, #1a0505 100%)" }}>
+      <section id="section-consequences" className="py-16 sm:py-20 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #1a0505 0%, #250a0a 50%, #1a0505 100%)" }}>
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(239,68,68,0.12) 0%, transparent 70%)" }} />
 
         <div className="relative mx-auto max-w-3xl px-4 sm:px-6 text-center">
@@ -452,7 +435,7 @@ export default async function GuiaPage() {
       </section>
 
       {/* ── MÓDULOS — visual dramático ── */}
-      <section className="py-16 sm:py-24" style={{ background: "#0a0a0d" }}>
+      <section id="section-modules" className="py-16 sm:py-24" style={{ background: "#0a0a0d" }}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <div className="text-center mb-12">
             <span className="text-sm font-black uppercase tracking-[0.2em]" style={{ color: "#f5c842" }}>Conteúdo do guia</span>
@@ -553,7 +536,7 @@ export default async function GuiaPage() {
       </section>
 
       {/* ── ANCORAGEM DE PREÇO ── */}
-      <section className="py-16 sm:py-20" style={{ background: "#0f0f13" }}>
+      <section id="section-price" className="py-16 sm:py-20" style={{ background: "#0f0f13" }}>
         <div className="mx-auto max-w-2xl px-4 sm:px-6">
           <div className="text-center mb-10">
             <h2 className="font-black text-3xl sm:text-4xl text-white" style={{ letterSpacing: "-0.02em" }}>
@@ -624,7 +607,7 @@ export default async function GuiaPage() {
       </section>
 
       {/* ── AUTOR ── */}
-      <section className="py-16 sm:py-20" style={{ background: "#0a0a0d", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <section id="section-author" className="py-16 sm:py-20" style={{ background: "#0a0a0d", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start rounded-3xl p-7 sm:p-10" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
             <div className="relative shrink-0">
@@ -688,7 +671,7 @@ export default async function GuiaPage() {
       </div>
 
       {/* ── FAQ ── */}
-      <section className="py-14 sm:py-20" style={{ background: "#0a0a0d" }}>
+      <section id="section-faq" className="py-14 sm:py-20" style={{ background: "#0a0a0d" }}>
         <div className="mx-auto max-w-2xl px-4 sm:px-6">
           <h2 className="font-black text-2xl sm:text-3xl text-center text-white mb-2" style={{ letterSpacing: "-0.02em" }}>
             Perguntas frequentes
@@ -717,7 +700,7 @@ export default async function GuiaPage() {
       </section>
 
       {/* ── CTA FINAL FORTE ── */}
-      <section className="py-20 sm:py-28 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #100e00 0%, #1a1400 50%, #0d0b00 100%)" }}>
+      <section id="section-final-cta" className="py-20 sm:py-28 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #100e00 0%, #1a1400 50%, #0d0b00 100%)" }}>
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 50% at 50% 50%, rgba(245,200,66,0.12) 0%, transparent 70%)" }} />
 
         <div className="relative mx-auto max-w-xl px-4 sm:px-6 text-center">

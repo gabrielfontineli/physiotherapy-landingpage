@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import { HOTMART_URL } from "@/lib/config"
 
@@ -16,10 +16,24 @@ const symptoms = [
 export function SymptomChecklist() {
   const [checked, setChecked] = useState<Set<number>>(new Set())
 
+  const leadFired = useRef(false)
+
   const toggle = (i: number) => {
     setChecked((prev) => {
       const next = new Set(prev)
       next.has(i) ? next.delete(i) : next.add(i)
+
+      // Dispara Lead no Pixel quando 2+ sintomas marcados (uma vez por sessão)
+      if (next.size >= 2 && !leadFired.current) {
+        leadFired.current = true
+        window.fbq?.("track", "Lead", {
+          content_name: "Guia Hérnia de Disco — Checklist",
+          content_category: "guia",
+          value: 19.9,
+          currency: "BRL",
+        })
+      }
+
       return next
     })
   }
