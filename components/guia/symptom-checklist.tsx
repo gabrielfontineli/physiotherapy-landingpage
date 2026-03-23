@@ -26,12 +26,14 @@ export function SymptomChecklist() {
       // Dispara Lead no Pixel quando 2+ sintomas marcados (uma vez por sessão)
       if (next.size >= 2 && !leadFired.current) {
         leadFired.current = true
-        window.fbq?.("track", "Lead", {
+        const leadParams = {
           content_name: "Guia Hérnia de Disco — Checklist",
           content_category: "guia",
           value: 19.9,
           currency: "BRL",
-        })
+        }
+        window.fbq?.("track", "Lead", leadParams)
+        window.ttq?.track("SubmitForm", leadParams) // equivalente TikTok de Lead
       }
 
       return next

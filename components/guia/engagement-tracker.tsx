@@ -2,12 +2,13 @@
 
 import { useEffect, useRef } from "react"
 
-// Dispara eventos no Meta Pixel com segurança
 function track(event: string, params?: Record<string, unknown>) {
   window.fbq?.("track", event, params)
+  window.ttq?.track(event, params)
 }
 function trackCustom(event: string, params?: Record<string, unknown>) {
   window.fbq?.("trackCustom", event, params)
+  window.ttq?.track(event, params) // TikTok trata tudo como track
 }
 
 export function GuiaEngagementTracker() {
