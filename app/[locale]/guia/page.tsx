@@ -23,6 +23,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { WHATSAPP_GUIDE_URL } from "@/lib/config"
+import { getTestimonials, getFaqs } from "@/sanity/lib/queries"
 
 export const metadata: Metadata = {
   title: "Destrave sua Hérnia de Disco e Ciático — Guia do Dr. Guilherme Carvalho",
@@ -157,7 +158,18 @@ const faqs = [
   },
 ]
 
-export default function GuiaPage() {
+export default async function GuiaPage() {
+  const isSanityConfigured = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+
+  const [sanityTestimonials, sanityFaqs] = isSanityConfigured
+    ? await Promise.all([getTestimonials(), getFaqs()])
+    : [[], []]
+
+  const activeTestimonials = sanityTestimonials.length > 0 ? sanityTestimonials : testimonials
+  const activeFaqs = sanityFaqs.length > 0
+    ? sanityFaqs.map((f) => ({ q: f.question, a: f.answer }))
+    : faqs
+
   return (
     <div
       className="min-h-screen bg-[#0c0c0f] text-white font-sans"
@@ -445,7 +457,7 @@ export default function GuiaPage() {
             className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6"
             style={{ scrollSnapType: "x mandatory", scrollBehavior: "smooth" }}
           >
-            {testimonials.map((t) => (
+            {activeTestimonials.map((t) => (
               <div
                 key={t.name}
                 className="flex-shrink-0 w-[78vw] max-w-[300px] sm:w-[280px]"
@@ -885,7 +897,7 @@ export default function GuiaPage() {
             collapsible
             className="space-y-3"
           >
-            {faqs.map((faq, i) => (
+            {activeFaqs.map((faq, i) => (
               <AccordionItem
                 key={faq.q}
                 value={`faq-${i}`}
