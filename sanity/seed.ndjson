@@ -11,3 +11,24 @@
 {"_id":"faq-4","_type":"faq","question":"Vou conseguir entender os exercícios?","answer":"Sim. O guia foi feito para ser simples e direto. Você terá explicações claras + vídeos demonstrativos, mostrando exatamente como fazer cada posição e exercício. Mesmo quem nunca fez fisioterapia consegue acompanhar.","order":4}
 {"_id":"faq-5","_type":"faq","question":"Preciso ter diagnóstico médico?","answer":"Não necessariamente. O guia foi criado para pessoas que já sabem ou suspeitam que têm hérnia de disco ou dor no ciático. Mas se você ainda não tem diagnóstico e tem dúvidas sobre sua condição, o ideal é procurar um profissional de saúde para avaliação.","order":5}
 {"_id":"faq-6","_type":"faq","question":"Tem garantia?","answer":"Sim. Você tem 7 dias de garantia. Se achar que o guia não é para você, basta solicitar o reembolso dentro desse prazo. Sem burocracia.","order":6}
+{"_id":"pain-1","_type":"painPoint","text":"Acorda com dor nas costas todos os dias","order":1}
+{"_id":"pain-2","_type":"painPoint","text":"Sente formigamento ou dormência que desce pela perna","order":2}
+{"_id":"pain-3","_type":"painPoint","text":"Já tentou tratamento, mas a dor voltou","order":3}
+{"_id":"pain-4","_type":"painPoint","text":"Tem medo de piorar fazendo exercício errado","order":4}
+{"_id":"pain-5","_type":"painPoint","text":"Não consegue agachar, sentar ou dormir confortável","order":5}
+{"_id":"pain-6","_type":"painPoint","text":"Está cansado de depender só de remédio para aguentar o dia","order":6}
+{"_id":"module-1","_type":"guideModule","number":"01","title":"Entenda sua dor","description":"O que é hérnia de disco, por que o nervo ciático dói e o que acontece no seu corpo. Quando você entende, para de ter medo.","order":1}
+{"_id":"module-2","_type":"guideModule","number":"02","title":"Posições de alívio imediato","description":"Posturas e movimentos que descomprimem o nervo em minutos. Para usar quando a crise bate forte.","order":2}
+{"_id":"module-3","_type":"guideModule","number":"03","title":"Protocolo de exercícios","description":"Sequência de exercícios terapêuticos seguros e progressivos para fortalecer sem agravar a hérnia.","order":3}
+{"_id":"module-4","_type":"guideModule","number":"04","title":"O que evitar","description":"Movimentos, posturas e hábitos que pioram a hérnia — e como substituí-los no dia a dia.","order":4}
+{"_id":"module-5","_type":"guideModule","number":"05","title":"Rotina sustentável","description":"Como montar uma rotina de 10 a 15 minutos por dia para manter a coluna saudável a longo prazo.","order":5}
+{"_id":"stat-1","_type":"trustStat","value":"+50","label":"Avaliações 5 estrelas","sub":"no Google","order":1}
+{"_id":"stat-2","_type":"trustStat","value":"5+","label":"Anos de experiência","sub":"em dor crônica","order":2}
+{"_id":"stat-3","_type":"trustStat","value":"3","label":"Pós-graduações","sub":"especializações","order":3}
+{"_id":"stat-4","_type":"trustStat","value":"500+","label":"Pacientes atendidos","sub":"presencial e online","order":4}
+{"_id":"forwho-1","_type":"forWhoItem","text":"Tem diagnóstico de hérnia de disco (L4-L5, L5-S1 ou ciática)","order":1}
+{"_id":"forwho-2","_type":"forWhoItem","text":"Sofre com dor no nervo ciático (dor que desce pela perna)","order":2}
+{"_id":"forwho-3","_type":"forWhoItem","text":"Quer fazer exercícios mas tem medo de piorar","order":3}
+{"_id":"forwho-4","_type":"forWhoItem","text":"Não pode ou não quer depender de sessões presenciais","order":4}
+{"_id":"forwho-5","_type":"forWhoItem","text":"Busca autonomia para cuidar da própria coluna","order":5}
+{"_id":"guia-config","_type":"guiaConfig","topBarText":"🔥 Oferta de lançamento · R$ 19,90 · Acesso imediato após pagamento","heroTagline":"Guia Digital — Fisioterapeuta Especialista","heroPreHeadline":"Chega de sofrer com","heroHeadline":"Hérnia de Disco","heroSubtitle":"e nervo ciático","heroDescription":"O protocolo criado por fisioterapeuta especialista para você aliviar a dor, retomar sua vida e parar de depender só de remédio — tudo em casa.","heroSocialProof":"+50 avaliações 5 estrelas no Google","pricingOriginal":"R$ 47,00","pricingInstallments":"2x de R$ 9,95","pricingFull":"R$ 19,90","authorName":"Dr. Guilherme Carvalho","authorCredential":"Fisioterapeuta · CREFITO 1 318268-F","authorBio":"Mais de 5 anos especializando em dor crônica e coluna. Pós-graduado em Osteopatia, Quiropraxia e Acupuntura. Trata hérnia de disco e ciático no consultório em Natal e online para pacientes em todo o Brasil.","authorSpecializations":["Osteopatia","Quiropraxia","Acupuntura"]}

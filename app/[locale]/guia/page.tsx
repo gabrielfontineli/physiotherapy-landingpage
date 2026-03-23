@@ -23,7 +23,15 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { WHATSAPP_GUIDE_URL } from "@/lib/config"
-import { getTestimonials, getFaqs } from "@/sanity/lib/queries"
+import {
+  getTestimonials,
+  getFaqs,
+  getGuiaConfig,
+  getPainPoints,
+  getGuideModules,
+  getTrustStats,
+  getForWhoItems,
+} from "@/sanity/lib/queries"
 
 export const metadata: Metadata = {
   title: "Destrave sua Hérnia de Disco e Ciático — Guia do Dr. Guilherme Carvalho",
@@ -158,17 +166,48 @@ const faqs = [
   },
 ]
 
+// Icon mapping for guide modules (by position)
+const moduleIcons = [BookOpen, Zap, Award, Shield, Clock]
+
 export default async function GuiaPage() {
   const isSanityConfigured = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 
-  const [sanityTestimonials, sanityFaqs] = isSanityConfigured
-    ? await Promise.all([getTestimonials(), getFaqs()])
-    : [[], []]
+  const [
+    sanityConfig,
+    sanityTestimonials,
+    sanityFaqs,
+    sanityPainPoints,
+    sanityModules,
+    sanityStats,
+    sanityForWho,
+  ] = isSanityConfigured
+    ? await Promise.all([
+        getGuiaConfig(),
+        getTestimonials(),
+        getFaqs(),
+        getPainPoints(),
+        getGuideModules(),
+        getTrustStats(),
+        getForWhoItems(),
+      ])
+    : [{}, [], [], [], [], [], []]
+
+  const cfg = sanityConfig as Awaited<ReturnType<typeof getGuiaConfig>>
 
   const activeTestimonials = sanityTestimonials.length > 0 ? sanityTestimonials : testimonials
   const activeFaqs = sanityFaqs.length > 0
     ? sanityFaqs.map((f) => ({ q: f.question, a: f.answer }))
     : faqs
+  const activePains = sanityPainPoints.length > 0
+    ? sanityPainPoints.map((p) => p.text)
+    : pains
+  const activeModules = sanityModules.length > 0
+    ? sanityModules.map((m, i) => ({ ...m, icon: moduleIcons[i] ?? BookOpen }))
+    : modules
+  const activeStats = sanityStats.length > 0 ? sanityStats : trustStats
+  const activeForWho = sanityForWho.length > 0
+    ? sanityForWho.map((f) => f.text)
+    : forWho
 
   return (
     <div
@@ -179,7 +218,7 @@ export default async function GuiaPage() {
 
       {/* ── TOP BAR ── */}
       <div className="w-full py-2.5 text-center text-sm font-semibold bg-[#f5c842] text-[#0c0c0f]">
-        🔥 Oferta de lançamento · R$&nbsp;19,90 · Acesso imediato após pagamento
+        {cfg.topBarText ?? "🔥 Oferta de lançamento · R$ 19,90 · Acesso imediato após pagamento"}
       </div>
 
       {/* ── HERO ── */}
@@ -206,7 +245,7 @@ export default async function GuiaPage() {
                 }}
               >
                 <Zap className="h-3.5 w-3.5" />
-                Guia Digital — Fisioterapeuta Especialista
+                {cfg.heroTagline ?? "Guia Digital — Fisioterapeuta Especialista"}
               </div>
 
               <h1
@@ -214,18 +253,16 @@ export default async function GuiaPage() {
                 style={{ fontFamily: "var(--font-playfair, serif)" }}
               >
                 <span className="block text-xl sm:text-2xl font-semibold text-white/55">
-                  Chega de sofrer com
+                  {cfg.heroPreHeadline ?? "Chega de sofrer com"}
                 </span>
-                <span
-                  className="block text-5xl sm:text-6xl lg:text-7xl text-white mt-1"
-                >
-                  Hérnia de Disco
+                <span className="block text-5xl sm:text-6xl lg:text-7xl text-white mt-1">
+                  {cfg.heroHeadline ?? "Hérnia de Disco"}
                 </span>
                 <span
                   className="block text-2xl sm:text-3xl mt-2 italic"
                   style={{ color: "#f5c842" }}
                 >
-                  e nervo ciático
+                  {cfg.heroSubtitle ?? "e nervo ciático"}
                 </span>
               </h1>
 
@@ -233,9 +270,8 @@ export default async function GuiaPage() {
                 className="mt-6 text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0"
                 style={{ color: "rgba(255,255,255,0.60)" }}
               >
-                O protocolo criado por fisioterapeuta especialista para você aliviar a dor,
-                retomar sua vida e parar de depender só de remédio —{" "}
-                <span className="text-white/85 font-medium">tudo em casa.</span>
+                {cfg.heroDescription ??
+                  "O protocolo criado por fisioterapeuta especialista para você aliviar a dor, retomar sua vida e parar de depender só de remédio — tudo em casa."}
               </p>
 
               {/* Social proof strip */}
@@ -246,7 +282,7 @@ export default async function GuiaPage() {
                   ))}
                 </div>
                 <span style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.875rem" }}>
-                  +50 avaliações 5 estrelas no Google
+                  {cfg.heroSocialProof ?? "+50 avaliações 5 estrelas no Google"}
                 </span>
               </div>
 
@@ -320,7 +356,7 @@ export default async function GuiaPage() {
           </p>
 
           <ul className="mt-8 space-y-3 text-left max-w-xl mx-auto">
-            {pains.map((pain) => (
+            {activePains.map((pain) => (
               <li
                 key={pain}
                 className="flex items-start gap-3 rounded-xl p-4"
@@ -388,7 +424,7 @@ export default async function GuiaPage() {
           </div>
 
           <div className="space-y-3">
-            {modules.map((mod) => {
+            {activeModules.map((mod) => {
               const Icon = mod.icon
               return (
                 <div
@@ -564,7 +600,7 @@ export default async function GuiaPage() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {trustStats.map((stat) => (
+            {activeStats.map((stat) => (
               <div
                 key={stat.label}
                 className="rounded-2xl p-5 text-center"
@@ -628,7 +664,7 @@ export default async function GuiaPage() {
           </h2>
 
           <ul className="mt-8 space-y-3 text-left max-w-xl mx-auto">
-            {forWho.map((item) => (
+            {activeForWho.map((item) => (
               <li key={item} className="flex items-start gap-3">
                 <CheckCircle
                   className="h-5 w-5 shrink-0 mt-0.5"
@@ -679,21 +715,20 @@ export default async function GuiaPage() {
                 className="mt-1.5 font-serif text-2xl font-bold"
                 style={{ fontFamily: "var(--font-playfair, serif)" }}
               >
-                Dr. Guilherme Carvalho
+                {cfg.authorName ?? "Dr. Guilherme Carvalho"}
               </h3>
               <p className="text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.40)" }}>
-                Fisioterapeuta · CREFITO 1 318268-F
+                {cfg.authorCredential ?? "Fisioterapeuta · CREFITO 1 318268-F"}
               </p>
               <p
                 className="mt-4 text-sm leading-relaxed"
                 style={{ color: "rgba(255,255,255,0.62)" }}
               >
-                Mais de 5 anos especializando em dor crônica e coluna. Pós-graduado em
-                Osteopatia, Quiropraxia e Acupuntura. Trata hérnia de disco e ciático no
-                consultório em Natal e online para pacientes em todo o Brasil.
+                {cfg.authorBio ??
+                  "Mais de 5 anos especializando em dor crônica e coluna. Pós-graduado em Osteopatia, Quiropraxia e Acupuntura. Trata hérnia de disco e ciático no consultório em Natal e online para pacientes em todo o Brasil."}
               </p>
               <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
-                {["Osteopatia", "Quiropraxia", "Acupuntura"].map((spec) => (
+                {(cfg.authorSpecializations ?? ["Osteopatia", "Quiropraxia", "Acupuntura"]).map((spec) => (
                   <span
                     key={spec}
                     className="rounded-full px-3 py-1 text-xs font-medium"
@@ -832,7 +867,7 @@ export default async function GuiaPage() {
 
             <div className="mt-5">
               <p className="text-sm line-through" style={{ color: "rgba(255,255,255,0.25)" }}>
-                De R$&nbsp;47,00
+                De {cfg.pricingOriginal ?? "R$ 47,00"}
               </p>
               <div
                 className="font-serif text-5xl sm:text-6xl font-bold"
@@ -841,11 +876,11 @@ export default async function GuiaPage() {
                   color: "#f5c842",
                 }}
               >
-                2x de R$&nbsp;9,95
+                {cfg.pricingInstallments ?? "2x de R$ 9,95"}
               </div>
               <p className="mt-2 text-base" style={{ color: "rgba(255,255,255,0.45)" }}>
                 ou{" "}
-                <strong style={{ color: "#fff" }}>R$&nbsp;19,90</strong> à vista
+                <strong style={{ color: "#fff" }}>{cfg.pricingFull ?? "R$ 19,90"}</strong> à vista
               </p>
             </div>
 

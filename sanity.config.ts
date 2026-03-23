@@ -18,11 +18,32 @@ export default defineConfig({
           .title("Conteúdo")
           .items([
             S.listItem()
-              .title("Depoimentos")
+              .title("⚙️ Configurações Gerais")
+              .child(
+                S.document()
+                  .schemaType("guiaConfig")
+                  .documentId("guia-config")
+                  .title("Configurações Gerais")
+              ),
+            S.divider(),
+            S.listItem()
+              .title("💬 Depoimentos")
               .child(S.documentTypeList("testimonial").title("Depoimentos")),
             S.listItem()
-              .title("Perguntas Frequentes")
+              .title("❓ Perguntas Frequentes")
               .child(S.documentTypeList("faq").title("Perguntas Frequentes")),
+            S.listItem()
+              .title("📦 Módulos do Guia")
+              .child(S.documentTypeList("guideModule").title("Módulos do Guia")),
+            S.listItem()
+              .title("😣 Pontos de Dor")
+              .child(S.documentTypeList("painPoint").title("Pontos de Dor")),
+            S.listItem()
+              .title("✅ Para Quem É")
+              .child(S.documentTypeList("forWhoItem").title("Para Quem É")),
+            S.listItem()
+              .title("📊 Estatísticas de Confiança")
+              .child(S.documentTypeList("trustStat").title("Estatísticas de Confiança")),
           ]),
     }),
     visionTool(),
