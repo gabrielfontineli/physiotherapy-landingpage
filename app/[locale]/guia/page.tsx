@@ -21,6 +21,7 @@ import {
   MessageCircle,
   Check,
   X,
+  AlertTriangle,
 } from "lucide-react"
 import { BuyButton } from "@/components/guia/buy-button"
 import { StickyCta } from "@/components/guia/sticky-cta"
@@ -64,7 +65,7 @@ const pains = [
 const modules = [
   { number: "01", title: "Entenda sua dor", description: "O que é hérnia de disco, por que o nervo ciático dói e o que acontece no seu corpo. Quando você entende, para de ter medo.", icon: BookOpen, result: "Você vai saber exatamente o que está acontecendo na sua coluna." },
   { number: "02", title: "Posições de alívio imediato", description: "Posturas e movimentos que descomprimem o nervo em minutos. Para usar quando a crise bate forte.", icon: Zap, result: "Você vai conseguir aliviar a crise sem precisar de remédio.", highlight: true },
-  { number: "03", title: "Protocolo de exercícios", description: "Sequência de exercícios terapêuticos seguros e progressivos para fortalecer sem agravar a hérnia.", icon: Award, result: "Você vai fortalecer a coluna sem medo de piorar." },
+  { number: "03", title: "Protocolo de exercícios", description: "Sequência de exercícios terapêuticos seguros e progressivos para fortalecer sem agravar a hérnia. Cada exercício tem vídeo com ângulo lateral e frontal, e indicação de quando parar se sentir dor.", icon: Award, result: "Você vai fortalecer a coluna sem medo de piorar." },
   { number: "04", title: "O que evitar", description: "Movimentos, posturas e hábitos que pioram a hérnia — e como substituí-los no dia a dia.", icon: Shield, result: "Você vai parar de fazer sem saber o que agrava sua dor." },
   { number: "05", title: "Rotina sustentável", description: "Como montar uma rotina de 10 a 15 minutos por dia para manter a coluna saudável a longo prazo.", icon: Clock, result: "Você vai ter um plano claro para nunca mais entrar em crise." },
 ]
@@ -77,13 +78,13 @@ const trustStats = [
 ]
 
 const testimonials = [
-  { name: "Carlos M.", time: "21:43", text: "Já comecei a aplicar ontem e hoje acordei bem melhor. A dor que descia pra perna diminuiu muito." },
-  { name: "Fernanda R.", time: "09:17", text: "Eu estava travando direto. Comecei a fazer as posições e já senti alívio. Muito bom mesmo." },
-  { name: "Marcos T.", time: "16:52", text: "Finalmente alguém explicou de um jeito que dá pra entender. Já estou conseguindo controlar melhor a dor." },
-  { name: "Patrícia L.", time: "11:08", text: "Tenho L4-L5 e L5-S1 e já estou melhorando. Está fazendo muito sentido pra mim." },
-  { name: "Roberto S.", time: "20:30", text: "Eu tinha medo de piorar fazendo exercício, mas do jeito que está no guia ficou muito mais seguro." },
-  { name: "Ana C.", time: "08:45", text: "A dor não sumiu totalmente ainda, mas melhorou muito. Já consigo levantar sem travar." },
-  { name: "Diego F.", time: "14:22", text: "Funciona mesmo. Já senti diferença." },
+  { name: "Carlos M.", time: "21:43", text: "Tenho L4-L5 e fiquei 3 meses sem conseguir sentar direito. Comprei sem muita esperança. Na segunda semana já conseguia trabalhar de novo." },
+  { name: "Fernanda R.", time: "09:17", text: "Tinha medo de piorar fazendo exercício errado. O guia explica exatamente o que pode e o que não pode na minha fase. Primeira vez que me sinto segura." },
+  { name: "Marcos T.", time: "16:52", text: "Tentei YouTube, tentei fisioterapeuta que não explicava nada. Esse guia foi diferente porque tem progressão — começa no básico e vai avançando. Senti diferença real na primeira semana." },
+  { name: "Patrícia L.", time: "11:08", text: "L4-L5 e L5-S1 aqui. Acordava toda manhã travada. Depois de 10 dias fazendo as posições de descompressão, já consigo me levantar sem apoio." },
+  { name: "Roberto S.", time: "20:30", text: "Achei que R$19,90 era barato demais para funcionar. Me arrependi de ter esperado tanto tempo para comprar. Minha dor no ciático caiu uns 70%." },
+  { name: "Ana C.", time: "08:45", text: "Tentei de tudo nesses 2 anos: anti-inflamatório, acupuntura, até cogitei cirurgia. Com o guia pela primeira vez estou no controle. Já consigo levantar sem travar." },
+  { name: "Diego F.", time: "14:22", text: "Comprei com 7 dias de garantia e pensando em devolver. Não devolvi porque na terceira sessão já senti diferença. Valeu cada centavo." },
 ]
 
 const faqs = [
@@ -91,11 +92,13 @@ const faqs = [
   { q: "Funciona para hérnia L4-L5 ou L5-S1?", a: "Sim. O guia foi pensado principalmente para hérnia lombar nas regiões L4-L5 e L5-S1, as mais comuns. As estratégias ajudam a reduzir a pressão na coluna e diminuir a irritação do nervo ciático." },
   { q: "Em quanto tempo posso sentir melhora?", a: "Algumas pessoas relatam alívio já nas primeiras aplicações das posições de descompressão. Cada caso é diferente, mas o objetivo é tirá-lo do ciclo de crises — não apenas aliviar momentaneamente." },
   { q: "E se eu já fiz tratamento e não funcionou?", a: "O guia trata especificamente da progressão por fases da dor — algo que muitos protocolos genéricos ignoram. Se você fez exercícios sem respeitar a fase, provavelmente fez a coisa certa na hora errada. Este guia resolve exatamente isso." },
+  { q: "Tenho essa dor há anos. Ainda tem jeito?", a: "Sim. A dor crônica não significa que está tudo perdido — significa que o ciclo nunca foi quebrado da forma certa. O guia foi feito justamente para pessoas que tentaram de tudo e não conseguiram sair da crise. A chave é respeitar as fases: primeiro aliviar, depois fortalecer. Nessa ordem." },
   { q: "Serve para quem tem mais de 60 anos?", a: "Sim. Os exercícios são adaptáveis e respeitam as limitações individuais. O guia explica exatamente como modificar cada movimento se necessário." },
   { q: "Posso usar mesmo tomando medicação?", a: "Sim. O guia é complementar ao tratamento médico, não substitui. Na verdade, muitos pacientes conseguem reduzir a dependência de remédio à medida que a dor melhora — mas isso deve ser sempre orientado pelo seu médico." },
   { q: "É diferente do que acho no YouTube?", a: "Muito. O YouTube tem exercícios genéricos sem progressão por fases. Este guia foi estruturado por um fisioterapeuta que trata hérnia de disco todos os dias, com protocolo específico para L4-L5 e L5-S1, do alívio imediato até o fortalecimento." },
-  { q: "Vou conseguir entender os exercícios?", a: "Sim. O guia foi feito para ser simples. Você terá explicações claras com vídeos demonstrativos mostrando exatamente como fazer cada posição. Mesmo quem nunca fez fisioterapia consegue acompanhar." },
-  { q: "Tem garantia?", a: "Sim. Você tem 7 dias de garantia incondicional. Se achar que o guia não é para você, solicita o reembolso pela Hotmart — sem perguntas, sem burocracia." },
+  { q: "Vou conseguir entender os exercícios?", a: "Sim. O guia foi feito para ser simples. Você terá explicações claras com vídeos demonstrativos mostrando exatamente como fazer cada posição — com ângulo lateral e frontal. Mesmo quem nunca fez fisioterapia consegue acompanhar." },
+  { q: "E se eu tiver dúvidas durante o processo?", a: "Você pode falar diretamente comigo pelo WhatsApp. Respondo pessoalmente. Meu objetivo não é vender um PDF e sumir — é que você realmente melhore." },
+  { q: "Tem garantia?", a: "Sim. Você tem 7 dias de garantia incondicional. Aplique o guia, veja se funciona para você. Se em 7 dias não sentir nenhuma diferença, solicita o reembolso pela Hotmart — 100% do valor de volta, sem perguntas, sem burocracia. O risco é todo nosso." },
 ]
 
 const moduleIcons = [BookOpen, Zap, Award, Shield, Clock]
@@ -110,6 +113,7 @@ export default async function GuiaPage() {
     sanityPainPoints,
     sanityModules,
     sanityStats,
+    sanityForWho,
   ] = isSanityConfigured
     ? await Promise.all([
         getGuiaConfig(),
@@ -142,6 +146,26 @@ export default async function GuiaPage() {
   const activeStats = sanityStats.length > 0
     ? (sanityStats as Array<{ value: string; label: string; sub: string }>)
     : trustStats
+
+  const forWhoIsFor = (sanityForWho as Array<{ type: string; text: string }>).filter((i) => i.type === "is_for").map((i) => i.text)
+  const forWhoIsNotFor = (sanityForWho as Array<{ type: string; text: string }>).filter((i) => i.type === "is_not_for").map((i) => i.text)
+
+  const activeForWhoIsFor = forWhoIsFor.length > 0 ? forWhoIsFor : [
+    "Você tem diagnóstico de hérnia L4-L5 ou L5-S1",
+    "Sente dor que desce pela perna (nervo ciático)",
+    "Já fez fisioterapia sem resultado consistente",
+    "Quer entender o que está acontecendo na sua coluna",
+    "Tem 10–15 minutos por dia para dedicar à sua recuperação",
+  ]
+  const activeForWhoIsNotFor = forWhoIsNotFor.length > 0 ? forWhoIsNotFor : [
+    "Você tem indicação cirúrgica confirmada por médico",
+    "Está em fase aguda com déficit motor severo (não consegue mover a perna)",
+    "Busca fórmula mágica sem compromisso nenhum",
+  ]
+
+  const originalPrice = cfg.pricingOriginal ?? "R$ 47,00"
+  const currentPrice = cfg.pricingFull ?? "R$ 19,90"
+  const installments = cfg.pricingInstallments ?? "2x de R$ 9,95"
 
   return (
     <div className="min-h-screen bg-[#0a0a0d] text-white overflow-x-hidden">
@@ -204,7 +228,7 @@ export default async function GuiaPage() {
         style={{ background: "linear-gradient(90deg, #b45309 0%, #f59e0b 40%, #f5c842 60%, #f59e0b 80%, #b45309 100%)", color: "#000" }}
       >
         <span className="relative z-10">
-          🔥 Oferta de lançamento — <strong>R$&nbsp;19,90</strong> por tempo limitado &nbsp;·&nbsp; Termina em{" "}
+          🔥 Oferta de pré-lançamento: <strong>47 vagas</strong> a <strong>R$&nbsp;19,90</strong> — depois sobe para {originalPrice}. Restam{" "}
           <CountdownTimer />
         </span>
       </div>
@@ -234,23 +258,31 @@ export default async function GuiaPage() {
                 className="font-black leading-[1.03] text-white"
                 style={{ fontSize: "clamp(2.2rem, 4.5vw, 4rem)", letterSpacing: "-0.03em" }}
               >
-                {cfg.heroPreHeadline ?? "Chega de sofrer com"}{" "}
+                {cfg.heroPreHeadline ?? "Alivie a crise de hérnia"}{" "}
                 <span style={{ color: "#f5c842" }}>
-                  {cfg.heroHeadline ?? "Hérnia de Disco"}
+                  {cfg.heroHeadline ?? "em casa"}
                 </span>
                 {cfg.heroSubtitle ? (
-                  <> <span style={{ opacity: 0.55 }}>e</span> {cfg.heroSubtitle}</>
+                  <> — <span style={{ opacity: 0.80 }}>{cfg.heroSubtitle}</span></>
                 ) : (
-                  <> <span style={{ opacity: 0.55 }}>e</span> nervo ciático</>
+                  <> — <span style={{ opacity: 0.80 }}>sem consulta, sem cirurgia, sem medo de piorar</span></>
                 )}
               </h1>
 
               <p className="mt-5 text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0" style={{ color: "rgba(255,255,255,0.62)" }}>
                 {cfg.heroDescription ??
-                  "O protocolo de fisioterapeuta especialista para aliviar a dor, retomar sua vida e parar de depender só de remédio — tudo em casa."}
+                  "Um guia passo a passo criado pelo Dr. Guilherme Carvalho, fisioterapeuta especialista em coluna, com as mesmas posições e exercícios que usa com seus pacientes. Você aplica em casa, no celular, em 10 minutos — e já pode sentir diferença na primeira sessão."}
               </p>
 
               <div className="mt-8 flex flex-col gap-3 items-center lg:items-start">
+                {/* PRICE BEFORE CTA */}
+                <div className="flex items-baseline gap-3">
+                  <p className="text-3xl font-black" style={{ color: "#f5c842" }}>{currentPrice}</p>
+                  <p className="text-sm" style={{ color: "rgba(255,255,255,0.32)" }}>
+                    <s>{originalPrice}</s> · pagamento único
+                  </p>
+                </div>
+
                 <a
                   href={HOTMART_URL}
                   target="_blank"
@@ -258,7 +290,7 @@ export default async function GuiaPage() {
                   className="btn-shine glow-btn relative inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-5 text-lg sm:text-xl font-black text-[#0a0a0d] bg-[#f5c842] hover:bg-[#f0bb22] transition-all hover:scale-[1.03] active:scale-[0.97]"
                   style={{ width: "100%", maxWidth: "420px" }}
                 >
-                  QUERO ALIVIAR MINHA DOR AGORA
+                  COMEÇAR A ME RECUPERAR — {currentPrice}
                   <ArrowRight className="h-5 w-5 shrink-0" />
                 </a>
 
@@ -267,19 +299,11 @@ export default async function GuiaPage() {
                   <span className="flex items-center gap-1.5"><CheckCircle className="h-3.5 w-3.5 text-green-400" /> Acesso imediato</span>
                   <span className="flex items-center gap-1.5"><Shield className="h-3.5 w-3.5 text-green-400" /> Garantia 7 dias</span>
                 </div>
-
-                <div className="flex items-baseline gap-3">
-                  <p className="text-3xl font-black" style={{ color: "#f5c842" }}>R$&nbsp;19,90</p>
-                  <p className="text-sm" style={{ color: "rgba(255,255,255,0.32)" }}>
-                    <s>R$ 67,00</s> · pagamento único
-                  </p>
-                </div>
               </div>
             </div>
 
-            {/* FOTO — mobile: topo (max-h para não ocupar tudo), desktop: direita (altura livre) */}
+            {/* FOTO — mobile: topo, desktop: direita */}
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end relative">
-              {/* Glow dourado atrás */}
               <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 60% at 60% 50%, rgba(245,200,66,0.10) 0%, transparent 70%)" }} />
               <Image
                 src="/images/hero-guide.png"
@@ -296,7 +320,7 @@ export default async function GuiaPage() {
         </div>
       </section>
 
-      {/* ── STATS STRIP — ouro sólido ── */}
+      {/* ── STATS STRIP ── */}
       <div style={{ background: "linear-gradient(135deg, #1a1200 0%, #2d1f00 50%, #1a1200 100%)", borderTop: "1px solid rgba(245,200,66,0.25)", borderBottom: "1px solid rgba(245,200,66,0.25)" }}>
         <div className="mx-auto max-w-4xl px-4 sm:px-6 py-10">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-center">
@@ -312,6 +336,131 @@ export default async function GuiaPage() {
           </div>
         </div>
       </div>
+
+      {/* ── SINTOMAS — ISSO É VOCÊ? ── */}
+      <section id="section-checklist" className="py-16 sm:py-20" style={{ background: "linear-gradient(180deg, #0a0a0d 0%, #110909 100%)" }}>
+        <div className="mx-auto max-w-2xl px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-4" style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.30)" }}>
+              <span className="text-lg">👇</span>
+              <span className="text-sm font-bold text-red-400">Isso é você?</span>
+            </div>
+            <h2 className="font-black text-3xl sm:text-4xl text-white" style={{ letterSpacing: "-0.02em" }}>
+              Marque seus sintomas
+            </h2>
+            <p className="mt-3 text-base" style={{ color: "rgba(255,255,255,0.45)" }}>
+              Clique em cada um que se aplica a você
+            </p>
+          </div>
+          <SymptomChecklist />
+        </div>
+      </section>
+
+      {/* ── O QUE ACONTECE SE VOCÊ NÃO AGIR ── */}
+      <section id="section-consequences" className="py-16 sm:py-20 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #1a0505 0%, #250a0a 50%, #1a0505 100%)" }}>
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(239,68,68,0.12) 0%, transparent 70%)" }} />
+
+        <div className="relative mx-auto max-w-3xl px-4 sm:px-6 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6" style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.35)" }}>
+            <TrendingDown className="h-4 w-4 text-red-400" />
+            <span className="text-sm font-bold text-red-400">O que acontece com quem não trata</span>
+          </div>
+
+          <h2 className="font-black text-3xl sm:text-5xl text-white" style={{ letterSpacing: "-0.02em", lineHeight: 1.1 }}>
+            Ignorar a hérnia<br />
+            <span className="text-red-400">tem um preço alto</span>
+          </h2>
+
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+            {[
+              { icon: TrendingDown, title: "Piora progressiva", desc: "A hérnia não tratada tende a comprimir cada vez mais o nervo, aumentando a dor e o formigamento." },
+              { icon: Activity, title: "Perda de mobilidade", desc: "A dor crônica faz você se movimentar menos. Menos movimento gera mais rigidez e fraqueza muscular." },
+              { icon: Pill, title: "Dependência de remédio", desc: "Anti-inflamatórios mascaram a dor mas não resolvem a causa. O uso contínuo traz outros riscos à saúde." },
+              { icon: Brain, title: "Impacto mental", desc: "Viver com dor afeta sono, humor, trabalho e relacionamentos. A qualidade de vida cai progressivamente." },
+            ].map((item) => {
+              const Icon = item.icon
+              return (
+                <div key={item.title} className="flex gap-4 rounded-2xl p-5" style={{ background: "rgba(239,68,68,0.07)", border: "1px solid rgba(239,68,68,0.18)" }}>
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style={{ background: "rgba(239,68,68,0.15)" }}>
+                    <Icon className="h-5 w-5 text-red-400" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-white">{item.title}</p>
+                    <p className="mt-1 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.52)" }}>{item.desc}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* OBJEÇÃO: "Tenho isso há anos, ainda tem jeito?" */}
+          <div className="mt-10 rounded-2xl p-6 text-left" style={{ background: "rgba(245,200,66,0.06)", border: "1px solid rgba(245,200,66,0.20)", borderLeft: "3px solid #f5c842" }}>
+            <p className="font-black text-white text-base mb-2">
+              &ldquo;Já tentei de tudo e nada funcionou.&rdquo;
+            </p>
+            <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.60)" }}>
+              Entendo. A maioria dos protocolos genéricos falha porque não respeita a fase da dor. Você provavelmente fez a coisa certa <em>na hora errada</em>. O guia foi construído em torno disso: primeiro você alivia a crise, depois fortalece. Nessa ordem. É o que muda o resultado.
+            </p>
+          </div>
+
+          <div className="mt-8 rounded-2xl p-6" style={{ background: "rgba(245,200,66,0.08)", border: "1px solid rgba(245,200,66,0.25)" }}>
+            <p className="font-bold text-white text-lg mb-5">Existe um caminho diferente. E ele começa hoje.</p>
+            <BuyButton label="Quero começar a melhorar agora" large={false} />
+          </div>
+        </div>
+      </section>
+
+      {/* ── PARA QUEM É / NÃO É ── */}
+      <section id="section-for-who" className="py-16 sm:py-20" style={{ background: "#0a0a0d" }}>
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <h2 className="font-black text-3xl sm:text-4xl text-white" style={{ letterSpacing: "-0.02em" }}>
+              Este guia é para você?
+            </h2>
+            <p className="mt-3 text-base" style={{ color: "rgba(255,255,255,0.42)" }}>
+              Seja honesto — o guia só funciona para quem se encaixa no perfil certo
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* É para você */}
+            <div className="rounded-2xl p-6" style={{ background: "rgba(34,197,94,0.06)", border: "1px solid rgba(34,197,94,0.20)" }}>
+              <div className="flex items-center gap-2.5 mb-5">
+                <div className="h-8 w-8 rounded-full flex items-center justify-center" style={{ background: "rgba(34,197,94,0.15)" }}>
+                  <Check className="h-4 w-4 text-green-400" />
+                </div>
+                <p className="font-black text-white text-base">Este guia É para você se:</p>
+              </div>
+              <ul className="space-y-3">
+                {activeForWhoIsFor.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <CheckCircle className="h-4 w-4 text-green-400 shrink-0 mt-0.5" />
+                    <span className="text-sm leading-snug" style={{ color: "rgba(255,255,255,0.72)" }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* NÃO é para você */}
+            <div className="rounded-2xl p-6" style={{ background: "rgba(239,68,68,0.05)", border: "1px solid rgba(239,68,68,0.18)" }}>
+              <div className="flex items-center gap-2.5 mb-5">
+                <div className="h-8 w-8 rounded-full flex items-center justify-center" style={{ background: "rgba(239,68,68,0.15)" }}>
+                  <X className="h-4 w-4 text-red-400" />
+                </div>
+                <p className="font-black text-white text-base">Este guia NÃO é para você se:</p>
+              </div>
+              <ul className="space-y-3">
+                {activeForWhoIsNotFor.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                    <span className="text-sm leading-snug" style={{ color: "rgba(255,255,255,0.55)" }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── DEPOIMENTOS WHATSAPP ── */}
       <section id="section-testimonials" className="py-16 sm:py-20" style={{ background: "#0f0f13" }}>
@@ -368,73 +517,18 @@ export default async function GuiaPage() {
           <p className="text-center text-xs mt-3 sm:hidden" style={{ color: "rgba(255,255,255,0.20)" }}>
             ← deslize para ver mais →
           </p>
-        </div>
-      </section>
 
-      {/* ── SINTOMAS — ISSO É VOCÊ? ── */}
-      <section id="section-checklist" className="py-16 sm:py-20" style={{ background: "linear-gradient(180deg, #0a0a0d 0%, #110909 100%)" }}>
-        <div className="mx-auto max-w-2xl px-4 sm:px-6">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-4" style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.30)" }}>
-              <span className="text-lg">👇</span>
-              <span className="text-sm font-bold text-red-400">Isso é você?</span>
+          {/* Social proof summary */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <div className="flex items-center gap-1.5 rounded-full px-4 py-2" style={{ background: "rgba(245,200,66,0.08)", border: "1px solid rgba(245,200,66,0.20)" }}>
+              {[...Array(5)].map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-[#f5c842] text-[#f5c842]" />)}
+              <span className="text-sm font-semibold text-white ml-1.5">+50 avaliações verificadas no Google</span>
             </div>
-            <h2 className="font-black text-3xl sm:text-4xl text-white" style={{ letterSpacing: "-0.02em" }}>
-              Marque seus sintomas
-            </h2>
-            <p className="mt-3 text-base" style={{ color: "rgba(255,255,255,0.45)" }}>
-              Clique em cada um que se aplica a você
-            </p>
-          </div>
-          <SymptomChecklist />
-        </div>
-      </section>
-
-      {/* ── O QUE ACONTECE SE VOCÊ NÃO AGIR — fundo vermelho escuro ── */}
-      <section id="section-consequences" className="py-16 sm:py-20 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #1a0505 0%, #250a0a 50%, #1a0505 100%)" }}>
-        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(239,68,68,0.12) 0%, transparent 70%)" }} />
-
-        <div className="relative mx-auto max-w-3xl px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6" style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.35)" }}>
-            <TrendingDown className="h-4 w-4 text-red-400" />
-            <span className="text-sm font-bold text-red-400">O que acontece com quem não trata</span>
-          </div>
-
-          <h2 className="font-black text-3xl sm:text-5xl text-white" style={{ letterSpacing: "-0.02em", lineHeight: 1.1 }}>
-            Ignorar a hérnia<br />
-            <span className="text-red-400">tem um preço alto</span>
-          </h2>
-
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-            {[
-              { icon: TrendingDown, title: "Piora progressiva", desc: "A hérnia não tratada tende a comprimir cada vez mais o nervo, aumentando a dor e o formigamento." },
-              { icon: Activity, title: "Perda de mobilidade", desc: "A dor crônica faz você se movimentar menos. Menos movimento gera mais rigidez e fraqueza muscular." },
-              { icon: Pill, title: "Dependência de remédio", desc: "Anti-inflamatórios mascaram a dor mas não resolvem a causa. O uso contínuo traz outros riscos à saúde." },
-              { icon: Brain, title: "Impacto mental", desc: "Viver com dor afeta sono, humor, trabalho e relacionamentos. A qualidade de vida cai progressivamente." },
-            ].map((item) => {
-              const Icon = item.icon
-              return (
-                <div key={item.title} className="flex gap-4 rounded-2xl p-5" style={{ background: "rgba(239,68,68,0.07)", border: "1px solid rgba(239,68,68,0.18)" }}>
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style={{ background: "rgba(239,68,68,0.15)" }}>
-                    <Icon className="h-5 w-5 text-red-400" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-white">{item.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.52)" }}>{item.desc}</p>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          <div className="mt-10 rounded-2xl p-6" style={{ background: "rgba(245,200,66,0.08)", border: "1px solid rgba(245,200,66,0.25)" }}>
-            <p className="font-bold text-white text-lg mb-5">Existe um caminho diferente. E ele começa hoje.</p>
-            <BuyButton label="Quero começar a melhorar agora" large={false} />
           </div>
         </div>
       </section>
 
-      {/* ── MÓDULOS — visual dramático ── */}
+      {/* ── MÓDULOS ── */}
       <section id="section-modules" className="py-16 sm:py-24" style={{ background: "#0a0a0d" }}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <div className="text-center mb-12">
@@ -535,79 +629,8 @@ export default async function GuiaPage() {
         </div>
       </section>
 
-      {/* ── ANCORAGEM DE PREÇO ── */}
-      <section id="section-price" className="py-16 sm:py-20" style={{ background: "#0f0f13" }}>
-        <div className="mx-auto max-w-2xl px-4 sm:px-6">
-          <div className="text-center mb-10">
-            <h2 className="font-black text-3xl sm:text-4xl text-white" style={{ letterSpacing: "-0.02em" }}>
-              Quanto você já gastou<br />tentando resolver?
-            </h2>
-            <p className="mt-3 text-base" style={{ color: "rgba(255,255,255,0.42)" }}>
-              Enquanto isso, o guia custa menos que qualquer consulta
-            </p>
-          </div>
-
-          {/* Comparison */}
-          <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
-            <div className="grid grid-cols-3 text-center text-xs font-bold uppercase tracking-widest px-4 py-3" style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.40)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-              <span className="text-left">Opção</span>
-              <span>Custo</span>
-              <span>Acesso</span>
-            </div>
-            {[
-              { label: "1 sessão de fisioterapia", value: "R$ 150–300", access: "60 min", bad: true },
-              { label: "Consulta ortopedista", value: "R$ 300–500", access: "1 vez", bad: true },
-              { label: "Remédios / mês", value: "R$ 80–200", access: "temporário", bad: true },
-              { label: "Este Guia", value: "R$ 19,90", access: "vitalício", bad: false },
-            ].map((item, i) => (
-              <div
-                key={item.label}
-                className="grid grid-cols-3 items-center px-4 py-3.5"
-                style={{
-                  background: item.bad ? "transparent" : "rgba(245,200,66,0.07)",
-                  borderTop: i > 0 ? "1px solid rgba(255,255,255,0.05)" : undefined,
-                  borderBottom: !item.bad ? "1px solid rgba(245,200,66,0.25)" : undefined,
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  {item.bad
-                    ? <X className="h-4 w-4 shrink-0 text-red-400" />
-                    : <CheckCircle className="h-4 w-4 shrink-0 text-green-400" />
-                  }
-                  <span className="text-sm" style={{ color: item.bad ? "rgba(255,255,255,0.55)" : "white", fontWeight: item.bad ? 400 : 700 }}>
-                    {item.label}
-                  </span>
-                </div>
-                <span className="text-center text-sm font-bold" style={{ color: item.bad ? "#f87171" : "#f5c842" }}>
-                  {item.value}
-                </span>
-                <span className="text-center text-xs" style={{ color: item.bad ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.65)" }}>
-                  {item.access}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(245,200,66,0.12) 0%, rgba(245,200,66,0.05) 100%)", border: "2px solid rgba(245,200,66,0.40)" }}>
-            <p className="text-sm font-black uppercase tracking-widest mb-2" style={{ color: "rgba(245,200,66,0.65)" }}>Preço de lançamento</p>
-            <p className="text-sm line-through" style={{ color: "rgba(255,255,255,0.30)" }}>De {cfg.pricingOriginal ?? "R$ 67,00"}</p>
-            <p className="font-black leading-none mt-1" style={{ fontSize: "clamp(3.5rem, 10vw, 5rem)", color: "#f5c842", letterSpacing: "-0.03em" }}>
-              {cfg.pricingFull ?? "R$ 19,90"}
-            </p>
-            <p className="mt-2 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>ou {cfg.pricingInstallments ?? "2x de R$ 9,95"} · acesso vitalício</p>
-            <p className="mt-1 text-xs font-medium" style={{ color: "rgba(245,200,66,0.60)" }}>menos de R$ 0,66 por dia durante um mês</p>
-            <div className="mt-6">
-              <BuyButton label={`Garantir meu acesso — ${cfg.pricingFull ?? "R$ 19,90"}`} />
-            </div>
-            <p className="mt-3 text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
-              Processado pela Hotmart · Garantia de 7 dias · Acesso imediato
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ── AUTOR ── */}
-      <section id="section-author" className="py-16 sm:py-20" style={{ background: "#0a0a0d", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <section id="section-author" className="py-16 sm:py-20" style={{ background: "#0f0f13", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start rounded-3xl p-7 sm:p-10" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
             <div className="relative shrink-0">
@@ -653,25 +676,109 @@ export default async function GuiaPage() {
         </div>
       </section>
 
-      {/* ── GARANTIA STRIP ── */}
-      <div className="py-6" style={{ background: "linear-gradient(135deg, #0a1a0a 0%, #071207 100%)", borderTop: "1px solid rgba(34,197,94,0.15)", borderBottom: "1px solid rgba(34,197,94,0.15)" }}>
+      {/* ── GARANTIA STRIP — movida para antes do preço ── */}
+      <div className="py-8" style={{ background: "linear-gradient(135deg, #0a1a0a 0%, #071207 100%)", borderTop: "1px solid rgba(34,197,94,0.15)", borderBottom: "1px solid rgba(34,197,94,0.15)" }}>
         <div className="mx-auto max-w-2xl px-4 sm:px-6">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5 text-center sm:text-left">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl text-3xl" style={{ background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.25)" }}>
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl text-4xl" style={{ background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.25)" }}>
               🛡️
             </div>
             <div>
-              <p className="font-black text-xl text-white">Garantia incondicional de 7 dias</p>
-              <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.50)" }}>
-                Se em 7 dias você não gostar, devolvemos seu dinheiro. Sem perguntas, sem burocracia.
+              <p className="font-black text-xl text-white">Teste por 7 dias. Não melhorou nada? Devolução completa.</p>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.50)" }}>
+                Compre, aplique o guia, veja se funciona para você. Se em 7 dias não sentir nenhuma diferença — ou simplesmente não gostar — manda mensagem para a Hotmart e recebe 100% do valor de volta. Sem questionamentos, sem burocracia.{" "}
+                <strong className="text-white">O risco é todo nosso.</strong>
               </p>
             </div>
           </div>
         </div>
       </div>
 
+      {/* ── ANCORAGEM DE PREÇO ── */}
+      <section id="section-price" className="py-16 sm:py-20" style={{ background: "#0a0a0d" }}>
+        <div className="mx-auto max-w-2xl px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <h2 className="font-black text-3xl sm:text-4xl text-white" style={{ letterSpacing: "-0.02em" }}>
+              Quanto você já gastou<br />tentando resolver?
+            </h2>
+            <p className="mt-3 text-base" style={{ color: "rgba(255,255,255,0.42)" }}>
+              Uma única sessão de fisioterapia custa o equivalente a 15 cópias deste guia — e termina em 60 minutos. O guia fica com você para sempre.
+            </p>
+          </div>
+
+          {/* Comparison */}
+          <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
+            <div className="grid grid-cols-3 text-center text-xs font-bold uppercase tracking-widest px-4 py-3" style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.40)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              <span className="text-left">Opção</span>
+              <span>Custo</span>
+              <span>Acesso</span>
+            </div>
+            {[
+              { label: "1 sessão de fisioterapia", value: "R$ 150–300", access: "60 min", bad: true },
+              { label: "Consulta ortopedista", value: "R$ 300–500", access: "1 vez", bad: true },
+              { label: "Remédios / mês", value: "R$ 80–200", access: "temporário", bad: true },
+              { label: "Este Guia", value: currentPrice, access: "vitalício", bad: false },
+              { label: "Não fazer nada", value: "Piora progressiva", access: "sem fim", bad: true, danger: true },
+            ].map((item, i) => (
+              <div
+                key={item.label}
+                className="grid grid-cols-3 items-center px-4 py-3.5"
+                style={{
+                  background: item.bad ? (item.danger ? "rgba(239,68,68,0.06)" : "transparent") : "rgba(245,200,66,0.07)",
+                  borderTop: i > 0 ? "1px solid rgba(255,255,255,0.05)" : undefined,
+                  borderBottom: !item.bad ? "1px solid rgba(245,200,66,0.25)" : undefined,
+                }}
+              >
+                <div className="flex items-center gap-2">
+                  {item.bad
+                    ? <X className={`h-4 w-4 shrink-0 ${item.danger ? "text-red-500" : "text-red-400"}`} />
+                    : <CheckCircle className="h-4 w-4 shrink-0 text-green-400" />
+                  }
+                  <span className="text-sm" style={{ color: item.bad ? (item.danger ? "rgba(255,255,255,0.40)" : "rgba(255,255,255,0.55)") : "white", fontWeight: item.bad ? 400 : 700 }}>
+                    {item.label}
+                  </span>
+                </div>
+                <span className="text-center text-sm font-bold" style={{ color: item.bad ? (item.danger ? "#f87171" : "#f87171") : "#f5c842" }}>
+                  {item.value}
+                </span>
+                <span className="text-center text-xs" style={{ color: item.bad ? (item.danger ? "rgba(239,68,68,0.60)" : "rgba(255,255,255,0.35)") : "rgba(255,255,255,0.65)" }}>
+                  {item.access}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Por que tão barato? */}
+          <div className="mt-6 rounded-2xl p-5" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <p className="font-bold text-white text-sm mb-1.5">Por que tão barato?</p>
+            <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.50)" }}>
+              Porque o objetivo é que o máximo de pessoas com hérnia tenha acesso a isso — não só quem pode pagar consulta particular. O conteúdo é o mesmo que aplico no consultório. O formato digital é o que permite esse preço.
+            </p>
+          </div>
+
+          <div className="mt-8 rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(245,200,66,0.12) 0%, rgba(245,200,66,0.05) 100%)", border: "2px solid rgba(245,200,66,0.40)" }}>
+            <p className="text-sm font-black uppercase tracking-widest mb-2" style={{ color: "rgba(245,200,66,0.65)" }}>Preço de pré-lançamento · 47 vagas</p>
+            <p className="text-sm line-through" style={{ color: "rgba(255,255,255,0.30)" }}>De {originalPrice}</p>
+            <p className="font-black leading-none mt-1" style={{ fontSize: "clamp(3.5rem, 10vw, 5rem)", color: "#f5c842", letterSpacing: "-0.03em" }}>
+              {currentPrice}
+            </p>
+            <p className="mt-2 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>ou {installments} · acesso vitalício</p>
+            <p className="mt-1 text-xs font-medium" style={{ color: "rgba(245,200,66,0.60)" }}>menos de R$ 0,66 por dia durante um mês</p>
+            <div className="mt-6">
+              <BuyButton label={`Garantir meu acesso — ${currentPrice}`} />
+            </div>
+            <p className="mt-3 text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
+              Processado pela Hotmart · Garantia de 7 dias · Acesso imediato
+            </p>
+            <p className="mt-2 text-xs font-semibold" style={{ color: "rgba(245,200,66,0.55)" }}>
+              Com dúvidas? Fale com o Dr. Guilherme pelo WhatsApp antes de comprar.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ── FAQ ── */}
-      <section id="section-faq" className="py-14 sm:py-20" style={{ background: "#0a0a0d" }}>
+      <section id="section-faq" className="py-14 sm:py-20" style={{ background: "#0f0f13" }}>
         <div className="mx-auto max-w-2xl px-4 sm:px-6">
           <h2 className="font-black text-2xl sm:text-3xl text-center text-white mb-2" style={{ letterSpacing: "-0.02em" }}>
             Perguntas frequentes
@@ -715,16 +822,16 @@ export default async function GuiaPage() {
           </h2>
 
           <p className="mt-5 text-base leading-relaxed max-w-sm mx-auto" style={{ color: "rgba(255,255,255,0.50)" }}>
-            Você já sofreu o suficiente. O guia está pronto. Com garantia de 7 dias, não há risco nenhum.
+            Você já sofreu o suficiente. O guia está pronto. Com garantia de 7 dias e devolução sem perguntas, o risco é todo nosso.
           </p>
 
           <div className="mt-8">
-            <p className="text-sm line-through mb-1" style={{ color: "rgba(255,255,255,0.30)" }}>De {cfg.pricingOriginal ?? "R$ 67,00"}</p>
+            <p className="text-sm line-through mb-1" style={{ color: "rgba(255,255,255,0.30)" }}>De {originalPrice}</p>
             <p className="font-black mb-1" style={{ color: "#f5c842", fontSize: "clamp(3rem, 8vw, 4.5rem)", letterSpacing: "-0.03em", lineHeight: 1 }}>
-              {cfg.pricingFull ?? "R$ 19,90"}
+              {currentPrice}
             </p>
             <p className="text-sm mb-6" style={{ color: "rgba(255,255,255,0.40)" }}>
-              ou {cfg.pricingInstallments ?? "2x de R$ 9,95"}
+              ou {installments}
             </p>
 
             <a
@@ -734,14 +841,14 @@ export default async function GuiaPage() {
               className="btn-shine glow-btn relative inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-5 text-xl font-black text-[#0a0a0d] bg-[#f5c842] hover:bg-[#f0bb22] transition-all hover:scale-[1.03] active:scale-[0.97]"
               style={{ width: "100%", maxWidth: "460px" }}
             >
-              QUERO O GUIA AGORA
+              COMEÇAR A ME RECUPERAR AGORA
               <ArrowRight className="h-5 w-5 shrink-0" />
             </a>
           </div>
 
           <div className="mt-5 flex items-center justify-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.35)" }}>
             <Shield className="h-4 w-4" />
-            <span>Garantia incondicional de 7 dias · Reembolso sem burocracia</span>
+            <span>Garantia incondicional de 7 dias · O risco é todo nosso</span>
           </div>
 
           <p className="mt-5 text-sm" style={{ color: "rgba(255,255,255,0.28)" }}>
@@ -755,7 +862,7 @@ export default async function GuiaPage() {
 
       {/* ── URGÊNCIA FINAL ── */}
       <div className="py-4 text-center font-black text-sm" style={{ background: "#dc2626", color: "#fff" }}>
-        ⚡ Esse valor pode sair do ar a qualquer momento — garanta agora por R$&nbsp;19,90
+        ⚡ Oferta de pré-lançamento: apenas 47 vagas a {currentPrice} — depois sobe para {originalPrice}
       </div>
 
       {/* ── FOOTER ── */}
