@@ -147,17 +147,18 @@ export default async function GuiaPage() {
     ? (sanityStats as Array<{ value: string; label: string; sub: string }>)
     : trustStats
 
-  const forWhoIsFor = (sanityForWho as Array<{ type: string; text: string }>).filter((i) => i.type === "is_for").map((i) => i.text)
-  const forWhoIsNotFor = (sanityForWho as Array<{ type: string; text: string }>).filter((i) => i.type === "is_not_for").map((i) => i.text)
+  const sanityForWhoItems = sanityForWho as Array<{ _id: string; text: string }>
 
-  const activeForWhoIsFor = forWhoIsFor.length > 0 ? forWhoIsFor : [
-    "Você tem diagnóstico de hérnia L4-L5 ou L5-S1",
-    "Sente dor que desce pela perna (nervo ciático)",
-    "Já fez fisioterapia sem resultado consistente",
-    "Quer entender o que está acontecendo na sua coluna",
-    "Tem 10–15 minutos por dia para dedicar à sua recuperação",
-  ]
-  const activeForWhoIsNotFor = forWhoIsNotFor.length > 0 ? forWhoIsNotFor : [
+  const activeForWhoIsFor = sanityForWhoItems.length > 0
+    ? sanityForWhoItems.map((i) => i.text)
+    : [
+        "Você tem diagnóstico de hérnia L4-L5 ou L5-S1",
+        "Sente dor que desce pela perna (nervo ciático)",
+        "Já fez fisioterapia sem resultado consistente",
+        "Quer entender o que está acontecendo na sua coluna",
+        "Tem 10–15 minutos por dia para dedicar à sua recuperação",
+      ]
+  const activeForWhoIsNotFor = [
     "Você tem indicação cirúrgica confirmada por médico",
     "Está em fase aguda com déficit motor severo (não consegue mover a perna)",
     "Busca fórmula mágica sem compromisso nenhum",
