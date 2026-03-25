@@ -81,7 +81,7 @@ const trustStats = [
 // Depoimentos fixos do hero — mensagens reais fornecidas pelo Dr. Guilherme
 const HERO_TESTIMONIALS = [
   { name: "Lucas S.", time: "21:12", text: "Minha dor descia da lombar pra perna direto, principalmente quando eu sentava. Depois que comecei a seguir o guia, melhorou uns 80%." },
-  { name: "Fernanda R.", time: "21:13", text: "Eu alongava achando que tava ajudando… e só piorava. Depois do guia entendi onde tava errando." },
+  { name: "Fernanda R.", time: "08:47", text: "Eu alongava achando que tava ajudando… e só piorava. Depois do guia entendi onde tava errando." },
 ]
 
 const testimonials = [
