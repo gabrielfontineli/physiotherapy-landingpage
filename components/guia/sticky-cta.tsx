@@ -31,7 +31,7 @@ export function StickyCta() {
         <div className="min-w-0">
           <p className="text-xs font-semibold text-white truncate">Guia Hérnia de Disco</p>
           <div className="flex items-baseline gap-1.5">
-            <span className="text-xs text-white/30 line-through">R$ 67,00</span>
+            <span className="text-xs text-white/30 line-through">R$ 47,00</span>
             <span className="text-base font-bold text-[#f5c842]">R$ 19,90</span>
           </div>
         </div>
