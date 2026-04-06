@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { AlertTriangle, CheckCircle2, ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { WHATSAPP_BASE } from "@/lib/config"
+import { track } from "@/lib/analytics"
 
 const WA_BASE = WHATSAPP_BASE
 
@@ -97,6 +98,10 @@ export function TriageFormSection() {
   const goTo = (s: Step) => setTimeout(() => setStep(s), 140)
 
   const handleSimple = (q: number, opt: string) => {
+    if (q === 1) {
+      track("triage_start")
+    }
+    track("triage_step_complete", { step: q })
     setAnswers((prev) => ({ ...prev, [q]: opt }))
     goTo((q + 1) as Step)
   }
@@ -121,12 +126,15 @@ export function TriageFormSection() {
       setAnswers((prev) => ({ ...prev, 6: alertFlags.join(", ") }))
       setStep("alert")
     } else {
+      track("triage_step_complete", { step: 6 })
       setAnswers((prev) => ({ ...prev, 6: t("dNone") }))
       setStep(7)
     }
   }
 
   const handleFinal = (opt: string) => {
+    track("triage_step_complete", { step: 7 })
+    track("triage_complete")
     setAnswers((prev) => ({ ...prev, 7: opt }))
     goTo("done")
   }
@@ -348,7 +356,12 @@ export function TriageFormSection() {
               size="lg"
               className="btn-glow-green mt-8 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold h-14 px-8"
             >
-              <a href={buildWaUrl(answers)} target="_blank" rel="noopener noreferrer">
+              <a
+                href={buildWaUrl(answers)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("whatsapp_click", { location: "triage_done" })}
+              >
                 <span className="btn-shine" aria-hidden="true" />
                 {WA_ICON}
                 {t("doneCta")}
