@@ -2,15 +2,6 @@
 
 import { useEffect } from "react"
 
-declare global {
-  interface Window {
-    fbq?: (...args: unknown[]) => void
-    ttq?: {
-      track: (event: string, params?: Record<string, unknown>) => void
-      page: () => void
-    }
-  }
-}
 
 /** Fires ViewContent on Meta + TikTok when the guia page loads */
 export function PixelViewContent() {

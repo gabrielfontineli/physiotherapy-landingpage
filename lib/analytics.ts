@@ -1,7 +1,7 @@
 declare global {
   interface Window {
     gtag?: (command: string, ...args: unknown[]) => void
-    fbq?: (...args: unknown[]) => void
+    fbq?: (action: string, event: string, params?: Record<string, unknown>) => void
     ttq?: {
       track: (event: string, params?: Record<string, unknown>) => void
       page: () => void
@@ -22,12 +22,12 @@ const EVENT_MAP: Record<string, PixelMapping> = {
     meta: { action: "track", name: "Contact" },
     tiktok: "Contact",
   },
-  triage_cta_click: {},
+  triage_cta_click: {}, // GA4 only — no standard Meta/TikTok event
   triage_start: {
     meta: { action: "track", name: "Lead" },
     tiktok: "Subscribe",
   },
-  triage_step_complete: {},
+  triage_step_complete: {}, // GA4 only — granular funnel step, no pixel equivalent
   triage_complete: {
     ga4Name: "generate_lead",
     meta: { action: "track", name: "CompleteRegistration" },
