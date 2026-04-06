@@ -10,6 +10,7 @@ import { LocationSection } from "@/components/location-section"
 import { FinalCtaSection } from "@/components/final-cta-section"
 import { Footer } from "@/components/footer"
 import { WhatsAppFab } from "@/components/whatsapp-fab"
+import { MainEngagementTracker } from "@/components/main-engagement-tracker"
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
       </main>
       <Footer />
       <WhatsAppFab />
+      <MainEngagementTracker />
     </>
   )
 }
