@@ -1,15 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-
-function track(event: string, params?: Record<string, unknown>) {
-  window.fbq?.("track", event, params)
-  window.ttq?.track(event, params)
-}
-function trackCustom(event: string, params?: Record<string, unknown>) {
-  window.fbq?.("trackCustom", event, params)
-  window.ttq?.track(event, params) // TikTok trata tudo como track
-}
+import { track } from "@/lib/analytics"
 
 export function GuiaEngagementTracker() {
   const firedDepths = useRef(new Set<number>())
@@ -28,11 +20,11 @@ export function GuiaEngagementTracker() {
       for (const milestone of depthMilestones) {
         if (pct >= milestone && !firedDepths.current.has(milestone)) {
           firedDepths.current.add(milestone)
-          trackCustom("ScrollDepth", { depth: milestone, page: "guia" })
+          track("scroll_depth", { depth: milestone, page: "guia" })
 
-          // 75%+ scroll = alta intenção → dispara AddToCart como proxy
+          // 75%+ scroll = alta intenção → AddToCart como proxy
           if (milestone === 75) {
-            track("AddToCart", {
+            track("add_to_cart", {
               content_name: "Guia Hérnia de Disco",
               content_type: "product",
               value: 19.9,
@@ -65,7 +57,7 @@ export function GuiaEngagementTracker() {
             const sectionName = sectionMap[id]
             if (sectionName && !firedSections.current.has(id)) {
               firedSections.current.add(id)
-              trackCustom("SectionView", { section: sectionName, page: "guia" })
+              track("section_view", { section: sectionName, page: "guia" })
             }
           }
         }
