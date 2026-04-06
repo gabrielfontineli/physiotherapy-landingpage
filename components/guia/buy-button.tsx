@@ -2,6 +2,7 @@
 
 import { BookOpen, ArrowRight } from "lucide-react"
 import { HOTMART_URL } from "@/lib/config"
+import { track } from "@/lib/analytics"
 
 interface BuyButtonProps {
   label?: string
@@ -11,14 +12,8 @@ interface BuyButtonProps {
 
 export function BuyButton({ label = "Quero o Guia Agora", large = true, className }: BuyButtonProps) {
   function handleClick() {
-    window.fbq?.("track", "InitiateCheckout", {
+    track("buy_click", {
       content_name: "Guia Hérnia de Disco",
-      value: 19.90,
-      currency: "BRL",
-    })
-    window.ttq?.track("InitiateCheckout", {
-      content_name: "Guia Hérnia de Disco",
-      content_type: "product",
       value: 19.90,
       currency: "BRL",
     })
