@@ -1,22 +1,16 @@
 "use client"
 
 import { useEffect } from "react"
+import { track } from "@/lib/analytics"
 
-
-/** Fires ViewContent on Meta + TikTok when the guia page loads */
+/** Fires view_content on the guia page load (GTM routes to Meta + TikTok) */
 export function PixelViewContent() {
   useEffect(() => {
-    window.fbq?.("track", "ViewContent", {
+    track("view_content", {
       content_name: "Guia Hérnia de Disco",
       content_category: "guia_digital",
-      value: 19.90,
-      currency: "BRL",
-    })
-
-    window.ttq?.track("ViewContent", {
-      content_name: "Guia Hérnia de Disco",
       content_type: "product",
-      value: 19.90,
+      value: 19.9,
       currency: "BRL",
     })
   }, [])

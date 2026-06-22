@@ -3,6 +3,7 @@
 import { useState, useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import { HOTMART_URL } from "@/lib/config"
+import { track } from "@/lib/analytics"
 
 const symptoms = [
   "Acordo com dor nas costas todo dia",
@@ -24,14 +25,12 @@ export function SymptomChecklist() {
 
       if (next.size >= 2 && !leadFired.current) {
         leadFired.current = true
-        const leadParams = {
+        track("checklist_lead", {
           content_name: "Guia Hérnia de Disco — Checklist",
           content_category: "guia",
           value: 19.9,
           currency: "BRL",
-        }
-        window.fbq?.("track", "Lead", leadParams)
-        window.ttq?.track("SubmitForm", leadParams)
+        })
       }
 
       return next
