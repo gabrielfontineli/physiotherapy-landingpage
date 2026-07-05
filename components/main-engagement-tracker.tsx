@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import { track } from "@/lib/analytics"
 
-export function MainEngagementTracker() {
+export function MainEngagementTracker({ page = "main" }: { page?: string }) {
   const firedDepths = useRef(new Set<number>())
 
   useEffect(() => {
@@ -18,14 +18,14 @@ export function MainEngagementTracker() {
       for (const milestone of depthMilestones) {
         if (pct >= milestone && !firedDepths.current.has(milestone)) {
           firedDepths.current.add(milestone)
-          track("scroll_depth", { depth: milestone, page: "main" })
+          track("scroll_depth", { depth: milestone, page })
         }
       }
     }
 
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  }, [page])
 
   return null
 }

@@ -1,0 +1,54 @@
+/* Paleta Noir escopada à página /quiropraxia — não usa tokens globais */
+.quiro {
+  --q-bg: #101114;
+  --q-bg-alt: #17181c;
+  --q-card: #1b1d21;
+  --q-card2: #1f2126;
+  --q-border: #26282d;
+  --q-bone: #f4efe6;
+  --q-bone-border: #e0d8c7;
+  --q-text: #f4efe8;
+  --q-muted: #a9a49c;
+  --q-ink: #221d17;
+  --q-ink-muted: #6b645c;
+  --q-copper: #c47f4e;
+  --q-terracotta: #b0512c;
+  background: var(--q-bg);
+  color: var(--q-text);
+}
+
+/* Reveal on scroll */
+.quiro .q-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.quiro .q-reveal.q-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Microinteração de card */
+.quiro .q-card-hover {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.quiro .q-card-hover:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--q-copper) 55%, transparent);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.35);
+}
+
+/* Ken Burns discreto no vídeo do hero (parallax-like) */
+@keyframes q-slow-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.quiro .q-hero-media {
+  animation: q-slow-zoom 24s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiro .q-reveal { opacity: 1; transform: none; transition: none; }
+  .quiro .q-hero-media { animation: none; }
+  .quiro .q-card-hover, .quiro .q-card-hover:hover { transform: none; transition: none; }
+}
