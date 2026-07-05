@@ -229,5 +229,200 @@
     "address1": "Rua João Pessoa, 198 - Sala 406",
     "address2": "Cidade Alta, Natal - RN",
     "copyright": "Todos os direitos reservados."
+  },
+  "quiro": {
+    "metadata": {
+      "title": "Quiropraxia em Natal/RN | Dr. Guilherme Carvalho — Coluna, Hérnia de Disco e Ciático",
+      "description": "Quiropraxia em Natal com fisioterapeuta especialista: quiropraxia, osteopatia, dry needling e terapia manual para dor lombar, hérnia de disco e nervo ciático. Agende sua avaliação."
+    },
+    "header": {
+      "nav": {
+        "conditions": "O que tratamos",
+        "techniques": "Técnicas",
+        "testimonials": "Depoimentos",
+        "faq": "Dúvidas",
+        "location": "Localização"
+      },
+      "cta": "Agendar"
+    },
+    "hero": {
+      "eyebrow": "Quiropraxia · Natal/RN",
+      "title": "Quiropraxia em Natal para dores na coluna, pescoço e nervo ciático",
+      "subtitle": "Tratamento personalizado utilizando Quiropraxia, Osteopatia, Dry Needling e Terapia Manual para aliviar a dor, restaurar os movimentos e melhorar sua qualidade de vida.",
+      "ctaWhatsapp": "Agendar pelo WhatsApp",
+      "ctaLocation": "Ver localização",
+      "ratingLabel": "Nota 5,0 no Google",
+      "ratingCount": "mais de 50 avaliações",
+      "credential": "CREFITO 1 318268-F",
+      "videoAria": "Vídeo de atendimentos na clínica: quiropraxia, dry needling e terapia manual"
+    },
+    "trust": {
+      "item1": "Atendimento Particular",
+      "item2": "Sessões Individualizadas",
+      "item3": "Avaliação Completa",
+      "item4": "Localização de Fácil Acesso",
+      "item5": "Atendimento Humanizado"
+    },
+    "breadcrumb": {
+      "home": "Início",
+      "current": "Quiropraxia em Natal"
+    },
+    "about": {
+      "tagline": "Sobre o profissional",
+      "title": "Conheça o Dr. Guilherme Carvalho",
+      "p1": "Fisioterapeuta especialista em terapia manual, com atuação dedicada ao tratamento de dores na coluna, hérnia de disco e nervo ciático em Natal/RN. Cada paciente recebe avaliação completa e um plano de tratamento individual — nada de protocolos genéricos.",
+      "p2": "A filosofia é simples: encontrar a origem da dor, tratá-la com as técnicas certas — quiropraxia, osteopatia, dry needling — e devolver o movimento com segurança, sem pressa e com acompanhamento próximo.",
+      "imageAlt": "Dr. Guilherme Carvalho, fisioterapeuta e quiropraxista em Natal/RN"
+    },
+    "conditions": {
+      "tagline": "O que tratamos",
+      "title": "Dores e condições que tratamos na clínica",
+      "subtitle": "Da dor aguda à limitação de movimento — tratamento com base em avaliação, não em achismo.",
+      "items": {
+        "hernia": "Hérnia de Disco",
+        "lombar": "Dor Lombar",
+        "cervical": "Dor Cervical",
+        "ciatico": "Nervo Ciático",
+        "pescoco": "Dor no Pescoço",
+        "escapulas": "Dor entre as Escápulas",
+        "ombro": "Dor no Ombro",
+        "quadril": "Dor no Quadril",
+        "atletas": "Recovery para Atletas",
+        "movimento": "Limitação de Movimento"
+      }
+    },
+    "techniques": {
+      "tagline": "Técnicas utilizadas",
+      "title": "Terapia manual de verdade, técnica por técnica",
+      "items": {
+        "quiropraxia": {
+          "name": "Quiropraxia",
+          "text": "Ajustes articulares precisos para restaurar o movimento da coluna e aliviar dores na lombar, no pescoço e na região torácica."
+        },
+        "osteopatia": {
+          "name": "Osteopatia",
+          "text": "Abordagem global do corpo: articulações, músculos e fáscias tratados em conjunto para resolver a causa da dor, não só o sintoma."
+        },
+        "dryNeedling": {
+          "name": "Dry Needling",
+          "text": "Agulhamento seco em pontos-gatilho para desativar contraturas musculares profundas e dores irradiadas."
+        },
+        "miofascial": {
+          "name": "Liberação Miofascial",
+          "text": "Técnicas manuais sobre a fáscia para reduzir tensão, melhorar circulação e devolver elasticidade ao tecido."
+        },
+        "ventosa": {
+          "name": "Ventosaterapia",
+          "text": "Sucção controlada que melhora o fluxo sanguíneo local e ajuda na recuperação muscular."
+        },
+        "neural": {
+          "name": "Mobilização Neural",
+          "text": "Movimentos específicos que liberam o deslizamento dos nervos — essencial em casos de ciático e formigamentos."
+        },
+        "exercicios": {
+          "name": "Exercícios Terapêuticos",
+          "text": "Exercícios prescritos de forma individual para estabilizar a coluna e evitar que a dor volte."
+        }
+      },
+      "imageAlt": "Aplicação de {name} no consultório em Natal"
+    },
+    "video": {
+      "tagline": "Vídeo institucional",
+      "title": "Como funciona o tratamento",
+      "p1": "Do primeiro contato à alta: avaliação completa, explicação clara do diagnóstico funcional e tratamento com as técnicas que fazem sentido para o seu caso.",
+      "p2": "Assista e conheça o consultório, o método de trabalho e o que esperar da sua primeira consulta de quiropraxia em Natal.",
+      "videoAria": "Vídeo institucional da clínica"
+    },
+    "steps": {
+      "tagline": "Como funciona a consulta",
+      "title": "Sua primeira consulta, passo a passo",
+      "s1": {
+        "title": "Avaliação completa",
+        "text": "Histórico, exame físico e testes de movimento para entender seu quadro por inteiro."
+      },
+      "s2": {
+        "title": "Identificação da origem da dor",
+        "text": "Não tratamos sintoma solto: localizamos a estrutura e o padrão que causam a dor."
+      },
+      "s3": {
+        "title": "Tratamento personalizado",
+        "text": "Quiropraxia, osteopatia, dry needling — as técnicas certas para o seu caso, já na primeira sessão."
+      },
+      "s4": {
+        "title": "Exercícios específicos",
+        "text": "Prescrição individual para fortalecer e estabilizar o que a avaliação apontou."
+      },
+      "s5": {
+        "title": "Plano de recuperação",
+        "text": "Número estimado de sessões, metas claras e reavaliações para medir a evolução."
+      }
+    },
+    "testimonials": {
+      "tagline": "Depoimentos",
+      "title": "Quem tratou, recomenda",
+      "subtitle": "Avaliações reais de pacientes no Google",
+      "googleLabel": "Avaliações do Google",
+      "seeAll": "Ver avaliações no Google",
+      "ratingStatic": "5,0"
+    },
+    "gallery": {
+      "tagline": "Galeria",
+      "title": "O consultório e os atendimentos",
+      "alt1": "Consultório de fisioterapia e quiropraxia em Natal",
+      "alt2": "Ajuste de quiropraxia na coluna",
+      "alt3": "Aplicação de dry needling",
+      "alt4": "Técnica de osteopatia",
+      "alt5": "Sessão de recovery para atletas",
+      "alt6": "Atendimento de terapia manual",
+      "alt7": "Sala de atendimento",
+      "alt8": "Exercícios terapêuticos orientados"
+    },
+    "faq": {
+      "tagline": "Perguntas frequentes",
+      "title": "Dúvidas comuns sobre quiropraxia",
+      "q1": "O tratamento dói?",
+      "a1": "Não. As técnicas são aplicadas com precisão e dentro do limite de conforto de cada paciente. Algumas pessoas sentem leve sensibilidade após a sessão, que passa em poucas horas.",
+      "q2": "Quiropraxia é segura?",
+      "a2": "Sim. Aplicada por fisioterapeuta habilitado, após avaliação completa, a quiropraxia é segura e tem indicações e contraindicações respeitadas caso a caso.",
+      "q3": "Quem pode fazer?",
+      "a3": "Adultos de todas as idades — de atletas a idosos. A avaliação inicial define se há alguma contraindicação e qual técnica é mais adequada para você.",
+      "q4": "Quanto tempo dura a consulta?",
+      "a4": "Em média 50 minutos a 1 hora, incluindo avaliação e tratamento já na primeira sessão.",
+      "q5": "Quantas sessões normalmente são necessárias?",
+      "a5": "Depende do caso. Quadros agudos costumam responder em poucas sessões; condições crônicas pedem um plano um pouco mais longo. Você recebe uma estimativa clara na avaliação.",
+      "q6": "Vocês tratam hérnia de disco?",
+      "a6": "Sim. Hérnia de disco é uma das condições mais frequentes no consultório, tratada com terapia manual, mobilização neural e exercícios específicos.",
+      "q7": "Tratam nervo ciático?",
+      "a7": "Sim. Dor ciática responde muito bem à combinação de quiropraxia, mobilização neural e dry needling, conforme a origem identificada na avaliação.",
+      "q8": "Aceitam plano de saúde?",
+      "a8": "O atendimento é particular, o que garante sessões individuais e tempo integral dedicado ao seu caso. Fornecemos recibo para reembolso junto ao seu plano."
+    },
+    "finalCta": {
+      "title": "Está procurando Quiropraxia em Natal?",
+      "text": "Agende sua avaliação presencial e descubra qual é a melhor estratégia para tratar sua dor.",
+      "cta": "Agendar avaliação pelo WhatsApp"
+    },
+    "location": {
+      "tagline": "Localização",
+      "title": "Fácil de chegar, no centro de Natal",
+      "addressLabel": "Endereço",
+      "addressLine1": "Rua João Pessoa, 198 — Edifício Canaçu, Sala 406",
+      "addressLine2": "Cidade Alta, Natal/RN",
+      "addressNote": "(vizinho à Caixa Econômica Federal)",
+      "hoursLabel": "Horário de atendimento",
+      "hoursText": "Segunda a sexta, com hora marcada.",
+      "hoursText2": "Agende pelo WhatsApp.",
+      "directions": "Como chegar",
+      "mapTitle": "Mapa — consultório na Cidade Alta, Natal/RN"
+    },
+    "footer": {
+      "role": "Fisioterapeuta · Quiropraxia · Osteopatia",
+      "contactLabel": "Contato",
+      "whatsapp": "WhatsApp",
+      "linksLabel": "Links rápidos",
+      "credential": "CREFITO 1 318268-F",
+      "copyright": "Todos os direitos reservados.",
+      "backHome": "Página inicial"
+    }
   }
 }

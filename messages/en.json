@@ -229,5 +229,200 @@
     "address1": "Rua João Pessoa, 198 - Suite 406",
     "address2": "Cidade Alta, Natal - RN, Brazil",
     "copyright": "All rights reserved."
+  },
+  "quiro": {
+    "metadata": {
+      "title": "Chiropractic Care in Natal, Brazil | Dr. Guilherme Carvalho — Spine, Disc Herniation & Sciatica",
+      "description": "Chiropractic care in Natal with a specialist physiotherapist: chiropractic, osteopathy, dry needling and manual therapy for low back pain, disc herniation and sciatica. Book your assessment."
+    },
+    "header": {
+      "nav": {
+        "conditions": "What we treat",
+        "techniques": "Techniques",
+        "testimonials": "Reviews",
+        "faq": "FAQ",
+        "location": "Location"
+      },
+      "cta": "Book now"
+    },
+    "hero": {
+      "eyebrow": "Chiropractic · Natal, Brazil",
+      "title": "Chiropractic care in Natal for spine, neck and sciatic nerve pain",
+      "subtitle": "Personalized treatment combining Chiropractic, Osteopathy, Dry Needling and Manual Therapy to relieve pain, restore movement and improve your quality of life.",
+      "ctaWhatsapp": "Book via WhatsApp",
+      "ctaLocation": "See location",
+      "ratingLabel": "5.0 rating on Google",
+      "ratingCount": "over 50 reviews",
+      "credential": "CREFITO 1 318268-F",
+      "videoAria": "Video of treatments at the clinic: chiropractic, dry needling and manual therapy"
+    },
+    "trust": {
+      "item1": "Private Practice",
+      "item2": "One-on-One Sessions",
+      "item3": "Thorough Assessment",
+      "item4": "Easy-to-Reach Location",
+      "item5": "Humanized Care"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Chiropractic in Natal"
+    },
+    "about": {
+      "tagline": "About the professional",
+      "title": "Meet Dr. Guilherme Carvalho",
+      "p1": "Physiotherapist specializing in manual therapy, dedicated to treating spine pain, disc herniation and sciatica in Natal, Brazil. Every patient gets a thorough assessment and an individual treatment plan — no generic protocols.",
+      "p2": "The philosophy is simple: find the source of the pain, treat it with the right techniques — chiropractic, osteopathy, dry needling — and restore movement safely, with close follow-up.",
+      "imageAlt": "Dr. Guilherme Carvalho, physiotherapist and chiropractic practitioner in Natal, Brazil"
+    },
+    "conditions": {
+      "tagline": "What we treat",
+      "title": "Pain and conditions we treat at the clinic",
+      "subtitle": "From acute pain to restricted movement — treatment based on assessment, not guesswork.",
+      "items": {
+        "hernia": "Disc Herniation",
+        "lombar": "Low Back Pain",
+        "cervical": "Cervical Pain",
+        "ciatico": "Sciatic Nerve",
+        "pescoco": "Neck Pain",
+        "escapulas": "Pain Between Shoulder Blades",
+        "ombro": "Shoulder Pain",
+        "quadril": "Hip Pain",
+        "atletas": "Athlete Recovery",
+        "movimento": "Restricted Movement"
+      }
+    },
+    "techniques": {
+      "tagline": "Techniques we use",
+      "title": "Real manual therapy, technique by technique",
+      "items": {
+        "quiropraxia": {
+          "name": "Chiropractic",
+          "text": "Precise joint adjustments to restore spinal movement and relieve low back, neck and thoracic pain."
+        },
+        "osteopatia": {
+          "name": "Osteopathy",
+          "text": "A whole-body approach: joints, muscles and fascia treated together to solve the cause of pain, not just the symptom."
+        },
+        "dryNeedling": {
+          "name": "Dry Needling",
+          "text": "Dry needling of trigger points to release deep muscle contractures and radiating pain."
+        },
+        "miofascial": {
+          "name": "Myofascial Release",
+          "text": "Hands-on fascia techniques to reduce tension, improve circulation and restore tissue elasticity."
+        },
+        "ventosa": {
+          "name": "Cupping Therapy",
+          "text": "Controlled suction that improves local blood flow and supports muscle recovery."
+        },
+        "neural": {
+          "name": "Neural Mobilization",
+          "text": "Specific movements that free nerve gliding — essential for sciatica and tingling."
+        },
+        "exercicios": {
+          "name": "Therapeutic Exercise",
+          "text": "Individually prescribed exercises to stabilize the spine and keep pain from coming back."
+        }
+      },
+      "imageAlt": "{name} being applied at the clinic in Natal"
+    },
+    "video": {
+      "tagline": "Inside the clinic",
+      "title": "How treatment works",
+      "p1": "From first contact to discharge: thorough assessment, a clear explanation of your functional diagnosis, and treatment with the techniques that make sense for your case.",
+      "p2": "Watch to see the clinic, the working method and what to expect from your first chiropractic visit in Natal.",
+      "videoAria": "Clinic institutional video"
+    },
+    "steps": {
+      "tagline": "How the visit works",
+      "title": "Your first visit, step by step",
+      "s1": {
+        "title": "Thorough assessment",
+        "text": "History, physical exam and movement tests to fully understand your condition."
+      },
+      "s2": {
+        "title": "Finding the source of pain",
+        "text": "We don't chase loose symptoms: we locate the structure and pattern causing the pain."
+      },
+      "s3": {
+        "title": "Personalized treatment",
+        "text": "Chiropractic, osteopathy, dry needling — the right techniques for your case, starting at the first session."
+      },
+      "s4": {
+        "title": "Specific exercises",
+        "text": "Individual prescription to strengthen and stabilize what the assessment revealed."
+      },
+      "s5": {
+        "title": "Recovery plan",
+        "text": "Estimated number of sessions, clear goals and reassessments to track progress."
+      }
+    },
+    "testimonials": {
+      "tagline": "Reviews",
+      "title": "Patients recommend it",
+      "subtitle": "Real patient reviews on Google",
+      "googleLabel": "Google reviews",
+      "seeAll": "See reviews on Google",
+      "ratingStatic": "5.0"
+    },
+    "gallery": {
+      "tagline": "Gallery",
+      "title": "The clinic and the care",
+      "alt1": "Physiotherapy and chiropractic clinic in Natal",
+      "alt2": "Chiropractic spinal adjustment",
+      "alt3": "Dry needling application",
+      "alt4": "Osteopathy technique",
+      "alt5": "Athlete recovery session",
+      "alt6": "Manual therapy session",
+      "alt7": "Treatment room",
+      "alt8": "Guided therapeutic exercise"
+    },
+    "faq": {
+      "tagline": "Frequently asked questions",
+      "title": "Common questions about chiropractic care",
+      "q1": "Does the treatment hurt?",
+      "a1": "No. Techniques are applied precisely and within each patient's comfort limit. Some people feel mild soreness after the session, which fades within hours.",
+      "q2": "Is chiropractic safe?",
+      "a2": "Yes. Performed by a licensed physiotherapist after a thorough assessment, chiropractic care is safe, with indications and contraindications respected case by case.",
+      "q3": "Who can be treated?",
+      "a3": "Adults of all ages — from athletes to seniors. The initial assessment rules out contraindications and defines the best technique for you.",
+      "q4": "How long does a visit take?",
+      "a4": "On average 50 minutes to 1 hour, including assessment and treatment at the first session.",
+      "q5": "How many sessions are usually needed?",
+      "a5": "It depends on the case. Acute conditions often respond within a few sessions; chronic ones need a slightly longer plan. You get a clear estimate at the assessment.",
+      "q6": "Do you treat disc herniation?",
+      "a6": "Yes. Disc herniation is one of the most frequent conditions at the clinic, treated with manual therapy, neural mobilization and specific exercises.",
+      "q7": "Do you treat sciatica?",
+      "a7": "Yes. Sciatic pain responds very well to the combination of chiropractic, neural mobilization and dry needling, depending on the source found at the assessment.",
+      "q8": "Do you accept health insurance?",
+      "a8": "Care is private, which guarantees one-on-one sessions fully dedicated to your case. We provide receipts for reimbursement with your insurance plan."
+    },
+    "finalCta": {
+      "title": "Looking for chiropractic care in Natal?",
+      "text": "Book your in-person assessment and find out the best strategy to treat your pain.",
+      "cta": "Book an assessment via WhatsApp"
+    },
+    "location": {
+      "tagline": "Location",
+      "title": "Easy to reach, in downtown Natal",
+      "addressLabel": "Address",
+      "addressLine1": "Rua João Pessoa, 198 — Edifício Canaçu, Suite 406",
+      "addressLine2": "Cidade Alta, Natal, Brazil",
+      "addressNote": "(next to Caixa Econômica Federal)",
+      "hoursLabel": "Opening hours",
+      "hoursText": "Monday to Friday, by appointment.",
+      "hoursText2": "Book via WhatsApp.",
+      "directions": "Get directions",
+      "mapTitle": "Map — clinic in Cidade Alta, Natal, Brazil"
+    },
+    "footer": {
+      "role": "Physiotherapist · Chiropractic · Osteopathy",
+      "contactLabel": "Contact",
+      "whatsapp": "WhatsApp",
+      "linksLabel": "Quick links",
+      "credential": "CREFITO 1 318268-F",
+      "copyright": "All rights reserved.",
+      "backHome": "Home page"
+    }
   }
 }

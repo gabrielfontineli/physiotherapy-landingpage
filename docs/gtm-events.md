@@ -23,13 +23,13 @@ Código: `lib/analytics.ts` → `track(event, params)` faz `dataLayer.push({ eve
 
 | Evento (dataLayer) | Onde dispara | Params | Mapeamento sugerido (GA4 / Meta / TikTok) |
 |---|---|---|---|
-| `whatsapp_click` | botões WhatsApp (hero, fab, final, triagem) | `location` | — / `Contact` / `Contact` |
+| `whatsapp_click` | botões WhatsApp (hero, fab, final, triagem); página `/quiropraxia` (header, hero, final_cta, footer) | `location`, `page` (em /quiropraxia) | — / `Contact` / `Contact` |
 | `triage_cta_click` | CTA abrir triagem | `location` | só GA4 |
 | `triage_start` | início do formulário de triagem | — | — / `Lead` / `Subscribe` |
 | `triage_step_complete` | cada passo da triagem | `step` | só GA4 (funil granular) |
 | `triage_complete` | triagem finalizada | — | `generate_lead` / `CompleteRegistration` / `CompleteRegistration` |
-| `scroll_depth` | marcos de scroll | `depth` (25/50/75/100), `page` | — / `ScrollDepth` (custom) / `ScrollDepth` |
-| `section_view` | seção entra na tela (guia) | `section`, `page` | — / `SectionView` (custom) / `SectionView` |
+| `scroll_depth` | marcos de scroll | `depth` (25/50/75/100), `page` (`main` \| `guia` \| `quiropraxia`) | — / `ScrollDepth` (custom) / `ScrollDepth` |
+| `section_view` | seção entra na tela (guia, /quiropraxia) | `section`, `page` (`guia` \| `quiropraxia`) | — / `SectionView` (custom) / `SectionView` |
 | `add_to_cart` | scroll 75% na guia (proxy alta intenção) | `content_name`, `content_type`, `value`, `currency` | — / `AddToCart` / `AddToCart` |
 | `view_content` | carga da página da guia | `content_name`, `content_category`, `content_type`, `value`, `currency` | — / `ViewContent` / `ViewContent` |
 | `checklist_lead` | 2+ sintomas marcados no checklist | `content_name`, `content_category`, `value`, `currency` | — / `Lead` / `SubmitForm` |

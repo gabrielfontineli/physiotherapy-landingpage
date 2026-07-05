@@ -10,3 +10,10 @@ export const WHATSAPP_GUIDE_URL = `${WHATSAPP_BASE}${encodeURIComponent(
 )}`
 
 export const HOTMART_URL = "https://pay.hotmart.com/D104423178L"
+
+export const WHATSAPP_QUIRO_URL = `${WHATSAPP_BASE}${encodeURIComponent(
+  "Olá, Dr. Guilherme! Vim pela página de Quiropraxia e gostaria de agendar uma avaliação."
+)}`
+
+// ponytail: vazio até Guilherme confirmar handle — UI esconde ícone quando vazio
+export const INSTAGRAM_URL = ""
