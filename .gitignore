@@ -15,3 +15,20 @@ node_modules/
 
 # Generated
 next-env.d.ts
+*.tsbuildinfo
+.superpowers/
+
+# Local assets / briefing
+*.MOV
+*.mov
+briefing*
+
+# Tooling
+.leankg/
+leankg.yaml
+
+# Local docs / specs (WIP)
+docs/superpowers/
+
+# Alternative LP (WIP)
+public/alt.html
