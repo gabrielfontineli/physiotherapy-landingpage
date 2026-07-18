@@ -34,12 +34,14 @@ app/
     layout.tsx        # fonts, metadata, JSON-LD, GTM, providers (i18n + theme)
     page.tsx          # composição da landing principal (ordem das seções)
     guia/page.tsx     # página de venda do e-book (identidade dark + gold)
+    quiropraxia/page.tsx # landing de quiropraxia (metadata + JSON-LD próprios)
   api/reviews/route.ts # Google Places reviews (server)
   studio/             # Sanity Studio embarcado (/studio)
   globals.css         # tokens de cor CSS (OKLch), --primary, --accent, fonts
 components/
   *.tsx               # seções da landing (1 arquivo por seção)
   guia/*.tsx          # componentes da página /guia
+  quiropraxia/*.tsx   # componentes da página /quiropraxia (paleta própria em quiro.css)
   ui/*.tsx            # shadcn/ui — NÃO editar à toa, são primitivos
 lib/
   config.ts           # links WhatsApp + Hotmart (FONTE ÚNICA)
@@ -100,17 +102,20 @@ O site **não** dispara GA4/Meta/TikTok direto. Só empurra eventos semânticos 
 plataforma no painel. Catálogo completo de eventos: `docs/gtm-events.md`. Não
 duplicar PageView.
 
-## Env vars (`.env.local`)
+## Env vars
 
-```
-GOOGLE_PLACES_API_KEY        # reviews
-GOOGLE_PLACE_ID
-NEXT_PUBLIC_SANITY_PROJECT_ID
-NEXT_PUBLIC_SANITY_DATASET
-NEXT_PUBLIC_GTM_ID
-NEXT_PUBLIC_META_PIXEL_ID
-NEXT_PUBLIC_GA_MEASUREMENT_ID
-```
+Template documentado: `.env.example` (copiar pra `.env.local`). **Todas
+opcionais** — o site roda sem nenhuma (reviews caem no fallback embutido,
+Sanity/GTM não carregam). Não tratar env var ausente como erro.
+
+## Troubleshooting local
+
+- `[reviews] REQUEST_DENIED` no log do dev → billing desativado no projeto
+  Google Cloud (ou Places API não habilitada). **Não é bug** — site usa
+  fallback. Fix é no console do Google, não no código.
+- Porta 3000 ocupada / `Unable to acquire lock at .next/dev/lock` → dev
+  server zumbi: `lsof -nP -iTCP:3000 -sTCP:LISTEN`, `kill <pid>`,
+  `rm -f .next/dev/lock`.
 
 ## Gotchas
 
