@@ -8,12 +8,11 @@ export async function InstitutionalVideo() {
     <section className="bg-[var(--q-bone)] py-16 md:py-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
         <Reveal section="institutional_video">
-          {/* ponytail: placeholder = cópia do hero.mp4; trocar arquivo quando vídeo real chegar */}
           <video
-            className="aspect-video w-full rounded-2xl border border-[var(--q-bone-border)] bg-[var(--q-ink)] object-cover"
+            className="mx-auto aspect-[9/16] w-full max-w-sm rounded-2xl border border-[var(--q-bone-border)] bg-[var(--q-ink)] object-cover"
             controls
             preload="none"
-            poster="/quiropraxia/hero-poster.webp"
+            poster="/quiropraxia/video-institucional-poster.webp"
             aria-label={t("videoAria")}
           >
             <source src="/quiropraxia/video-institucional.mp4" type="video/mp4" />

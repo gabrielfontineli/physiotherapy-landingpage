@@ -114,12 +114,12 @@ export default async function QuiropraxiaPage() {
       <QuiroHeader />
       <main>
         <QuiroHero />
+        <InstitutionalVideo />
         <TrustBar />
         <QuiroBreadcrumb />
         <QuiroAbout />
         <ConditionsGrid />
         <TechniquesSection />
-        <InstitutionalVideo />
         <ConsultSteps />
         <QuiroTestimonials />
         <QuiroGallery />
