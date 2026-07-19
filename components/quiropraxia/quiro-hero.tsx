@@ -9,7 +9,19 @@ export async function QuiroHero() {
     <section className="relative flex min-h-[100svh] items-start overflow-hidden md:items-center">
       <div className="absolute inset-0 z-0">
         <video
-          className="q-hero-media h-full w-full object-cover object-center md:object-[75%_center]"
+          className="q-hero-media h-full w-full object-cover object-center md:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/quiropraxia/hero-mobile-poster.webp"
+          aria-label={t("videoAria")}
+        >
+          <source src="/quiropraxia/hero-mobile.mp4" type="video/mp4" />
+        </video>
+        <video
+          className="q-hero-media hidden h-full w-full object-cover object-[75%_center] md:block"
           autoPlay
           muted
           loop
