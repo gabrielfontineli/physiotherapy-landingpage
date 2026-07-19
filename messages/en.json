@@ -425,7 +425,9 @@
       "q7": "Do you treat sciatica?",
       "a7": "Yes. Sciatic pain responds very well to the combination of chiropractic, neural mobilization and dry needling, depending on the source found at the assessment.",
       "q8": "Do you accept health insurance?",
-      "a8": "Care is private, which guarantees one-on-one sessions fully dedicated to your case. We provide receipts for reimbursement with your insurance plan."
+      "a8": "Care is private, which guarantees one-on-one sessions fully dedicated to your case. We provide receipts for reimbursement with your insurance plan.",
+      "q9": "How much does the visit cost?",
+      "a9": "The price is shared on WhatsApp based on your assessment. We split payment on card and provide receipts for health-insurance reimbursement."
     },
     "finalCta": {
       "title": "Looking for chiropractic care in Natal?",

@@ -14,7 +14,7 @@ export async function QuiroAbout() {
               src="/quiropraxia/dr-guilherme.webp"
               alt={t("imageAlt")}
               fill
-              sizes="(max-width: 1024px) 100vw, 40vw"
+              sizes="(max-width: 1024px) 100vw, 450px"
               className="object-cover"
             />
           </div>

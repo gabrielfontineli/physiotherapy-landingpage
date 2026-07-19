@@ -4,7 +4,6 @@ import { QuiroHeader } from "@/components/quiropraxia/quiro-header"
 import { QuiroHero } from "@/components/quiropraxia/quiro-hero"
 import { TrustBar } from "@/components/quiropraxia/trust-bar"
 import { QuiroStats } from "@/components/quiropraxia/quiro-stats"
-import { QuiroMarquee } from "@/components/quiropraxia/quiro-marquee"
 import { QuiroBreadcrumb } from "@/components/quiropraxia/quiro-breadcrumb"
 import { QuiroAbout } from "@/components/quiropraxia/quiro-about"
 import { ConditionsGrid } from "@/components/quiropraxia/conditions-grid"
@@ -12,7 +11,6 @@ import { TechniquesSection } from "@/components/quiropraxia/techniques-section"
 import { InstitutionalVideo } from "@/components/quiropraxia/institutional-video"
 import { ConsultSteps } from "@/components/quiropraxia/consult-steps"
 import { QuiroTestimonials } from "@/components/quiropraxia/quiro-testimonials"
-import { QuiroGallery } from "@/components/quiropraxia/quiro-gallery"
 import { QuiroFaq } from "@/components/quiropraxia/quiro-faq"
 import { QuiroFinalCta } from "@/components/quiropraxia/quiro-final-cta"
 import { QuiroLocation } from "@/components/quiropraxia/quiro-location"
@@ -91,7 +89,7 @@ export default async function QuiropraxiaPage() {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({
+      mainEntity: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => ({
         "@type": "Question",
         name: tFaq(`q${n}`),
         acceptedAnswer: { "@type": "Answer", text: tFaq(`a${n}`) },
@@ -122,11 +120,9 @@ export default async function QuiropraxiaPage() {
         <QuiroBreadcrumb />
         <QuiroAbout />
         <ConditionsGrid />
-        <QuiroMarquee />
         <TechniquesSection />
         <ConsultSteps />
         <QuiroTestimonials />
-        <QuiroGallery />
         <QuiroFaq />
         <QuiroFinalCta />
         <QuiroLocation />

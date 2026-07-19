@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Star, ExternalLink } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Reveal } from "@/components/quiropraxia/reveal"
+import { LazyVideo } from "@/components/quiropraxia/lazy-video"
 
 interface GoogleReview {
   author_name: string
@@ -13,7 +14,8 @@ interface GoogleReview {
 }
 
 // Depoimentos em vídeo (reels self-hosted). `captionKey` aponta pra quiro.testimonials.videos.
-// preload="none" garante que nenhum vídeo baixa até o clique — só o poster carrega.
+// Carrossel horizontal + LazyVideo: só o poster carrega (lazy), e o <video> só
+// monta no clique. Off-screen o browser nem baixa o poster.
 const VIDEO_TESTIMONIALS = Array.from({ length: 8 }, (_, i) => {
   const n = String(i + 1).padStart(2, "0")
   return {
@@ -61,18 +63,15 @@ export function QuiroTestimonials() {
                 {t("videoTitle")}
               </h3>
             </Reveal>
-            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:px-0">
               {VIDEO_TESTIMONIALS.map((v) => (
-                <figure key={v.src}>
-                  <video
-                    className="aspect-[9/16] w-full rounded-2xl border border-[var(--q-border)] bg-[var(--q-ink)] object-cover"
-                    controls
-                    preload="none"
+                <figure key={v.src} className="w-[62%] shrink-0 snap-start sm:w-[38%] lg:w-[23%]">
+                  <LazyVideo
+                    src={v.src}
                     poster={v.poster}
-                    aria-label={t("videoAria")}
-                  >
-                    <source src={v.src} type="video/mp4" />
-                  </video>
+                    ariaLabel={t("videoAria")}
+                    className="aspect-[9/16] w-full rounded-2xl border border-[var(--q-border)] bg-[var(--q-ink)]"
+                  />
                   <figcaption className="mt-2 px-1 text-xs leading-snug text-[var(--q-muted)] text-balance">
                     {t(v.captionKey)}
                   </figcaption>

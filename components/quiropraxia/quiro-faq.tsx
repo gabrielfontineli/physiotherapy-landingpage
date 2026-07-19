@@ -2,7 +2,7 @@ import { Plus } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { Reveal } from "@/components/quiropraxia/reveal"
 
-const questions = [1, 2, 3, 4, 5, 6, 7, 8] as const
+const questions = [1, 2, 3, 4, 5, 6, 7, 8, 9] as const
 
 export async function QuiroFaq() {
   const t = await getTranslations("quiro.faq")

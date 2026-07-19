@@ -27,7 +27,7 @@ export async function TechniquesSection() {
           </h2>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-5 lg:grid-cols-3">
           {techniques.map(([key, img], i) => (
             <Reveal key={key} delay={(i % 3) * 80}>
               <article className="q-card-hover h-full overflow-hidden rounded-2xl border border-[var(--q-border)] bg-[var(--q-card)]">
@@ -36,15 +36,15 @@ export async function TechniquesSection() {
                     src={`/quiropraxia/${img}`}
                     alt={t("imageAlt", { name: t(`items.${key}.name`) })}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes="(max-width: 1024px) 50vw, 400px"
                     className="object-cover"
                   />
                 </div>
-                <div className="p-5">
-                  <h3 className="font-serif text-lg font-bold text-[var(--q-text)]">
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-serif text-base font-bold text-[var(--q-text)] sm:text-lg">
                     {t(`items.${key}.name`)}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--q-muted)]">
+                  <p className="mt-1.5 text-xs leading-relaxed text-[var(--q-muted)] sm:mt-2 sm:text-sm">
                     {t(`items.${key}.text`)}
                   </p>
                 </div>
