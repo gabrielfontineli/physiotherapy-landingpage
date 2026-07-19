@@ -6,10 +6,10 @@ export async function QuiroHero() {
   const t = await getTranslations("quiro.hero")
 
   return (
-    <section className="relative flex min-h-[100svh] items-end overflow-hidden md:items-center">
-      <div className="absolute inset-0 -z-10">
+    <section className="relative flex min-h-[100svh] items-start overflow-hidden md:items-center">
+      <div className="absolute inset-0 z-0">
         <video
-          className="q-hero-media h-full w-full object-cover"
+          className="q-hero-media h-full w-full object-cover object-center md:object-[75%_center]"
           autoPlay
           muted
           loop
@@ -20,11 +20,13 @@ export async function QuiroHero() {
         >
           <source src="/quiropraxia/hero.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--q-bg)] via-[var(--q-bg)]/75 to-[var(--q-bg)]/30" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_15%,rgb(196_127_78/0.14),transparent_60%)]" />
+        {/* Mobile: escurece topo (texto), vídeo aparece embaixo. Desktop: escurece esquerda, vídeo à direita */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--q-bg)] via-[var(--q-bg)]/55 to-transparent md:bg-gradient-to-r md:from-[var(--q-bg)] md:via-[var(--q-bg)]/80 md:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--q-bg)]/70 via-transparent to-transparent md:from-[var(--q-bg)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_20%,rgb(196_127_78/0.12),transparent_60%)]" />
       </div>
 
-      <div className="mx-auto w-full max-w-7xl px-4 pb-16 pt-24 sm:px-6 md:py-28">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-16 pt-24 sm:px-6 md:py-28">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--q-copper)]">
             {t("eyebrow")}
