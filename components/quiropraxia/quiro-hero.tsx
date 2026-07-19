@@ -1,37 +1,19 @@
 import { Star, MapPin, BadgeCheck } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { QuiroWhatsButton } from "@/components/quiropraxia/whats-button"
+import { QuiroHeroVideo } from "@/components/quiropraxia/quiro-hero-video"
 
 export async function QuiroHero() {
   const t = await getTranslations("quiro.hero")
 
   return (
     <section className="relative flex min-h-[100svh] items-start overflow-hidden md:items-center">
+      {/* Preload do poster do hero (LCP). Media query = baixa só o do viewport.
+          React 19 iça <link> pro <head>. Ver quiro-hero-video.tsx. */}
+      <link rel="preload" as="image" href="/quiropraxia/hero-mobile-poster.webp" media="(max-width: 767px)" />
+      <link rel="preload" as="image" href="/quiropraxia/hero-poster.webp" media="(min-width: 768px)" />
       <div className="absolute inset-0 z-0">
-        <video
-          className="q-hero-media h-full w-full object-cover object-center md:hidden"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/quiropraxia/hero-mobile-poster.webp"
-          aria-label={t("videoAria")}
-        >
-          <source src="/quiropraxia/hero-mobile.mp4" type="video/mp4" />
-        </video>
-        <video
-          className="q-hero-media hidden h-full w-full object-cover object-[75%_center] md:block"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/quiropraxia/hero-poster.webp"
-          aria-label={t("videoAria")}
-        >
-          <source src="/quiropraxia/hero.mp4" type="video/mp4" />
-        </video>
+        <QuiroHeroVideo ariaLabel={t("videoAria")} />
         {/* Mobile: escurece topo (texto), vídeo aparece embaixo. Desktop: escurece esquerda, vídeo à direita */}
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--q-bg)] via-[var(--q-bg)]/55 to-transparent md:bg-gradient-to-r md:from-[var(--q-bg)] md:via-[var(--q-bg)]/80 md:to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--q-bg)]/70 via-transparent to-transparent md:from-[var(--q-bg)]" />
