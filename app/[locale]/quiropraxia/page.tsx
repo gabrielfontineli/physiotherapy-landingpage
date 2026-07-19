@@ -3,6 +3,8 @@ import { getTranslations } from "next-intl/server"
 import { QuiroHeader } from "@/components/quiropraxia/quiro-header"
 import { QuiroHero } from "@/components/quiropraxia/quiro-hero"
 import { TrustBar } from "@/components/quiropraxia/trust-bar"
+import { QuiroStats } from "@/components/quiropraxia/quiro-stats"
+import { QuiroMarquee } from "@/components/quiropraxia/quiro-marquee"
 import { QuiroBreadcrumb } from "@/components/quiropraxia/quiro-breadcrumb"
 import { QuiroAbout } from "@/components/quiropraxia/quiro-about"
 import { ConditionsGrid } from "@/components/quiropraxia/conditions-grid"
@@ -116,9 +118,11 @@ export default async function QuiropraxiaPage() {
         <QuiroHero />
         <InstitutionalVideo />
         <TrustBar />
+        <QuiroStats />
         <QuiroBreadcrumb />
         <QuiroAbout />
         <ConditionsGrid />
+        <QuiroMarquee />
         <TechniquesSection />
         <ConsultSteps />
         <QuiroTestimonials />

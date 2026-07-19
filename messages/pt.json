@@ -263,6 +263,24 @@
       "item4": "Localização de Fácil Acesso",
       "item5": "Atendimento Humanizado"
     },
+    "marquee": {
+      "terms": [
+        "Quiropraxia",
+        "Osteopatia",
+        "Dry Needling",
+        "Terapia Manual",
+        "Sem remédio",
+        "Sem cirurgia",
+        "Alívio já na 1ª sessão",
+        "Ventosaterapia"
+      ]
+    },
+    "stats": {
+      "patients": "Pacientes atendidos",
+      "rating": "Avaliação no Google",
+      "years": "Anos de experiência",
+      "techniques": "Técnicas disponíveis"
+    },
     "breadcrumb": {
       "home": "Início",
       "current": "Quiropraxia em Natal"

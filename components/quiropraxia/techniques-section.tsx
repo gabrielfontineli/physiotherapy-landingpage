@@ -31,7 +31,7 @@ export async function TechniquesSection() {
           {techniques.map(([key, img], i) => (
             <Reveal key={key} delay={(i % 3) * 80}>
               <article className="q-card-hover h-full overflow-hidden rounded-2xl border border-[var(--q-border)] bg-[var(--q-card)]">
-                <div className="relative aspect-[3/2]">
+                <div className="relative aspect-square">
                   <Image
                     src={`/quiropraxia/${img}`}
                     alt={t("imageAlt", { name: t(`items.${key}.name`) })}

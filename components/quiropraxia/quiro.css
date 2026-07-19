@@ -47,8 +47,18 @@
   animation: q-slow-zoom 24s ease-in-out infinite alternate;
 }
 
+/* Faixa marquee de rolagem infinita */
+@keyframes q-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.quiro .q-marquee-track {
+  animation: q-marquee 32s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .quiro .q-reveal { opacity: 1; transform: none; transition: none; }
   .quiro .q-hero-media { animation: none; }
   .quiro .q-card-hover, .quiro .q-card-hover:hover { transform: none; transition: none; }
+  .quiro .q-marquee-track { animation: none; }
 }

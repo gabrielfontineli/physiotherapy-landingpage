@@ -263,6 +263,24 @@
       "item4": "Easy-to-Reach Location",
       "item5": "Humanized Care"
     },
+    "marquee": {
+      "terms": [
+        "Chiropractic",
+        "Osteopathy",
+        "Dry Needling",
+        "Manual Therapy",
+        "No medication",
+        "No surgery",
+        "Relief from session one",
+        "Cupping therapy"
+      ]
+    },
+    "stats": {
+      "patients": "Patients treated",
+      "rating": "Google rating",
+      "years": "Years of experience",
+      "techniques": "Techniques available"
+    },
     "breadcrumb": {
       "home": "Home",
       "current": "Chiropractic in Natal"
