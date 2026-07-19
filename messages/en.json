@@ -381,7 +381,19 @@
       "subtitle": "Real patient reviews on Google",
       "googleLabel": "Google reviews",
       "seeAll": "See reviews on Google",
-      "ratingStatic": "5.0"
+      "ratingStatic": "5.0",
+      "videoTitle": "Stories from patients who moved again",
+      "videoAria": "Video testimonial",
+      "videos": {
+        "c1": "She believed surgery was the only way out.",
+        "c2": "Came in stiff. Left with more movement.",
+        "c3": "She arrived convinced she would need surgery.",
+        "c4": "For 16 years, pain was part of his routine.",
+        "c5": "When surgery seemed to be the next step.",
+        "c6": "Pain kept her bedridden for four months.",
+        "c7": "He was just waiting for surgery.",
+        "c8": "“I felt pain 24 hours a day.”"
+      }
     },
     "gallery": {
       "tagline": "Gallery",

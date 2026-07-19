@@ -381,7 +381,19 @@
       "subtitle": "Avaliações reais de pacientes no Google",
       "googleLabel": "Avaliações do Google",
       "seeAll": "Ver avaliações no Google",
-      "ratingStatic": "5,0"
+      "ratingStatic": "5,0",
+      "videoTitle": "Histórias de quem voltou a se mover",
+      "videoAria": "Depoimento em vídeo",
+      "videos": {
+        "c1": "Ela acreditava que a cirurgia era a única saída.",
+        "c2": "Chegou travado. Saiu com mais movimento.",
+        "c3": "Ela chegou acreditando que precisaria operar.",
+        "c4": "Durante 16 anos, a dor fez parte da rotina dele.",
+        "c5": "Quando a cirurgia parecia ser o próximo passo.",
+        "c6": "A dor a deixou acamada por quatro meses.",
+        "c7": "Ele estava só esperando a cirurgia.",
+        "c8": "“Eu sentia dor 24 horas por dia.”"
+      }
     },
     "gallery": {
       "tagline": "Galeria",

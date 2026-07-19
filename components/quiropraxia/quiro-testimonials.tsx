@@ -12,9 +12,16 @@ interface GoogleReview {
   relative_time_description: string
 }
 
-// ponytail: vídeos de depoimento entram aqui quando os arquivos chegarem
-// (ex.: "/quiropraxia/depoimento-01.mp4") — seção de vídeos só renderiza se não-vazio
-const VIDEO_TESTIMONIALS: string[] = []
+// Depoimentos em vídeo (reels self-hosted). `captionKey` aponta pra quiro.testimonials.videos.
+// preload="none" garante que nenhum vídeo baixa até o clique — só o poster carrega.
+const VIDEO_TESTIMONIALS = Array.from({ length: 8 }, (_, i) => {
+  const n = String(i + 1).padStart(2, "0")
+  return {
+    src: `/quiropraxia/reel-${n}.mp4`,
+    poster: `/quiropraxia/reel-${n}-poster.webp`,
+    captionKey: `videos.c${i + 1}`,
+  }
+})
 
 export function QuiroTestimonials() {
   const t = useTranslations("quiro.testimonials")
@@ -48,18 +55,31 @@ export function QuiroTestimonials() {
         </Reveal>
 
         {VIDEO_TESTIMONIALS.length > 0 && (
-          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {VIDEO_TESTIMONIALS.map((src) => (
-              <video
-                key={src}
-                className="aspect-video w-full rounded-2xl border border-[var(--q-border)]"
-                controls
-                preload="none"
-              >
-                <source src={src} type="video/mp4" />
-              </video>
-            ))}
-          </div>
+          <>
+            <Reveal section="video_testimonials" className="mt-12 text-center">
+              <h3 className="font-serif text-xl font-bold text-[var(--q-text)] text-balance sm:text-2xl">
+                {t("videoTitle")}
+              </h3>
+            </Reveal>
+            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {VIDEO_TESTIMONIALS.map((v) => (
+                <figure key={v.src}>
+                  <video
+                    className="aspect-[9/16] w-full rounded-2xl border border-[var(--q-border)] bg-[var(--q-ink)] object-cover"
+                    controls
+                    preload="none"
+                    poster={v.poster}
+                    aria-label={t("videoAria")}
+                  >
+                    <source src={v.src} type="video/mp4" />
+                  </video>
+                  <figcaption className="mt-2 px-1 text-xs leading-snug text-[var(--q-muted)] text-balance">
+                    {t(v.captionKey)}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </>
         )}
 
         {reviews.length > 0 && (
