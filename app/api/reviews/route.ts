@@ -73,7 +73,7 @@ export async function GET() {
     }
 
     const reviews: GoogleReview[] = (data.result.reviews ?? [])
-      .filter((r: GoogleReview) => r.rating >= 4)
+      .filter((r: GoogleReview) => r.rating === 5)
       .slice(0, 6)
 
     return NextResponse.json({

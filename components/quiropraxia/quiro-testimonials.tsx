@@ -40,7 +40,7 @@ export function QuiroTestimonials() {
     <section id="depoimentos" className="scroll-mt-20 bg-[var(--q-bg-alt)] py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal section="testimonials" className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--q-copper)]">
+          <p className="text-base font-semibold uppercase tracking-[0.25em] text-[var(--q-copper)]">
             {t("tagline")}
           </p>
           <h2 className="mt-3 font-serif text-2xl font-bold text-[var(--q-text)] text-balance sm:text-3xl md:text-4xl">
