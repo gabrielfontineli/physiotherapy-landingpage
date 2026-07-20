@@ -1,10 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Star, ExternalLink } from "lucide-react"
+import { Star, ExternalLink, Instagram } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Reveal } from "@/components/quiropraxia/reveal"
 import { LazyVideo } from "@/components/quiropraxia/lazy-video"
+import { INSTAGRAM_URL } from "@/lib/config"
 
 interface GoogleReview {
   author_name: string
@@ -78,6 +79,18 @@ export function QuiroTestimonials() {
                 </figure>
               ))}
             </div>
+            {INSTAGRAM_URL && (
+              <p className="mt-4 text-center">
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-[var(--q-copper)] hover:underline"
+                >
+                  <Instagram className="h-4 w-4" /> {t("videoInstagram")}
+                </a>
+              </p>
+            )}
           </>
         )}
 

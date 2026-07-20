@@ -15,5 +15,4 @@ export const WHATSAPP_QUIRO_URL = `${WHATSAPP_BASE}${encodeURIComponent(
   "Olá, Dr. Guilherme! Vim pela página de Quiropraxia e gostaria de agendar uma avaliação."
 )}`
 
-// ponytail: vazio até Guilherme confirmar handle — UI esconde ícone quando vazio
-export const INSTAGRAM_URL = ""
+export const INSTAGRAM_URL = "https://instagram.com/dr.guilhermecarvalho"
