@@ -110,6 +110,14 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        {/* Preconnect aos hosts de tracking (GTM injeta GA + Facebook). Abre o
+            handshake TLS cedo — Lighthouse apontou ~600ms de economia. */}
+        {GTM_ID && (
+          <>
+            <link rel="preconnect" href="https://www.googletagmanager.com" />
+            <link rel="preconnect" href="https://connect.facebook.net" crossOrigin="" />
+          </>
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
