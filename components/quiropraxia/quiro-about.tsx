@@ -1,9 +1,12 @@
 import Image from "next/image"
+import { Check } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { Reveal } from "@/components/quiropraxia/reveal"
+import { QuiroWhatsButton } from "@/components/quiropraxia/whats-button"
 
 export async function QuiroAbout() {
   const t = await getTranslations("quiro.about")
+  const features = [t("f1"), t("f2"), t("f3"), t("f4")]
 
   return (
     <section className="bg-[var(--q-bone)] py-16 md:py-24">
@@ -15,7 +18,7 @@ export async function QuiroAbout() {
               alt={t("imageAlt")}
               fill
               sizes="(max-width: 1024px) 100vw, 450px"
-              className="object-cover"
+              className="object-cover object-top"
             />
           </div>
         </Reveal>
@@ -28,6 +31,22 @@ export async function QuiroAbout() {
           </h2>
           <p className="mt-5 leading-relaxed text-[var(--q-ink-muted)]">{t("p1")}</p>
           <p className="mt-4 leading-relaxed text-[var(--q-ink-muted)]">{t("p2")}</p>
+          <p className="mt-4 leading-relaxed text-[var(--q-ink-muted)]">{t("p3")}</p>
+
+          <ul className="mt-6 space-y-3">
+            {features.map((f) => (
+              <li key={f} className="flex items-center gap-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--q-copper)]/15">
+                  <Check className="h-4 w-4 text-[var(--q-terracotta)]" strokeWidth={3} />
+                </span>
+                <span className="text-sm font-medium text-[var(--q-ink)] sm:text-base">{f}</span>
+              </li>
+            ))}
+          </ul>
+
+          <QuiroWhatsButton location="about" className="mt-8">
+            {t("cta")}
+          </QuiroWhatsButton>
         </Reveal>
       </div>
     </section>

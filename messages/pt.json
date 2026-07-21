@@ -287,9 +287,15 @@
     },
     "about": {
       "tagline": "Sobre o profissional",
-      "title": "Conheça o Dr. Guilherme Carvalho",
-      "p1": "Fisioterapeuta especialista em terapia manual, com atuação dedicada ao tratamento de dores na coluna, hérnia de disco e nervo ciático em Natal/RN. Cada paciente recebe avaliação completa e um plano de tratamento individual — nada de protocolos genéricos.",
-      "p2": "A filosofia é simples: encontrar a origem da dor, tratá-la com as técnicas certas — quiropraxia, osteopatia, dry needling — e devolver o movimento com segurança, sem pressa e com acompanhamento próximo.",
+      "title": "Prazer, eu sou o Dr. Guilherme Carvalho",
+      "p1": "Sou fisioterapeuta e dedico minha atuação ao tratamento de pessoas que convivem com dores na coluna, hérnia de disco, nervo ciático e outras condições musculoesqueléticas.",
+      "p2": "Acredito que cada paciente merece um atendimento individualizado. Por isso, toda consulta começa com uma avaliação detalhada para entender a origem da dor e definir as abordagens mais adequadas para cada caso.",
+      "p3": "Mais do que aliviar sintomas, meu objetivo é ajudar você a recuperar seus movimentos, sua confiança e sua qualidade de vida.",
+      "f1": "Atendimento presencial em Natal/RN",
+      "f2": "Avaliação individualizada",
+      "f3": "Tratamento personalizado",
+      "f4": "Quiropraxia • Terapia Manual • Dry Needling",
+      "cta": "Agendar avaliação",
       "imageAlt": "Dr. Guilherme Carvalho, fisioterapeuta e quiropraxista em Natal/RN"
     },
     "conditions": {

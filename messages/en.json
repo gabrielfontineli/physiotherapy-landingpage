@@ -287,10 +287,16 @@
     },
     "about": {
       "tagline": "About the professional",
-      "title": "Meet Dr. Guilherme Carvalho",
-      "p1": "Physiotherapist specializing in manual therapy, dedicated to treating spine pain, disc herniation and sciatica in Natal, Brazil. Every patient gets a thorough assessment and an individual treatment plan — no generic protocols.",
-      "p2": "The philosophy is simple: find the source of the pain, treat it with the right techniques — chiropractic, osteopathy, dry needling — and restore movement safely, with close follow-up.",
-      "imageAlt": "Dr. Guilherme Carvalho, physiotherapist and chiropractic practitioner in Natal, Brazil"
+      "title": "Nice to meet you, I am Dr. Guilherme Carvalho",
+      "p1": "I am a physiotherapist dedicated to treating people living with back pain, herniated discs, sciatic nerve pain and other musculoskeletal conditions.",
+      "p2": "I believe every patient deserves individualized care. That is why every appointment begins with a detailed assessment to understand the source of the pain and define the best approaches for each case.",
+      "p3": "More than relieving symptoms, my goal is to help you recover your movement, your confidence and your quality of life.",
+      "f1": "In-person care in Natal/RN",
+      "f2": "Individualized assessment",
+      "f3": "Personalized treatment",
+      "f4": "Chiropractic • Manual Therapy • Dry Needling",
+      "cta": "Book an assessment",
+      "imageAlt": "Dr. Guilherme Carvalho, physiotherapist and chiropractor in Natal/RN"
     },
     "conditions": {
       "tagline": "What we treat",
