@@ -35,15 +35,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { WHATSAPP_GUIDE_URL, HOTMART_URL } from "@/lib/config"
-import {
-  getTestimonials,
-  getFaqs,
-  getGuiaConfig,
-  getPainPoints,
-  getGuideModules,
-  getTrustStats,
-  getForWhoItems,
-} from "@/sanity/lib/queries"
 
 export const metadata: Metadata = {
   title: "Destrave sua Hérnia de Disco e Ciático — Guia do Dr. Guilherme Carvalho",
@@ -107,8 +98,6 @@ const faqs = [
   { q: "Tem garantia?", a: "Sim. 7 dias de garantia incondicional. Aplique o guia, veja se funciona. Se não sentir diferença, solicita reembolso pela Hotmart — 100% do valor de volta, sem perguntas. O risco é todo nosso." },
 ]
 
-const moduleIcons = [BookOpen, Zap, Award, Shield, Clock]
-
 // ── COMPONENTE: card de depoimento WhatsApp ──────────────────────────────
 function WaCard({ name, time, text, highlight }: { name: string; time: string; text: string; highlight?: boolean }) {
   return (
@@ -145,53 +134,15 @@ function WaCard({ name, time, text, highlight }: { name: string; time: string; t
 }
 
 export default async function GuiaPage() {
-  const isSanityConfigured = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+  // Conteúdo estático (era CMS-driven via Sanity, removido — copy vive inline).
+  const cfg: Record<string, any> = {}
 
-  const [
-    sanityConfig,
-    sanityTestimonials,
-    sanityFaqs,
-    sanityPainPoints,
-    sanityModules,
-    sanityStats,
-    sanityForWho,
-  ] = isSanityConfigured
-    ? await Promise.all([
-        getGuiaConfig(),
-        getTestimonials(),
-        getFaqs(),
-        getPainPoints(),
-        getGuideModules(),
-        getTrustStats(),
-        getForWhoItems(),
-      ])
-    : [{}, [], [], [], [], [], []]
-
-  const cfg = sanityConfig as Awaited<ReturnType<typeof getGuiaConfig>>
-
-  const activeTestimonials = sanityTestimonials.length > 0 ? sanityTestimonials : testimonials
-  const activeFaqs = sanityFaqs.length > 0
-    ? sanityFaqs.map((f) => ({ q: f.question, a: f.answer }))
-    : faqs
-  const activePains = sanityPainPoints.length > 0
-    ? (sanityPainPoints as Array<{ text: string }>).map((p) => p.text)
-    : pains
-  const activeModules = sanityModules.length > 0
-    ? (sanityModules as Array<{ number: string; title: string; description: string }>).map((m, i) => ({
-        ...m,
-        icon: moduleIcons[i] ?? BookOpen,
-        result: modules[i]?.result ?? "",
-        highlight: i === 1,
-      }))
-    : modules
-  const activeStats = sanityStats.length > 0
-    ? (sanityStats as Array<{ value: string; label: string; sub: string }>)
-    : trustStats
-
-  const sanityForWhoItems = sanityForWho as Array<{ _id: string; text: string }>
-  const activeForWhoIsFor = sanityForWhoItems.length > 0
-    ? sanityForWhoItems.map((i) => i.text)
-    : [
+  const activeTestimonials = testimonials
+  const activeFaqs = faqs
+  const activePains = pains
+  const activeModules = modules
+  const activeStats = trustStats
+  const activeForWhoIsFor = [
         "Você tem diagnóstico de hérnia L4-L5 ou L5-S1",
         "Sente dor que desce pela perna (nervo ciático)",
         "Já fez fisioterapia sem resultado consistente",
@@ -737,7 +688,7 @@ export default async function GuiaPage() {
                 {cfg.authorBio ?? "Mais de 5 anos especializando em dor crônica e coluna. Pós-graduado em Osteopatia, Quiropraxia e Acupuntura. Trata hérnia de disco e ciático no consultório em Natal e online para pacientes em todo o Brasil."}
               </p>
               <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
-                {(cfg.authorSpecializations ?? ["Osteopatia", "Quiropraxia", "Acupuntura"]).map((spec) => (
+                {(cfg.authorSpecializations ?? ["Osteopatia", "Quiropraxia", "Acupuntura"]).map((spec: string) => (
                   <span key={spec} className="rounded-full px-3 py-1 text-xs font-bold"
                     style={{ background: "#dbeafe", color: "#1e3a8a", border: "1px solid #bfdbfe" }}>
                     {spec}

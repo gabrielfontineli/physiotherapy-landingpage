@@ -11,7 +11,6 @@ de mexer no código. Veja também `memory/MEMORY.md` (memória do Claude) e
 - **Tailwind CSS v4** + **shadcn/ui** (componentes base em `components/ui/`)
 - **next-intl** — i18n PT (default) / EN
 - **next-themes** — dark/light (default: dark)
-- **Sanity** CMS — conteúdo dinâmico (depoimentos, FAQ, config da guia)
 - **GTM** — analytics (fonte única; ver abaixo)
 - **pnpm** — package manager. Node v22+.
 
@@ -36,7 +35,6 @@ app/
     guia/page.tsx     # página de venda do e-book (identidade dark + gold)
     quiropraxia/page.tsx # landing de quiropraxia (metadata + JSON-LD próprios)
   api/reviews/route.ts # Google Places reviews (server)
-  studio/             # Sanity Studio embarcado (/studio)
   globals.css         # tokens de cor CSS (OKLch), --primary, --accent, fonts
 components/
   *.tsx               # seções da landing (1 arquivo por seção)
@@ -53,10 +51,7 @@ i18n/
   navigation.ts       # Link, useRouter, redirect com locale
 messages/
   pt.json / en.json   # TODO texto da UI vive aqui
-sanity/
-  schemaTypes/*.ts    # schemas do CMS
-  lib/queries.ts      # GROQ queries
-styles/globals.css    # animações de botão (btn-glow-*, btn-shine)
+styles/globals.css    # animações de botão (btn-glow-*, btn-shine) — importado no layout
 ```
 
 ## Convenções (siga sempre)
@@ -92,8 +87,9 @@ styles/globals.css    # animações de botão (btn-glow-*, btn-shine)
 `lib/analytics.ts`. Depois o gestor cria trigger+tag no GTM (sem deploy). Documenta
 no `docs/gtm-events.md`.
 
-**Conteúdo dinâmico (depoimentos, FAQ, guia)** → editar via Sanity Studio em
-`/studio`, ou schemas em `sanity/schemaTypes/`.
+**Conteúdo da `/guia`** (depoimentos, FAQ, módulos, preço) → tudo inline em
+`app/[locale]/guia/page.tsx` como `const` no topo do arquivo. (Era CMS-driven via
+Sanity; removido — ninguém editava o `/studio`.)
 
 ## Analytics — importante
 
@@ -105,8 +101,8 @@ duplicar PageView.
 ## Env vars
 
 Template documentado: `.env.example` (copiar pra `.env.local`). **Todas
-opcionais** — o site roda sem nenhuma (reviews caem no fallback embutido,
-Sanity/GTM não carregam). Não tratar env var ausente como erro.
+opcionais** — o site roda sem nenhuma (reviews caem no fallback embutido, GTM
+não carrega). Não tratar env var ausente como erro.
 
 ## Troubleshooting local
 

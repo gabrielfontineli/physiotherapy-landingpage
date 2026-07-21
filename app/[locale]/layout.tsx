@@ -7,6 +7,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
 import { routing } from "@/i18n/routing"
 import "../globals.css"
+import "@/styles/globals.css"
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID
 
