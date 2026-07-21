@@ -51,7 +51,8 @@ i18n/
   navigation.ts       # Link, useRouter, redirect com locale
 messages/
   pt.json / en.json   # TODO texto da UI vive aqui
-styles/globals.css    # animações de botão (btn-glow-*, btn-shine) — importado no layout
+styles/globals.css    # NÃO importado (dead). Tem btn-glow-*/btn-shine + um dump
+                      # de tokens shadcn em cinza que sobrescreve a marca se importado
 ```
 
 ## Convenções (siga sempre)
